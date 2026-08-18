@@ -36,7 +36,7 @@ const pageData = {
   '#/components/input': { crumb: '数据录入 / Input 输入框', title: 'Input 输入框', lead: '用于接收单行文本、密码、数字和结构化输入；通过统一尺寸、状态与辅助信息保持表单一致性。', toc: ['带标题输入框', '密码输入框', '装饰输入框', '数字输入框', '标签输入框', '范围输入框', '使用规则', '无障碍', 'API'], body: inputBodySimplified() },
   '#/components/search': { crumb: '数据录入 / Search 搜索框', title: 'Search 搜索框', lead: '用于从列表、资源或页面内容中快速定位目标。', toc: ['小搜索框', '大搜索框', '使用规则', '无障碍', 'API'], body: searchBody() },
   '#/components/picker': { crumb: '数据录入 / Select 选择器', title: 'Select 选择器', lead: '用于从预设选项中选择一个值，并支持单选、多选、级联选择与禁用状态。', toc: ['单选框', '多选框', '级联选框', '使用规则', '无障碍', 'API'], body: pickerBody() },
-  '#/components/date-time-picker': { crumb: '数据录入 / Laydate 时间和日期选择器', title: '时间和日期选择器', lead: '用于选择时间、日期与日期时间范围，支持独立或联动面板。', toc: ['时间选择', '日期加时间选择', '日期选择', '年份选择', '使用规则', 'API'], body: dateTimePickerBodySingle() },
+  '#/components/date-time-picker': { crumb: '数据录入 / Laydate 时间和日期选择器', title: '时间和日期选择器', lead: '用于选择时间、日期与日期时间范围，支持独立或联动面板。', toc: ['时间选择', '日期选择', '日期加时间选择', '年份选择', '使用规则', 'API'], body: dateTimePickerBodySingle() },
 };
 function paletteHtml() { return `<div class="color-groups">${palettes.map(([name, colors]) => `<div class="palette"><h3>${name}</h3><div class="swatches">${colors.map(([label, color]) => `<div class="swatch"><i style="background:${color}"></i><b>${label}</b><code>${color}</code></div>`).join('')}</div></div>`).join('')}</div>`; }
 function typeContent() { return `<div class="spec-table"><div><b>中文</b><span>Alibaba PuHuiTi 3</span><span>Light / Regular / Medium / Bold / Heavy</span></div><div><b>英文</b><span class="cabin">Cabin</span><span>SemiBold</span></div><div><b>数字</b><span class="din">DINPro 1234567890</span><span>Regular / Medium / Bold</span></div></div><div class="type-list"><div><span>20 / 28 Medium</span><strong class="t20">这是一段文字</strong></div><div><span>18 / 26 Medium</span><strong class="t18">这是一段文字</strong></div><div><span>16 / 24 Regular</span><strong class="t16 regular">这是一段文字</strong></div><div><span>14 / 22 Regular</span><strong class="t14 regular">这是一段文字</strong></div><div><span>12 / 20 Regular</span><strong class="t12 regular">这是一段文字</strong></div></div>`; }
@@ -225,7 +225,7 @@ function updateTreeParents(item) { let parent=item.parentElement?.closest('.gs-t
 function toggleTreeCheck(item) { if(item.classList.contains('is-disabled')) return; const checked=item.getAttribute('aria-checked')==='true'; const next=checked ? 'false' : 'true'; item.setAttribute('aria-checked',next); item.querySelectorAll(':scope > .gs-tree__children .gs-tree__item').forEach(node=>{ if(!node.classList.contains('is-disabled')) node.setAttribute('aria-checked',next); }); updateTreeParents(item); }
 function activateTreeItem(item) { if(item.classList.contains('is-disabled')) return; const tree=item.closest('[data-tree]'); if(tree.hasAttribute('data-checkable')) toggleTreeCheck(item); else if(tree.dataset.selection==='single'){ tree.querySelectorAll('.gs-tree__item[aria-selected="true"]').forEach(node=>{ node.setAttribute('aria-selected','false'); node.classList.remove('is-selected'); }); item.setAttribute('aria-selected','true'); item.classList.add('is-selected'); } }
 function visibleTreeItems(tree) { return [...tree.querySelectorAll('.gs-tree__item')].filter(item=>{ let parent=item.parentElement?.closest('.gs-tree__item'); while(parent){ if(parent.getAttribute('aria-expanded')==='false') return false; parent=parent.parentElement?.closest('.gs-tree__item'); } return true; }); }
-function initComponentDemos(app) { app.querySelectorAll('[data-tree]').forEach(tree=>{ const current=tree.querySelector('.gs-tree__item.is-selected') || tree.querySelector('.gs-tree__item'); if(current) current.tabIndex=0; tree.querySelectorAll('.gs-tree__item[aria-checked]').forEach(item=>{ if(directTreeChildren(item).length) updateTreeParents(directTreeChildren(item)[0] || item); }); }); app.querySelectorAll('[data-checkbox-demo]').forEach(syncCheckboxDemo); app.querySelectorAll('.gs-input-range input').forEach(input=>input.setAttribute('data-numeric-only','')); }
+function initComponentDemos(app) { app.querySelectorAll('[data-tree]').forEach(tree=>{ const current=tree.querySelector('.gs-tree__item.is-selected') || tree.querySelector('.gs-tree__item'); if(current) current.tabIndex=0; tree.querySelectorAll('.gs-tree__item[aria-checked]').forEach(item=>{ if(directTreeChildren(item).length) updateTreeParents(directTreeChildren(item)[0] || item); }); }); app.querySelectorAll('[data-checkbox-demo]').forEach(syncCheckboxDemo); app.querySelectorAll('.gs-input-range input').forEach(input=>input.setAttribute('data-numeric-only','')); app.querySelectorAll('.gs-dtp-popover__footer [data-dtp-action]').forEach(action=>{ action.classList.add('gs-button'); if(action.textContent.trim()==='取消') action.classList.add('gs-button--secondary'); }); app.querySelectorAll('.gs-dtp-popover--calendar .gs-dtp-popover__footer').forEach(footer=>{ const today=document.createElement('button'); today.type='button'; today.className='gs-button gs-button--text-primary'; today.dataset.dtpAction='today'; today.setAttribute('aria-label','今天'); today.textContent='今天'; const actions=document.createElement('span'); actions.className='gs-dtp-calendar-footer-actions'; [...footer.querySelectorAll('[data-dtp-action]')].forEach(action=>actions.append(action)); footer.append(today,actions); }); }
 function syncCheckboxDemo(group) { const master=group.querySelector('[data-checkbox-master]'); const items=[...group.querySelectorAll('[data-checkbox-item]:not(:disabled)')]; const checked=items.filter(item=>item.checked).length; master.checked=checked===items.length && checked>0; master.indeterminate=checked>0 && checked<items.length; }
 function handleControlChange(event) {
   const input=event.target;
@@ -877,16 +877,30 @@ function setCalendarMonth(popup, delta, dateTime = false) {
   if (title) title.textContent = dateTime ? `${year} 年　${month}月` : `${year}年${month}月`;
   if (grid) grid.innerHTML = dateTime ? dtpDateTimeCalendarCells(year, month, selected) : dtpCalendarCells(year, month, selected);
 }
+function dateTimeTimeValues(part, current) {
+  const max = part === 'hour' ? 24 : 60;
+  const value = Math.min(max - 1, Math.max(0, Number(current) || 0));
+  return Array.from({ length: 7 }, (_, index) => String((value + index - 3 + max) % max).padStart(2, '0'));
+}
+function dateTimeTimeWheel(part, current) {
+  const max = part === 'hour' ? 24 : 60;
+  const values = Array.from({ length: max }, (_, index) => String(index).padStart(2, '0'));
+  const selected = String(current).padStart(2, '0');
+  const cycleCount = 5;
+  const middleCycle = Math.floor(cycleCount / 2);
+  return `<div class="gs-dtp-datetime-time-column" data-dtp-column="${part}"><div class="gs-dtp-datetime-time-wheel" data-dtp-time-wheel data-dtp-time-initial="${selected}" data-dtp-middle-cycle="${middleCycle}" role="listbox" aria-label="${part === 'hour' ? '小时' : part === 'minute' ? '分钟' : '秒'}" tabindex="0">${Array.from({ length: cycleCount }, (_, cycle) => values.map(value => `<span class="gs-dtp-datetime-time-item${cycle === middleCycle && value === selected ? ' is-in-slot' : ''}" data-dtp-time-item data-dtp-time-cycle="${cycle}" data-dtp-value="${value}" role="option" aria-selected="${cycle === middleCycle && value === selected}">${value}</span>`).join('')).join('')}</div></div>`;
+}
 function dtpDateTimePopup(id, startValue = '', initialOpen = false) {
-  const date = startValue ? String(startValue).slice(0, 10) : '2026-08-20';
+  const now = new Date();
+  const date = startValue ? String(startValue).slice(0, 10) : formatCalendarDate(now);
   const [year, month, day] = date.split('-').map(Number);
-  const hours = '14', minutes = '45', seconds = '31';
-  const safeYear = Number.isFinite(year) ? year : 2026;
-  const safeMonth = Number.isFinite(month) && month > 0 && month < 13 ? month : 8;
-  const safeDay = Number.isFinite(day) && day > 0 ? day : 20;
+  const time = normalizeTimeValue(startValue || currentTimeValue()).split(':');
+  const [hours, minutes, seconds] = time;
+  const safeYear = Number.isFinite(year) ? year : now.getFullYear();
+  const safeMonth = Number.isFinite(month) && month > 0 && month < 13 ? month : now.getMonth() + 1;
+  const safeDay = Number.isFinite(day) && day > 0 ? day : now.getDate();
   const selectedDate = `${safeYear}-${String(safeMonth).padStart(2,'0')}-${String(safeDay).padStart(2,'0')}`;
   const calendar = dtpDateTimeCalendarCells(safeYear, safeMonth, selectedDate);
-  const timeColumn = (part, values, current) => `<div class="gs-dtp-datetime-time-column" data-dtp-datetime-column="${part}">${values.map(value => dtpDateTimeOption(value, value, part, value === current)).join('')}</div>`;
   const hidden = initialOpen ? '' : ' hidden';
   return `<div id="${id}-datetime-popup" class="gs-dtp-popover gs-dtp-datetime-popover" data-dtp-datetime-popup data-dtp-calendar-year="${safeYear}" data-dtp-calendar-month="${safeMonth}" data-dtp-calendar-selected="${selectedDate}" role="dialog" aria-label="选择日期和时间"${hidden}>
     <div class="gs-dtp-datetime-panels">
@@ -894,9 +908,9 @@ function dtpDateTimePopup(id, startValue = '', initialOpen = false) {
         <div class="gs-dtp-datetime-date-head"><button type="button" class="gs-dtp-nav" data-dtp-datetime-nav="prev-year" aria-label="上一年">${dateNavIcon('prevYear')}</button><button type="button" class="gs-dtp-nav" data-dtp-datetime-nav="prev" aria-label="上个月">${dateNavIcon('prev')}</button><strong data-dtp-datetime-calendar-title>${safeYear} 年　${safeMonth}月</strong><button type="button" class="gs-dtp-nav" data-dtp-datetime-nav="next" aria-label="下个月">${dateNavIcon('next')}</button><button type="button" class="gs-dtp-nav" data-dtp-datetime-nav="next-year" aria-label="下一年">${dateNavIcon('nextYear')}</button></div>
         <div class="gs-dtp-datetime-date-body"><div class="gs-dtp-datetime-weekdays">${['日','一','二','三','四','五','六'].map(dayName => `<span>${dayName}</span>`).join('')}</div><div class="gs-dtp-datetime-calendar" data-dtp-datetime-calendar-grid>${calendar}</div></div>
       </section>
-      <section class="gs-dtp-datetime-time-panel" aria-label="时间选择"><h3 class="gs-dtp-datetime-time-title">${hours} : ${minutes} : ${seconds}</h3><div class="gs-dtp-datetime-time-columns">${timeColumn('hour', ['11','12','13','14','15','16','17'], hours)}${timeColumn('minute', ['42','43','44','45','46','47','48'], minutes)}${timeColumn('second', ['28','29','30','31','32','33','34'], seconds)}</div></section>
+      <section class="gs-dtp-datetime-time-panel" aria-label="时间选择"><h3 class="gs-dtp-datetime-time-title" data-dtp-datetime-time-title>${hours} : ${minutes} : ${seconds}</h3><div class="gs-dtp-datetime-time-columns">${dateTimeTimeWheel('hour', hours)}${dateTimeTimeWheel('minute', minutes)}${dateTimeTimeWheel('second', seconds)}</div></section>
     </div>
-    <div class="gs-dtp-popover__footer gs-dtp-datetime-footer"><button type="button" class="gs-dtp-action gs-dtp-action--text" data-dtp-datetime-action="now">现在</button><span class="gs-dtp-datetime-footer__actions"><button type="button" class="gs-dtp-action gs-dtp-action--text gs-dtp-action--muted" data-dtp-datetime-action="cancel">取消</button><button type="button" class="gs-dtp-action" data-dtp-datetime-action="confirm">确认</button></span></div>
+    <div class="gs-dtp-popover__footer gs-dtp-time-footer"><button type="button" class="gs-button gs-button--text-primary" data-dtp-datetime-action="now">现在</button><button type="button" class="gs-button gs-button--secondary" data-dtp-datetime-action="cancel">取消</button><button type="button" class="gs-button" data-dtp-datetime-action="confirm">确认</button></div>
   </div>`;
 }
 function dtpDateTimeRange(id, startValue = '', endValue = '', disabled = false, initialOpen = false) {
@@ -904,12 +918,16 @@ function dtpDateTimeRange(id, startValue = '', endValue = '', disabled = false, 
   const opened = false;
   const start = startValue || '请选择日期';
   const end = endValue || '请选择日期';
-  return `<div class="gs-dtp-datetime-field${disabled ? ' is-disabled' : ''}" data-dtp-datetime-field data-dtp-datetime-start="${escapeHtml(startValue)}"><button type="button" class="gs-dtp-datetime-trigger${disabled ? ' is-disabled' : ''}${opened ? ' is-active' : ''}" data-dtp-datetime-trigger aria-haspopup="dialog" aria-expanded="${opened}" aria-controls="${id}-datetime-popup"${disabled ? ' disabled aria-disabled="true"' : ''}><span class="gs-dtp-datetime__value${startValue ? '' : ' is-placeholder'}" data-dtp-datetime-value="start">${escapeHtml(start)}</span><span class="gs-dtp-datetime__separator">—</span><span class="gs-dtp-datetime__value${endValue ? '' : ' is-placeholder'}" data-dtp-datetime-value="end">${escapeHtml(end)}</span><span class="gs-dtp-datetime__icon" aria-hidden="true">${gsIcon('calendar')}</span></button>${dtpDateTimePopup(id, startValue, opened)}</div>`;
+  return `<div class="gs-dtp-datetime-field${disabled ? ' is-disabled' : ''}" data-dtp-datetime-field data-dtp-datetime-start="${escapeHtml(startValue)}" data-dtp-datetime-active-part="start"><div class="gs-dtp-datetime-trigger${disabled ? ' is-disabled' : ''}${opened ? ' is-active' : ''}" data-dtp-datetime-trigger role="group" aria-label="日期时间范围" aria-haspopup="dialog" aria-expanded="${opened}" aria-controls="${id}-datetime-popup"${disabled ? ' aria-disabled="true"' : ''}><button type="button" class="gs-dtp-datetime-segment" data-dtp-datetime-segment="start" aria-label="选择开始日期和时间"${disabled ? ' disabled aria-disabled="true"' : ''}><span class="gs-dtp-datetime__value${startValue ? '' : ' is-placeholder'}" data-dtp-datetime-value="start">${escapeHtml(start)}</span></button><span class="gs-dtp-datetime__separator" aria-hidden="true">—</span><button type="button" class="gs-dtp-datetime-segment" data-dtp-datetime-segment="end" aria-label="选择结束日期和时间"${disabled ? ' disabled aria-disabled="true"' : ''}><span class="gs-dtp-datetime__value${endValue ? '' : ' is-placeholder'}" data-dtp-datetime-value="end">${escapeHtml(end)}</span></button><span class="gs-dtp-datetime__icon" aria-hidden="true">${gsIcon('calendar')}</span></div>${dtpDateTimePopup(id, startValue, opened)}</div>`;
 }
 function dateTimePickerBody() {
   return `<section id="时间选择"><h2>时间选择</h2><p>选择一天中的时间，支持默认、激活与禁用状态。</p><div class="demo-card gs-dtp-card gs-dtp-time-card"><div class="gs-dtp-state-list"><div class="gs-dtp-state-row" data-dtp-state="default"><span class="gs-dtp-state-label">未选择默认</span>${dtpTrigger('dtp-time-default','time')}</div><div class="gs-dtp-state-row" data-dtp-state="hover"><span class="gs-dtp-state-label">未选择悬停</span>${dtpTrigger('dtp-time-hover','time')}</div><div class="gs-dtp-state-row is-active" data-dtp-state="active"><span class="gs-dtp-state-label">激活选择框</span>${dtpTrigger('dtp-time-active','time','14:45:31',false,true)}</div><div class="gs-dtp-state-row is-disabled" data-dtp-state="disabled"><span class="gs-dtp-state-label">禁用选择</span>${dtpTrigger('dtp-time-disabled','time','14:45:31',true)}</div></div></div></section><section id="日期加时间选择"><h2>日期加时间选择</h2><p>日期面板与时间面板左右独立选择，浮窗浮在组件上方，不挤压页面布局。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-datetime-stack">${dtpExample('交互示例',dtpDateTimeRange('dtp-datetime-range','2026-05-21 14:45:31','',false,true))}${dtpExample('禁用示例',dtpDateTimeRange('dtp-datetime-range-disabled','2026-05-21 14:45:31','2026-05-21 14:45:31',true))}</div></div></section><section id="日期选择"><h2>日期选择</h2><p>选择具体日期，浮层中的日期网格与输入框保持同一交互区域。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-grid">${dtpExample('交互示例',dtpTrigger('dtp-date','date'))}${dtpExample('禁用示例',dtpTrigger('dtp-date-disabled','date','2026-08-13',true))}</div></div></section><section id="年份选择"><h2>年份选择</h2><p>选择年份，适用于年度筛选与统计口径设置。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-grid">${dtpExample('交互示例',dtpTrigger('dtp-year','year'))}${dtpExample('禁用示例',dtpTrigger('dtp-year-disabled','year','2026',true))}</div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>时间、日期与日期时间范围使用对应类型，避免让用户手动输入格式。</li><li>激活后显示浮层，选择后回填值并关闭；点击外部区域也会关闭浮层。</li><li>禁用状态不可打开、不可选择，且不产生悬停与按下反馈。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>type</code><span>time | date | datetime | year</span><span>选择器类型</span></div><div><code>value</code><span>string | Date</span><span>当前值</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>range</code><span>boolean</span><span>是否启用范围选择</span></div><div><code>onChange</code><span>(value) =&gt; void</span><span>值变化时触发</span></div></div></section>`;
 }
 function timeWheelParts(field) {
+  if (field?.matches('[data-dtp-datetime-field]')) {
+    const part = field.dataset.dtpDatetimeActivePart || 'start';
+    return normalizeTimeValue(dateTimeValueOrFallback(field, part)).split(':');
+  }
   const value = field?.querySelector('[data-dtp-value]')?.textContent.trim();
   return value?.match(/^\d{2}:\d{2}:\d{2}$/)?.[0].split(':') || [...field?.querySelectorAll('[data-dtp-time-wheel]') || []].map(wheel => wheel.dataset.dtpTimeInitial || '00');
 }
@@ -929,11 +947,22 @@ function updateTimeWheelSelection(field, wheel, current) {
   const column = wheel.closest('[data-dtp-column]');
   const index = { hour: 0, minute: 1, second: 2 }[column?.dataset.dtpColumn];
   const value = field?.querySelector('[data-dtp-value]');
-  if (index === undefined || !value) return;
+  const datetimePart = field?.matches('[data-dtp-datetime-field]') ? field.dataset.dtpDatetimeActivePart || 'start' : '';
+  const datetimeValue = datetimePart ? dateTimePartElement(field, datetimePart) : null;
+  if (index === undefined || (!value && !datetimeValue)) return;
   const parts = timeWheelParts(field);
   parts[index] = current.dataset.dtpValue;
-  value.textContent = parts.join(':');
-  value.classList.remove('is-placeholder');
+  if (datetimeValue) {
+    const currentValue = dateTimeValueOrFallback(field, datetimePart);
+    const date = currentValue.match(/^\d{4}-\d{2}-\d{2}/)?.[0] || formatCalendarDate(new Date());
+    datetimeValue.textContent = `${date} ${parts.join(':')}`;
+    datetimeValue.classList.remove('is-placeholder');
+    const title = field.querySelector('[data-dtp-datetime-time-title]');
+    if (title) title.textContent = `${parts[0]} : ${parts[1]} : ${parts[2]}`;
+  } else {
+    value.textContent = parts.join(':');
+    value.classList.remove('is-placeholder');
+  }
 }
 function timeWheelTargetForValue(wheel, value, preferMiddle = false) {
   const targets = [...wheel.querySelectorAll('[data-dtp-time-item]')].filter(item => item.dataset.dtpValue === value);
@@ -945,8 +974,10 @@ function timeWheelTargetForValue(wheel, value, preferMiddle = false) {
   const center = wheel.scrollTop + wheel.clientHeight / 2;
   return targets.reduce((nearest, item) => Math.abs(item.offsetTop + item.offsetHeight / 2 - center) < Math.abs(nearest.offsetTop + nearest.offsetHeight / 2 - center) ? item : nearest, targets[0]);
 }
-function scrollTimeWheelToValue(wheel, value, behavior = 'auto', preferMiddle = false) {
-  const target = timeWheelTargetForValue(wheel, value, preferMiddle);
+function scrollTimeWheelToValue(wheel, value, behavior = 'auto', preferMiddle = false, targetCycle = null) {
+  const targets = [...wheel.querySelectorAll('[data-dtp-time-item]')].filter(item => item.dataset.dtpValue === value);
+  const cycleTarget = targetCycle === null ? null : targets.find(item => item.dataset.dtpTimeCycle === String(targetCycle));
+  const target = cycleTarget || timeWheelTargetForValue(wheel, value, preferMiddle);
   if (!target) return;
   const top = Math.max(0, target.offsetTop - (wheel.clientHeight - target.offsetHeight) / 2);
   if (Math.abs(wheel.scrollTop - top) > 1) {
@@ -964,8 +995,26 @@ function scrollTimeWheelToValue(wheel, value, behavior = 'auto', preferMiddle = 
   });
   wheel.dataset.dtpTimeReady = 'true';
 }
+function timeWheelWrapTarget(wheel, clicked) {
+  if (!wheel || !clicked) return null;
+  const items = [...wheel.querySelectorAll('[data-dtp-time-item]')];
+  const middleCycle = wheel.dataset.dtpMiddleCycle;
+  const middleItems = items.filter(item => item.dataset.dtpTimeCycle === middleCycle);
+  if (!middleItems.length) return null;
+  const firstValue = middleItems[0].dataset.dtpValue;
+  const lastValue = middleItems[middleItems.length - 1].dataset.dtpValue;
+  const current = nearestTimeWheelItem(wheel);
+  if (!current) return null;
+  const currentCycle = Number(current.dataset.dtpTimeCycle);
+  if (!Number.isInteger(currentCycle)) return null;
+  let targetCycle = null;
+  if (current.dataset.dtpValue === lastValue && clicked.dataset.dtpValue === firstValue) targetCycle = currentCycle + 1;
+  if (current.dataset.dtpValue === firstValue && clicked.dataset.dtpValue === lastValue) targetCycle = currentCycle - 1;
+  if (targetCycle === null) return null;
+  return items.find(item => item.dataset.dtpValue === clicked.dataset.dtpValue && item.dataset.dtpTimeCycle === String(targetCycle)) || null;
+}
 function syncTimeWheels(field, behavior = 'auto') {
-  if (field?.dataset.dtpKind !== 'time') return;
+  if (field?.dataset.dtpKind !== 'time' && !field?.matches('[data-dtp-datetime-field]')) return;
   timeWheelParts(field).forEach((part, index) => {
     const wheel = field.querySelectorAll('[data-dtp-time-wheel]')[index];
     if (wheel) scrollTimeWheelToValue(wheel, part, behavior);
@@ -991,20 +1040,88 @@ function handleTimeWheelScroll(event) {
       const latest = nearestTimeWheelItem(wheel);
       if (latest) {
         const middleCycle = wheel.dataset.dtpMiddleCycle;
-        const atEdge = middleCycle && latest.dataset.dtpTimeCycle !== middleCycle;
+        const cycles = [...wheel.querySelectorAll('[data-dtp-time-item]')].map(item => Number(item.dataset.dtpTimeCycle)).filter(Number.isFinite);
+        const cycle = Number(latest.dataset.dtpTimeCycle);
+        const atEdge = middleCycle && (cycle === Math.min(...cycles) || cycle === Math.max(...cycles));
         scrollTimeWheelToValue(wheel, latest.dataset.dtpValue, atEdge ? 'auto' : 'smooth', atEdge);
       }
     }, 140);
   });
 }
-function closeDateTimePicker(field) { if(!field) return; field.querySelectorAll('[data-dtp-popup],[data-dtp-datetime-popup]').forEach(p=>p.hidden=true); field.querySelectorAll('[data-dtp-trigger],[data-dtp-datetime-trigger]').forEach(t=>{t.setAttribute('aria-expanded','false');t.classList.remove('is-active');}); field.classList.remove('is-open'); }
+function setDateTimeActivePart(field, part = 'start') {
+  if (!field) return;
+  field.dataset.dtpDatetimeActivePart = part;
+  field.querySelectorAll('[data-dtp-datetime-segment]').forEach(segment => segment.classList.toggle('is-active', segment.dataset.dtpDatetimeSegment === part));
+}
+function closeDateTimePicker(field) { if(!field) return; field.querySelectorAll('[data-dtp-popup],[data-dtp-datetime-popup]').forEach(p=>p.hidden=true); field.querySelectorAll('[data-dtp-trigger],[data-dtp-datetime-trigger]').forEach(t=>{t.setAttribute('aria-expanded','false');t.classList.remove('is-active');}); field.querySelectorAll('[data-dtp-datetime-segment]').forEach(segment=>segment.classList.remove('is-active')); field.classList.remove('is-open'); }
 function closeAllDateTimePickers(except=null) { document.querySelectorAll('[data-dtp-field],[data-dtp-datetime-field]').forEach(f=>{ if(f!==except) closeDateTimePicker(f); }); }
-function openDateTimePicker(field) { closeAllDateTimePickers(field); const trigger=field.querySelector('[data-dtp-trigger],[data-dtp-datetime-trigger]'); const popup=field.querySelector('[data-dtp-popup],[data-dtp-datetime-popup]'); if(!trigger||!popup) return; popup.hidden=false; trigger.setAttribute('aria-expanded','true'); trigger.classList.add('is-active'); field.classList.add('is-open'); requestAnimationFrame(() => syncTimeWheels(field)); }
+function dateTimePartElement(field, part) { return field?.querySelector(`[data-dtp-datetime-value="${part}"]`); }
+function dateTimePartText(field, part) { return dateTimePartElement(field, part)?.textContent.trim() || ''; }
+function dateTimeValueOrFallback(field, part) {
+  const current = dateTimePartText(field, part);
+  if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(current)) return current;
+  const other = dateTimePartText(field, part === 'start' ? 'end' : 'start');
+  if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(other)) return other;
+  const now = new Date();
+  return `${formatCalendarDate(now)} ${currentTimeValue(now)}`;
+}
+function updateDateTimePopupTime(popup, time) {
+  const parts = normalizeTimeValue(time).split(':');
+  const title = popup?.querySelector('[data-dtp-datetime-time-title]');
+  if (title) title.textContent = `${parts[0]} : ${parts[1]} : ${parts[2]}`;
+  const columns = popup?.querySelector('.gs-dtp-datetime-time-columns');
+  if (!columns) return;
+  ['hour', 'minute', 'second'].forEach((part, index) => {
+    const column = columns.querySelector(`[data-dtp-datetime-column="${part}"]`);
+    if (!column) return;
+    column.outerHTML = dateTimeTimeWheel(part, parts[index]);
+  });
+}
+function syncDateTimePopupToPart(field, part = 'start') {
+  const popup = field?.querySelector('[data-dtp-datetime-popup]');
+  if (!popup) return;
+  const value = dateTimeValueOrFallback(field, part);
+  const date = value.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || formatCalendarDate(new Date());
+  const time = value.match(/(\d{2}:\d{2}:\d{2})/)?.[1] || currentTimeValue();
+  const [year, month] = date.split('-').map(Number);
+  popup.dataset.dtpCalendarYear = String(year);
+  popup.dataset.dtpCalendarMonth = String(month);
+  popup.dataset.dtpCalendarSelected = date;
+  setCalendarMonth(popup, 0, true);
+  updateDateTimePopupTime(popup, time);
+}
+function openDateTimePicker(field) {
+  if (!field || field.classList.contains('is-disabled')) return;
+  closeAllDateTimePickers(field);
+  const trigger=field.querySelector('[data-dtp-trigger],[data-dtp-datetime-trigger]');
+  const popup=field.querySelector('[data-dtp-popup],[data-dtp-datetime-popup]');
+  if(!trigger||!popup) return;
+  if (field.matches('[data-dtp-datetime-field]')) {
+    setDateTimeActivePart(field, field.dataset.dtpDatetimeActivePart || 'start');
+    syncDateTimePopupToPart(field, field.dataset.dtpDatetimeActivePart || 'start');
+  }
+  popup.hidden=false;
+  trigger.setAttribute('aria-expanded','true');
+  trigger.classList.add('is-active');
+  field.classList.add('is-open');
+  requestAnimationFrame(() => syncTimeWheels(field));
+}
 function handleDateTimeClick(event) {
+  const datetimeSegment = event.target.closest('[data-dtp-datetime-segment]');
+  if (datetimeSegment) {
+    const field = datetimeSegment.closest('[data-dtp-datetime-field]');
+    if (!field || field.classList.contains('is-disabled')) return true;
+    const part = datetimeSegment.dataset.dtpDatetimeSegment;
+    setDateTimeActivePart(field, part);
+    const popup = field.querySelector('[data-dtp-datetime-popup]');
+    if (popup?.hidden) openDateTimePicker(field); else syncDateTimePopupToPart(field, part);
+    event.preventDefault();
+    return true;
+  }
   const datetimeTrigger = event.target.closest('[data-dtp-datetime-trigger]');
   if (datetimeTrigger) {
-    if (datetimeTrigger.disabled) return true;
     const field = datetimeTrigger.closest('[data-dtp-datetime-field]');
+    if (!field || field.classList.contains('is-disabled')) return true;
     const popup = field?.querySelector('[data-dtp-datetime-popup]');
     if (popup?.hidden) openDateTimePicker(field); else closeDateTimePicker(field);
     event.preventDefault();
@@ -1015,20 +1132,21 @@ function handleDateTimeClick(event) {
     if (datetimeOption.disabled) return true;
     const field = datetimeOption.closest('[data-dtp-datetime-field]');
     const part = datetimeOption.dataset.dtpDatetimePart;
+    const activePart = field?.dataset.dtpDatetimeActivePart || 'start';
+    const target = dateTimePartElement(field, activePart);
     if (part === 'date') {
-      const start = field?.querySelector('[data-dtp-datetime-value="start"]');
-      const current = start?.textContent.trim() || '请选择日期';
-      const time = current.match(/\d{2}:\d{2}:\d{2}/)?.[0] || '14:45:31';
-      if (start) { start.textContent = `${datetimeOption.dataset.dtpDatetimeValue} ${time}`; start.classList.remove('is-placeholder'); }
+      const current = dateTimeValueOrFallback(field, activePart);
+      const time = current.match(/\d{2}:\d{2}:\d{2}/)?.[0] || currentTimeValue();
+      if (target) { target.textContent = `${datetimeOption.dataset.dtpDatetimeValue} ${time}`; target.classList.remove('is-placeholder'); }
       const popup = field?.querySelector('[data-dtp-datetime-popup]');
       if (popup) popup.dataset.dtpCalendarSelected = datetimeOption.dataset.dtpDatetimeValue;
     } else {
-      const start = field?.querySelector('[data-dtp-datetime-value="start"]');
-      const current = start?.textContent.trim() || '2026-08-20 14:45:31';
-      const date = current.match(/^\d{4}-\d{2}-\d{2}/)?.[0] || '2026-08-20';
-      const parts = current.match(/\d{2}:\d{2}:\d{2}/)?.[0].split(':') || ['14', '45', '31'];
+      const current = dateTimeValueOrFallback(field, activePart);
+      const date = current.match(/^\d{4}-\d{2}-\d{2}/)?.[0] || formatCalendarDate(new Date());
+      const parts = current.match(/\d{2}:\d{2}:\d{2}/)?.[0].split(':') || currentTimeValue().split(':');
       const index = { hour: 0, minute: 1, second: 2 }[part];
-      if (start && index !== undefined) { parts[index] = datetimeOption.dataset.dtpDatetimeValue; start.textContent = `${date} ${parts.join(':')}`; start.classList.remove('is-placeholder'); }
+      if (target && index !== undefined) { parts[index] = datetimeOption.dataset.dtpDatetimeValue; target.textContent = `${date} ${parts.join(':')}`; target.classList.remove('is-placeholder'); }
+      updateDateTimePopupTime(field?.querySelector('[data-dtp-datetime-popup]'), parts.join(':'));
     }
     const group = datetimeOption.closest('[data-dtp-datetime-column],.gs-dtp-datetime-calendar');
     group?.querySelectorAll('.is-current').forEach(item => item.classList.remove('is-current'));
@@ -1042,10 +1160,11 @@ function handleDateTimeClick(event) {
       const now = new Date();
       const date = formatCalendarDate(now);
       const time = currentTimeValue(now);
-      const start = field?.querySelector('[data-dtp-datetime-value="start"]');
-      if (start) { start.textContent = `${date} ${time}`; start.classList.remove('is-placeholder'); }
+      const activePart = field?.dataset.dtpDatetimeActivePart || 'start';
+      const target = dateTimePartElement(field, activePart);
+      if (target) { target.textContent = `${date} ${time}`; target.classList.remove('is-placeholder'); }
       const popup = field?.querySelector('[data-dtp-datetime-popup]');
-      if (popup) { popup.dataset.dtpCalendarSelected = date; popup.dataset.dtpCalendarYear = String(now.getFullYear()); popup.dataset.dtpCalendarMonth = String(now.getMonth() + 1); setCalendarMonth(popup, 0, true); }
+      if (popup) syncDateTimePopupToPart(field, activePart);
     }
     closeDateTimePicker(field);
     return true;
@@ -1070,8 +1189,13 @@ function handleDateTimeClick(event) {
   const timeItem = event.target.closest('[data-dtp-time-item]');
   if (timeItem) {
     const wheel = timeItem.closest('[data-dtp-time-wheel]');
-    const field = timeItem.closest('[data-dtp-field]');
-    if (wheel && field) { const preferMiddle = timeItem.dataset.dtpTimeCycle !== wheel.dataset.dtpMiddleCycle; updateTimeWheelSelection(field, wheel, timeItem); scrollTimeWheelToValue(wheel, timeItem.dataset.dtpValue, 'smooth', preferMiddle); }
+    const field = timeItem.closest('[data-dtp-field],[data-dtp-datetime-field]');
+    if (wheel && field) {
+      const wrapTarget = timeWheelWrapTarget(wheel, timeItem);
+      const target = wrapTarget || timeItem;
+      updateTimeWheelSelection(field, wheel, target);
+      scrollTimeWheelToValue(wheel, target.dataset.dtpValue, 'smooth', false, Number(target.dataset.dtpTimeCycle));
+    }
     return true;
   }
   const option = event.target.closest('[data-dtp-option]');
@@ -1087,6 +1211,15 @@ function handleDateTimeClick(event) {
       if (value) { value.textContent = parts.join(':'); value.classList.remove('is-placeholder'); }
       return true;
     }
+    if (field?.dataset.dtpKind === 'date') {
+      const grid = option.closest('[data-dtp-calendar-grid]');
+      grid?.querySelectorAll('.is-current').forEach(item => item.classList.remove('is-current'));
+      option.classList.add('is-current');
+      if (value) { value.textContent = option.dataset.dtpValue || option.textContent.trim(); value.classList.remove('is-placeholder'); }
+      const popup = field.querySelector('[data-dtp-popup]');
+      if (popup) popup.dataset.dtpCalendarSelected = option.dataset.dtpValue || option.textContent.trim();
+      return true;
+    }
     if (value) { value.textContent = option.dataset.dtpValue || option.textContent.trim(); value.classList.remove('is-placeholder'); }
     closeDateTimePicker(field);
     return true;
@@ -1094,6 +1227,13 @@ function handleDateTimeClick(event) {
   const action = event.target.closest('[data-dtp-action]');
   if (action) {
     const field = action.closest('[data-dtp-field]');
+    if (action.dataset.dtpAction === 'today' && field?.dataset.dtpKind === 'date') {
+      const today = formatCalendarDate(new Date());
+      const value = field.querySelector('[data-dtp-value]');
+      if (value) { value.textContent = today; value.classList.remove('is-placeholder'); }
+      const popup = field.querySelector('[data-dtp-popup]');
+      if (popup) { popup.dataset.dtpCalendarSelected = today; const [year, month] = today.split('-').map(Number); popup.dataset.dtpCalendarYear = String(year); popup.dataset.dtpCalendarMonth = String(month); setCalendarMonth(popup, 0, true); }
+    }
     if (action.dataset.dtpAction === 'now' && field?.dataset.dtpKind === 'time') {
       const value = field.querySelector('[data-dtp-value]');
       const now = currentTimeValue();
@@ -1124,7 +1264,7 @@ function handleDateTimeKeydown(event) {
     const step = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : event.key === 'PageUp' ? -5 : event.key === 'PageDown' ? 5 : 0;
     const nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 : Math.min(items.length - 1, Math.max(0, currentIndex + step));
     const next = items[nextIndex];
-    if (next) { const preferMiddle = next.dataset.dtpTimeCycle !== wheel.dataset.dtpMiddleCycle; updateTimeWheelSelection(field, wheel, next); scrollTimeWheelToValue(wheel, next.dataset.dtpValue, 'smooth', preferMiddle); event.preventDefault(); }
+    if (next) { updateTimeWheelSelection(field, wheel, next); scrollTimeWheelToValue(wheel, next.dataset.dtpValue, 'smooth', false, Number(next.dataset.dtpTimeCycle)); event.preventDefault(); }
     return;
   }
   if (event.key === 'Escape') { closeDateTimePicker(field); return; }
@@ -1133,6 +1273,6 @@ function handleDateTimeKeydown(event) {
 function placeholder(label) { return { crumb: label, title: label, lead: '该组件正在按照 GeoShare Web UI 规范建设中。', toc: ['组件状态', '后续内容'], body: `<section id="组件状态"><h2>组件状态</h2><div class="component-empty"><span>✦</span><b>即将上线</b><p>完成后将提供组件用途、交互规则、状态、可运行示例与 API 文档。</p></div></section><section id="后续内容"><h2>后续内容</h2><p>如果当前项目需要此组件，请按基础规范先完成业务实现，并将通用能力回收至组件库。</p></section>` }; }
 function getPage() { const hash=location.hash || '#/guide/intro'; if(pageData[hash]) return pageData[hash]; const item=navigation.flatMap(x=>x[1]).find(x=>x[1]===hash); return placeholder(item?.[0] || '页面未找到'); }
 function renderNav() { document.querySelector('#side-nav').innerHTML=navigation.map(([group,items])=>`<section><p>${group}</p>${items.map(([label,href])=>`<a href="${href}" data-href="${href}">${label}</a>`).join('')}</section>`).join(''); }
-function render() { const page=getPage(); const shell=document.querySelector('#article-shell').content.cloneNode(true); shell.querySelector('.breadcrumb').innerHTML=page.crumb; shell.querySelector('h1').textContent=page.title; shell.querySelector('.lead').textContent=page.lead; shell.querySelector('.article-body').innerHTML=location.hash === '#/components/date-time-picker' ? dateTimePickerBodySingle() : page.body; const app=document.querySelector('#app'); app.replaceChildren(shell); document.querySelectorAll('[data-href]').forEach(a=>a.classList.toggle('active',a.dataset.href===(location.hash||'#/guide/intro'))); document.querySelector('#page-toc').innerHTML=`<p>本页目录</p>${page.toc.map(x=>`<a href="${location.hash || '#/guide/intro'}" data-section="${x}">${x}</a>`).join('')}`; initComponentDemos(app); app.focus({preventScroll:true}); }
+function render() { const page=getPage(); const shell=document.querySelector('#article-shell').content.cloneNode(true); shell.querySelector('.breadcrumb').innerHTML=page.crumb; shell.querySelector('h1').textContent=page.title; shell.querySelector('.lead').textContent=page.lead; const articleBody=shell.querySelector('.article-body'); articleBody.innerHTML=location.hash === '#/components/date-time-picker' ? dateTimePickerBodySingle() : page.body; if (location.hash === '#/components/date-time-picker') { const dateSection=articleBody.querySelector('#日期选择'); const datetimeSection=articleBody.querySelector('#日期加时间选择'); if (dateSection && datetimeSection) datetimeSection.before(dateSection); } const app=document.querySelector('#app'); app.replaceChildren(shell); document.querySelectorAll('[data-href]').forEach(a=>a.classList.toggle('active',a.dataset.href===(location.hash||'#/guide/intro'))); document.querySelector('#page-toc').innerHTML=`<p>本页目录</p>${page.toc.map(x=>`<a href="${location.hash || '#/guide/intro'}" data-section="${x}">${x}</a>`).join('')}`; initComponentDemos(app); app.focus({preventScroll:true}); }
 function search(query) { const q=query.trim().toLowerCase(); document.querySelectorAll('#side-nav a').forEach(a=>{ a.hidden=Boolean(q && !a.textContent.toLowerCase().includes(q)); }); document.querySelectorAll('#side-nav section').forEach(section=>{ section.hidden=Boolean(q && !section.querySelector('a:not([hidden])')); }); }
 renderNav(); render(); const appRoot=document.querySelector('#app'); appRoot.addEventListener('click',handleComponentClick); appRoot.addEventListener('click',handleInputClick); appRoot.addEventListener('click',handleSearchClick); appRoot.addEventListener('change',handleControlChange); appRoot.addEventListener('input',handleNumericInput); appRoot.addEventListener('input',handleInputAffordances); appRoot.addEventListener('input',handleSearchInput); appRoot.addEventListener('pointerdown',handleSearchPointerDown); appRoot.addEventListener('pointerup',handleSearchPointerEnd); appRoot.addEventListener('pointercancel',handleSearchPointerEnd); appRoot.addEventListener('focusin',handleSearchFocus); appRoot.addEventListener('focusout',handleSearchFocus); appRoot.addEventListener('keydown',handleSearchKeydown); appRoot.addEventListener('keydown',handleInputKeydown); appRoot.addEventListener('keydown',handleTagKeydown); appRoot.addEventListener('keydown',handleTreeKeydown); appRoot.addEventListener('keydown',handlePickerKeydown); appRoot.addEventListener('keydown',handleDateTimeKeydown); appRoot.addEventListener('scroll',handleTimeWheelScroll,true); document.addEventListener('click',handlePickerOutsideClick); document.addEventListener('click',handleDateTimeOutsideClick); document.querySelector('#page-toc').addEventListener('click',handleTocClick); addEventListener('hashchange',render); document.querySelector('#search-input').addEventListener('input',e=>search(e.target.value)); addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();document.querySelector('#search-input').focus();}});
