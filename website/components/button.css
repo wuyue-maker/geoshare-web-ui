@@ -1,0 +1,303 @@
+.gs-button {
+  --button-bg: var(--gs-primary-2);
+  --button-color: #fff;
+  --button-border: var(--gs-primary-2);
+  --button-split-divider: #fff;
+  appearance: none;
+  box-sizing: border-box;
+  height: 32px;
+  min-width: 80px;
+  padding: 0 8px;
+  border: 1px solid var(--button-border);
+  border-radius: var(--gs-radius-sm);
+  background: var(--button-bg);
+  color: var(--button-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+  cursor: pointer;
+  transition: background-color .16s, border-color .16s, color .16s;
+}
+.gs-button:not(:disabled):not(.is-disabled):hover,
+.gs-button.is-hover:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-primary-3); --button-border: var(--gs-primary-3); }
+.gs-button:not(:disabled):not(.is-disabled):active,
+.gs-button.is-pressed:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-primary-1); --button-border: var(--gs-primary-1); }
+.gs-button:not(:disabled):not(.is-disabled):focus-visible { outline: 2px solid var(--gs-primary-3); outline-offset: 2px; }
+.gs-button:disabled,
+.gs-button.is-disabled {
+  --button-bg: var(--gs-primary-4);
+  --button-color: #fff;
+  --button-border: var(--gs-primary-4);
+  cursor: not-allowed;
+  transition: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.gs-button--neutral { --button-bg: var(--gs-neutral-6); --button-color: var(--gs-text-secondary); --button-border: var(--gs-neutral-6); --button-split-divider: var(--gs-neutral-4); font-weight: 400; }
+.gs-button--neutral:not(:disabled):not(.is-disabled):hover,
+.gs-button--neutral.is-hover:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-neutral-7); --button-border: var(--gs-neutral-7); }
+.gs-button--neutral:not(:disabled):not(.is-disabled):active,
+.gs-button--neutral.is-pressed:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-neutral-5); --button-border: var(--gs-neutral-5); }
+.gs-button--neutral:disabled,
+.gs-button--neutral.is-disabled { --button-bg: var(--gs-neutral-7); --button-color: var(--gs-text-tertiary); --button-border: var(--gs-neutral-7); --button-split-divider: var(--gs-neutral-5); }
+
+.gs-button--secondary { --button-bg: #fff; --button-color: var(--gs-text-secondary); --button-border: var(--gs-neutral-6); --button-split-divider: var(--gs-neutral-4); font-weight: 400; }
+.gs-button--secondary:not(:disabled):not(.is-disabled):hover,
+.gs-button--secondary.is-hover:not(:disabled):not(.is-disabled) { --button-bg: #fff; --button-color: var(--gs-primary-2); --button-border: var(--gs-primary-2); --button-split-divider: var(--gs-primary-2); }
+.gs-button--secondary:not(:disabled):not(.is-disabled):active,
+.gs-button--secondary.is-pressed:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-primary-4); --button-color: var(--gs-primary-1); --button-border: var(--gs-primary-1); --button-split-divider: var(--gs-primary-1); }
+.gs-button--secondary:disabled,
+.gs-button--secondary.is-disabled { --button-bg: #fff; --button-color: var(--gs-text-tertiary); --button-border: var(--gs-neutral-6); --button-split-divider: var(--gs-neutral-5); }
+
+.gs-button--dashed { --button-bg: #fff; --button-color: var(--gs-text-secondary); --button-border: var(--gs-neutral-6); border-style: dashed; font-weight: 400; }
+.gs-button--dashed:not(:disabled):not(.is-disabled):hover,
+.gs-button--dashed.is-hover:not(:disabled):not(.is-disabled) { --button-bg: #fff; --button-color: var(--gs-primary-2); --button-border: var(--gs-primary-2); }
+.gs-button--dashed:not(:disabled):not(.is-disabled):active,
+.gs-button--dashed.is-pressed:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-primary-5); --button-color: var(--gs-primary-1); --button-border: var(--gs-primary-2); }
+.gs-button--dashed:disabled,
+.gs-button--dashed.is-disabled { --button-bg: #fff; --button-color: var(--gs-text-tertiary); --button-border: var(--gs-neutral-6); }
+
+.gs-button--text,
+.gs-button--text-primary { --button-bg: transparent; --button-color: var(--gs-text-secondary); --button-border: transparent; --button-split-divider: var(--gs-neutral-4); min-width: auto; padding: 0 8px; font-weight: 400; }
+.gs-button--text:not(:disabled):not(.is-disabled):hover,
+.gs-button--text.is-hover:not(:disabled):not(.is-disabled) { --button-bg: transparent; --button-color: var(--gs-primary-2); --button-border: transparent; --button-split-divider: var(--gs-primary-2); }
+.gs-button--text:not(:disabled):not(.is-disabled):active,
+.gs-button--text.is-pressed:not(:disabled):not(.is-disabled) { --button-bg: transparent; --button-color: var(--gs-primary-1); --button-border: transparent; --button-split-divider: var(--gs-primary-1); }
+.gs-button--text-primary { --button-color: var(--gs-primary-2); }
+.gs-button--text-primary:not(:disabled):not(.is-disabled):hover,
+.gs-button--text-primary.is-hover:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-primary-6); --button-color: var(--gs-primary-2); --button-border: var(--gs-primary-6); --button-split-divider: var(--gs-primary-2); }
+.gs-button--text-primary:not(:disabled):not(.is-disabled):active,
+.gs-button--text-primary.is-pressed:not(:disabled):not(.is-disabled) { --button-bg: var(--gs-primary-4); --button-color: var(--gs-primary-1); --button-border: var(--gs-primary-4); --button-split-divider: var(--gs-primary-1); }
+.gs-button--text:disabled,
+.gs-button--text.is-disabled,
+.gs-button--text-primary:disabled,
+.gs-button--text-primary.is-disabled { --button-bg: transparent; --button-color: var(--gs-text-tertiary); --button-border: transparent; --button-split-divider: var(--gs-neutral-5); }
+
+.gs-button--red { --button-bg: var(--gs-red-2); --button-border: var(--gs-red-2); }
+.gs-button--orange { --button-bg: var(--gs-orange-2); --button-border: var(--gs-orange-2); }
+.gs-button--yellow { --button-bg: var(--gs-yellow-2); --button-border: var(--gs-yellow-2); }
+.gs-button--green { --button-bg: var(--gs-green-2); --button-border: var(--gs-green-2); }
+.gs-button--cyan { --button-bg: var(--gs-cyan-2); --button-border: var(--gs-cyan-2); }
+.gs-button--red:not(:disabled):not(.is-disabled):hover { --button-bg: var(--gs-red-3); --button-border: var(--gs-red-3); }
+.gs-button--orange:not(:disabled):not(.is-disabled):hover { --button-bg: var(--gs-orange-3); --button-border: var(--gs-orange-3); }
+.gs-button--yellow:not(:disabled):not(.is-disabled):hover { --button-bg: var(--gs-yellow-3); --button-border: var(--gs-yellow-3); }
+.gs-button--green:not(:disabled):not(.is-disabled):hover { --button-bg: var(--gs-green-3); --button-border: var(--gs-green-3); }
+.gs-button--cyan:not(:disabled):not(.is-disabled):hover { --button-bg: var(--gs-cyan-3); --button-border: var(--gs-cyan-3); }
+.gs-button--red:not(:disabled):not(.is-disabled):active { --button-bg: var(--gs-red-1); --button-border: var(--gs-red-1); }
+.gs-button--orange:not(:disabled):not(.is-disabled):active { --button-bg: var(--gs-orange-1); --button-border: var(--gs-orange-1); }
+.gs-button--yellow:not(:disabled):not(.is-disabled):active { --button-bg: var(--gs-yellow-1); --button-border: var(--gs-yellow-1); }
+.gs-button--green:not(:disabled):not(.is-disabled):active { --button-bg: var(--gs-green-1); --button-border: var(--gs-green-1); }
+.gs-button--cyan:not(:disabled):not(.is-disabled):active { --button-bg: var(--gs-cyan-1); --button-border: var(--gs-cyan-1); }
+.gs-button--red:disabled,.gs-button--red.is-disabled { --button-bg: var(--gs-red-4); --button-border: var(--gs-red-4); }
+.gs-button--orange:disabled,.gs-button--orange.is-disabled { --button-bg: var(--gs-orange-4); --button-border: var(--gs-orange-4); }
+.gs-button--yellow:disabled,.gs-button--yellow.is-disabled { --button-bg: var(--gs-yellow-4); --button-border: var(--gs-yellow-4); }
+.gs-button--green:disabled,.gs-button--green.is-disabled { --button-bg: var(--gs-green-4); --button-border: var(--gs-green-4); }
+.gs-button--cyan:disabled,.gs-button--cyan.is-disabled { --button-bg: var(--gs-cyan-4); --button-border: var(--gs-cyan-4); }
+
+.gs-button--icon { min-width: 32px; width: 32px; padding: 0; font-size: 16px; }
+.gs-icon-radius-4 { border-radius: 4px; }
+.gs-icon-radius-8 { border-radius: 8px; }
+.gs-icon-radius-12 { border-radius: 12px; }
+.gs-icon-radius-16 { border-radius: 16px; }
+.gs-icon-glyph { width: 20px; height: 20px; display: block; flex: 0 0 20px; color: inherit; fill: currentColor; pointer-events: none; }
+.gs-button--icon-text { gap: 4px; }
+.gs-button--icon-text .gs-icon-glyph { width: 16px; height: 16px; flex-basis: 16px; }
+.gs-button--with-icon { gap: 4px; }
+
+.gs-button__chevron { width: 0; height: 0; display: inline-block; flex: 0 0 auto; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; margin-left: 2px; }
+.gs-button--split {
+  min-width: 80px;
+  width: max-content;
+  padding: 0;
+  gap: 0;
+  justify-content: flex-start;
+  --button-split-divider: #d5d7d9;
+}
+.gs-button--split .gs-button__label {
+  min-width: 0;
+  padding: 0 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+.gs-button--split .gs-button__split-box {
+  box-sizing: border-box;
+  display: inline-grid;
+  grid-template-columns: 1px 1fr;
+  align-items: center;
+  align-self: stretch;
+  flex: 0 0 32px;
+  width: 32px;
+  margin-left: auto;
+  pointer-events: none;
+}
+.gs-button--split .gs-button__divider {
+  display: block;
+  width: 1px;
+  height: 16px;
+  background-color: var(--button-split-divider);
+}
+.gs-button--split .gs-button__chevron {
+  justify-self: center;
+  margin-left: 0;
+}
+
+/* Split dropdown divider colors — Figma component states. */
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary) {
+  --button-split-divider: #ffffff;
+}
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary):disabled,
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary).is-disabled {
+  --button-split-divider: #ffffff;
+}
+.gs-button--neutral.gs-button--split,
+.gs-button--secondary.gs-button--split,
+.gs-button--text.gs-button--split,
+.gs-button--text-primary.gs-button--split {
+  --button-split-divider: #d5d7d9;
+}
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary):not(:disabled):not(.is-disabled):hover,
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary).is-hover:not(:disabled):not(.is-disabled),
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary):not(:disabled):not(.is-disabled):active,
+.gs-button--split:not(.gs-button--neutral):not(.gs-button--secondary):not(.gs-button--text):not(.gs-button--text-primary).is-pressed:not(:disabled):not(.is-disabled) {
+  --button-split-divider: #ffffff;
+}
+.gs-button--neutral.gs-button--split:not(:disabled):not(.is-disabled):active,
+.gs-button--neutral.gs-button--split.is-pressed:not(:disabled):not(.is-disabled) {
+  --button-split-divider: #969899;
+}
+.gs-button--secondary.gs-button--split:not(:disabled):not(.is-disabled):hover,
+.gs-button--secondary.gs-button--split.is-hover:not(:disabled):not(.is-disabled),
+.gs-button--text.gs-button--split:not(:disabled):not(.is-disabled):hover,
+.gs-button--text.gs-button--split.is-hover:not(:disabled):not(.is-disabled),
+.gs-button--text-primary.gs-button--split:not(:disabled):not(.is-disabled):hover,
+.gs-button--text-primary.gs-button--split.is-hover:not(:disabled):not(.is-disabled) {
+  --button-split-divider: #1890ff;
+}
+.gs-button--secondary.gs-button--split:not(:disabled):not(.is-disabled):active,
+.gs-button--secondary.gs-button--split.is-pressed:not(:disabled):not(.is-disabled),
+.gs-button--text.gs-button--split:not(:disabled):not(.is-disabled):active,
+.gs-button--text.gs-button--split.is-pressed:not(:disabled):not(.is-disabled),
+.gs-button--text-primary.gs-button--split:not(:disabled):not(.is-disabled):active,
+.gs-button--text-primary.gs-button--split.is-pressed:not(:disabled):not(.is-disabled) {
+  --button-split-divider: #064580;
+}
+.gs-button--neutral.gs-button--split:disabled,
+.gs-button--neutral.gs-button--split.is-disabled,
+.gs-button--secondary.gs-button--split:disabled,
+.gs-button--secondary.gs-button--split.is-disabled,
+.gs-button--text.gs-button--split:disabled,
+.gs-button--text.gs-button--split.is-disabled,
+.gs-button--text-primary.gs-button--split:disabled,
+.gs-button--text-primary.gs-button--split.is-disabled {
+  --button-split-divider: #d5d7d9;
+}
+
+.gs-button-group { display: inline-flex; isolation: isolate; }
+.gs-button-group .gs-button { position: relative; border-radius: 0; margin-left: -1px; min-width: 80px; }
+.gs-button-group .gs-button:not(:disabled):not(.is-disabled):hover,
+.gs-button-group .gs-button:not(:disabled):not(.is-disabled):focus-visible,
+.gs-button-group .gs-button.is-hover:not(:disabled):not(.is-disabled),
+.gs-button-group .gs-button.is-pressed:not(:disabled):not(.is-disabled) { z-index: 1; }
+.gs-button-group .gs-button:first-child { border-radius: var(--gs-radius-sm) 0 0 var(--gs-radius-sm); margin-left: 0; }
+.gs-button-group .gs-button:last-child { border-radius: 0 var(--gs-radius-sm) var(--gs-radius-sm) 0; }
+.gs-button-group--text .gs-button { border-color: transparent; margin-left: 0; min-width: auto; padding-left: 12px; padding-right: 12px; }
+.gs-button-group--text .gs-button + .gs-button::before { content: ''; position: absolute; left: 0; top: 8px; height: 16px; border-left: 1px solid var(--gs-neutral-6); }
+.gs-button-group--icon .gs-button { min-width: 32px; }
+
+/* Combination button — Figma node 2240:201 */
+.gs-combination {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 400px;
+  max-width: 100%;
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.gs-combination__item {
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-width: 0;
+  margin: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--gs-text-secondary);
+  font: inherit;
+  white-space: nowrap;
+  cursor: default;
+}
+.gs-combination__item.is-hover { color: var(--gs-primary-2); }
+.gs-combination__item.is-selected { color: var(--gs-primary-2); }
+.gs-combination__item:disabled,
+.gs-combination__item.is-disabled { color: var(--gs-text-tertiary); pointer-events: none; }
+
+.gs-combination--outline .gs-combination__item {
+  flex: 1 1 0;
+  background: var(--gs-neutral-9);
+  border: 1px solid var(--gs-neutral-6);
+  border-right: 0;
+}
+.gs-combination--outline .gs-combination__item:first-child { border-radius: 4px 0 0 4px; }
+.gs-combination--outline .gs-combination__item:last-child { border-right: 1px solid var(--gs-neutral-6); border-radius: 0 4px 4px 0; }
+.gs-combination--outline .gs-combination__item.is-selected {
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--gs-primary-2);
+}
+.gs-combination--outline .gs-combination__item.is-selected + .gs-combination__item { border-left: 0; }
+.gs-combination--outline .gs-combination__item:disabled:not(.is-selected) { border-color: var(--gs-neutral-7); }
+.gs-combination--outline .gs-combination__item.is-selected:disabled {
+  color: var(--gs-primary-3);
+  border-color: var(--gs-primary-4);
+}
+
+.gs-combination--text .gs-combination__item { position: relative; flex: 1 1 0; }
+.gs-combination--text .gs-combination__item + .gs-combination__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 1px;
+  height: 16px;
+  background: var(--gs-neutral-6);
+}
+.gs-combination--text .gs-combination__item.is-selected:disabled { color: var(--gs-primary-3); }
+
+.gs-combination--filled,
+.gs-combination--icon {
+  gap: 4px;
+  padding: 2px;
+  border-radius: 4px;
+  background: var(--gs-neutral-7);
+  overflow: hidden;
+}
+.gs-combination--filled .gs-combination__item {
+  flex: 1 1 0;
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 2px;
+}
+.gs-combination--filled .gs-combination__item.is-selected { color: var(--gs-text-primary); background: var(--gs-neutral-9); }
+.gs-combination--filled .gs-combination__item.is-selected:disabled { color: var(--gs-text-tertiary); }
+
+.gs-combination--icon { width: auto; }
+.gs-combination--icon .gs-combination__item {
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 2px;
+  color: var(--gs-neutral-3);
+}
+.gs-combination--icon .gs-combination__item.is-hover { color: var(--gs-primary-2); }
+.gs-combination--icon .gs-combination__item.is-selected { color: var(--gs-neutral-2); background: var(--gs-neutral-9); }
+.gs-combination--icon .gs-combination__item:disabled,
+.gs-combination--icon .gs-combination__item.is-disabled { color: var(--gs-neutral-5); }
+.gs-combination--icon .gs-icon-glyph { width: 20px; height: 20px; }

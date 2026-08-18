@@ -1,0 +1,319 @@
+.gs-picker-card {
+  padding: 24px;
+}
+
+.gs-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.gs-picker-example {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.gs-picker-example__label {
+  color: var(--gs-text-tertiary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.gs-picker-example__label--disabled {
+  margin-top: 8px;
+}
+
+.gs-select-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+.gs-select {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 32px;
+  height: 32px;
+  gap: 8px;
+  padding: 0 8px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-9);
+  color: var(--gs-text-secondary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gs-select:not(:disabled):not(.is-disabled):hover,
+.gs-select.is-active:not(.is-disabled) {
+  border-color: var(--gs-primary-2);
+}
+
+.gs-select.is-active:not(.is-disabled) {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gs-primary-2) 20%, transparent);
+  color: var(--gs-text-primary);
+}
+
+.gs-select.is-disabled,
+.gs-select:disabled {
+  border-color: var(--gs-neutral-6);
+  background: var(--gs-neutral-7);
+  color: var(--gs-text-tertiary);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.gs-select__prefix,
+.gs-select__chevron {
+  display: inline-flex;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.gs-select__prefix {
+  color: var(--gs-text-tertiary);
+}
+
+.gs-select__chevron {
+  position: relative;
+  color: var(--gs-neutral-4);
+  overflow: hidden;
+}
+
+.gs-select__prefix .gs-icon,
+.gs-select__chevron .gs-icon,
+.gs-select-option__arrow {
+  width: 16px;
+  height: 16px;
+}
+
+.gs-select__chevron-icon {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+  transition: transform 180ms cubic-bezier(.2, 0, 0, 1), opacity 140ms linear;
+}
+
+.gs-select__chevron-icon--up {
+  opacity: 0;
+  transform: rotate(-90deg) scale(.84);
+}
+
+.gs-select.is-active:not(.is-disabled) .gs-select__chevron-icon--down {
+  opacity: 0;
+  transform: rotate(90deg) scale(.84);
+}
+
+.gs-select.is-active:not(.is-disabled) .gs-select__chevron-icon--up {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-select__chevron-icon {
+    transition: none;
+  }
+}
+
+.gs-select.is-active:not(.is-disabled) .gs-select__chevron {
+  color: var(--gs-primary-2);
+}
+
+.gs-select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gs-select__value.is-selected {
+  color: var(--gs-text-primary);
+}
+
+.gs-select--multi {
+  gap: 4px;
+  min-height: 32px;
+  height: auto;
+  padding-block: 4px;
+}
+
+.gs-select--multi .gs-select__prefix {
+  align-self: center;
+}
+
+.gs-select__tags {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+  gap: 4px;
+}
+
+/* An empty tag slot must not consume flex space: the placeholder should start
+   immediately after the prefix, just like the single-select value. */
+.gs-select__tags:empty {
+  display: none;
+}
+
+.gs-select__tags .gs-tag {
+  max-width: 100%;
+}
+
+.gs-select__placeholder {
+  flex: 1;
+  color: var(--gs-text-tertiary);
+  white-space: nowrap;
+}
+
+.gs-select-option--checkable {
+  justify-content: flex-start;
+}
+
+.gs-select-option__checkbox {
+  position: relative;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--gs-neutral-5);
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-9);
+}
+
+.gs-select-option--checkable.is-selected .gs-select-option__checkbox {
+  border-color: var(--gs-primary-2);
+  background: var(--gs-primary-2);
+}
+
+.gs-select-option--checkable.is-selected .gs-select-option__checkbox::after {
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--gs-neutral-9);
+  border-width: 0 2px 2px 0;
+  content: '';
+  transform: rotate(45deg);
+}
+
+.gs-select-option--checkable:disabled .gs-select-option__checkbox {
+  border-color: var(--gs-neutral-6);
+  background: var(--gs-neutral-7);
+}
+
+.gs-select-popup {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  border: 0;
+  border-radius: var(--gs-radius-md);
+  background: var(--gs-neutral-9);
+  box-shadow: var(--gs-shadow-sm);
+}
+
+.gs-select-popup[hidden] {
+  display: none;
+}
+
+.gs-select-option {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 32px;
+  gap: 8px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: var(--gs-radius-sm);
+  background: transparent;
+  color: var(--gs-text-secondary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gs-select-option__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+}
+
+.gs-select-option:hover:not(:disabled):not(.is-disabled) {
+  outline: 0;
+  background: var(--gs-neutral-8);
+  color: var(--gs-primary-2);
+}
+
+.gs-select-option:focus-visible:not(:disabled):not(.is-disabled),
+.gs-select-option.is-selected:not(:disabled):not(.is-disabled) {
+  outline: 0;
+  background: var(--gs-primary-5);
+  color: var(--gs-primary-2);
+}
+
+.gs-select-option:disabled {
+  color: var(--gs-text-tertiary);
+  cursor: not-allowed;
+}
+
+.gs-select-popup--cascader {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 120px;
+  gap: 8px;
+}
+
+.gs-select-pane {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  gap: 2px;
+}
+
+.gs-select-pane + .gs-select-pane {
+  padding-left: 8px;
+  border-left: 1px solid var(--gs-neutral-6);
+}
+
+.gs-select-pane__placeholder {
+  padding: 8px;
+  color: var(--gs-text-tertiary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+@media (max-width: 900px) {
+  .gs-picker-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .gs-picker-card {
+    padding: 16px;
+  }
+
+  .gs-select-popup--cascader {
+    grid-template-columns: 1fr;
+  }
+
+  .gs-select-pane + .gs-select-pane {
+    padding-top: 8px;
+    padding-left: 0;
+    border-top: 1px solid var(--gs-neutral-6);
+    border-left: 0;
+  }
+}

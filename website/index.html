@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GeoShare Web UI 组件与设计规范" />
+    <title>GeoShare UI · 组件文档</title>
+    <link rel="stylesheet" href="./foundations/tokens.css" />
+    <link rel="stylesheet" href="./foundations/fonts.css" />
+    <link rel="stylesheet" href="./site/styles.css" />
+    <link rel="stylesheet" href="./components/icon.css?v=20260814-icons" />
+    <link rel="stylesheet" href="./components/button.css" />
+    <link rel="stylesheet" href="./components/tag.css?v=20260814-neutral-surfaces" />
+    <link rel="stylesheet" href="./components/progress.css" />
+    <link rel="stylesheet" href="./components/timeline.css" />
+    <link rel="stylesheet" href="./components/tree.css" />
+    <link rel="stylesheet" href="./components/controls.css" />
+    <link rel="stylesheet" href="./components/input.css?v=20260814-placeholder-light" />
+    <link rel="stylesheet" href="./components/search.css?v=20260814-placeholder-light" />
+    <link rel="stylesheet" href="./components/picker.css?v=20260817-chevron-motion" />
+    <link rel="stylesheet" href="./components/date-time-picker.css?v=20260818-icon-registry-nav" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#/guide/intro" aria-label="GeoShare UI 首页"><img class="brand-logo" src="./assets/brand/geoshare-logo.png" alt="GeoShare UI" /></a>
+        <nav class="top-nav" aria-label="主导航"><a class="selected" href="#/guide/intro">组件</a><a href="#/guide/design">设计规范</a><a href="#/guide/resources">资源</a></nav>
+        <label class="search"><svg class="gs-icon gs-header-search-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M7 0.666992C10.4978 0.666992 13.333 3.50221 13.333 7C13.333 8.50903 12.8038 9.89352 11.9229 10.9814L14.373 13.4307C14.6331 13.691 14.6332 14.1137 14.373 14.374C14.1128 14.6342 13.69 14.6341 13.4297 14.374L10.9805 11.9238C9.89271 12.8043 8.50853 13.333 7 13.333C3.50221 13.333 0.666992 10.4978 0.666992 7C0.666992 3.50221 3.50221 0.666992 7 0.666992ZM7 3.33301C6.07988 3.3331 5.24498 3.70718 4.64258 4.30957C4.38245 4.56991 4.38237 4.99264 4.64258 5.25293C4.90287 5.51308 5.32562 5.51305 5.58594 5.25293C5.94851 4.89037 6.44769 4.66709 7 4.66699C7.55231 4.66709 8.0515 4.89041 8.41406 5.25293C8.67441 5.513 9.09715 5.51311 9.35742 5.25293C9.61765 4.99266 9.6175 4.56993 9.35742 4.30957C8.75502 3.70721 7.92011 3.33311 7 3.33301Z" fill="currentColor"/></svg><input id="search-input" type="search" placeholder="搜索组件或规范" autocomplete="off" /><kbd>⌘ K</kbd></label>
+      </div>
+    </header>
+    <div class="doc-layout">
+      <aside class="doc-sidebar"><nav id="side-nav" aria-label="组件目录"></nav></aside>
+      <main id="app" class="doc-main" tabindex="-1"></main>
+      <aside id="page-toc" class="page-toc" aria-label="页面目录"></aside>
+    </div>
+    <template id="article-shell">
+      <article class="doc-article">
+        <p class="breadcrumb">GeoShare UI / <span></span></p>
+        <h1></h1><p class="lead"></p>
+        <div class="article-body"></div>
+      </article>
+    </template>
+    <script src="./assets/icons/registry.js?v=20260818-icon-registry-nav"></script>
+    <script src="./site/preview.js?v=20260818-icon-registry-nav"></script>
+  </body>
+</html>

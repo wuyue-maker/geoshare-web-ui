@@ -1,0 +1,288 @@
+/* Other controls — values and measurements follow Figma node 893:1856. */
+.figma-control-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  margin-top: 16px;
+}
+
+.figma-spec-heading {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.figma-control-specimen {
+  display: grid;
+  gap: 20px;
+}
+
+.control-spec-card { margin-top: 16px; }
+.control-spec-card .figma-control-row { margin-top: 0; }
+
+.gs-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  color: var(--gs-text-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.gs-control__indicator {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: 0 0 16px;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--gs-neutral-6);
+  background: var(--gs-neutral-9);
+}
+
+.gs-control--radio .gs-control__indicator { border-radius: 50%; }
+.gs-control--checkbox .gs-control__indicator { border-radius: var(--gs-radius-sm); }
+
+.gs-control.is-hover .gs-control__indicator { border-color: var(--gs-primary-2); }
+
+.gs-control.is-selected .gs-control__indicator {
+  border-color: var(--gs-primary-2);
+  background: var(--gs-primary-2);
+}
+
+.gs-control--radio.is-selected .gs-control__indicator { background: var(--gs-neutral-9); }
+
+.gs-control--radio.is-selected .gs-control__indicator::after {
+  width: 6px;
+  height: 6px;
+  content: "";
+  border-radius: 50%;
+  background: var(--gs-primary-2);
+}
+
+.gs-control--checkbox.is-selected:not(.is-mixed) .gs-control__indicator::after {
+  width: 8px;
+  height: 5px;
+  content: "";
+  border: solid var(--gs-neutral-9);
+  border-width: 0 0 2px 2px;
+  transform: translateY(-1px) rotate(-45deg);
+}
+
+.gs-control--checkbox.is-mixed .gs-control__indicator::after {
+  width: 8px;
+  height: 2px;
+  content: "";
+  border-radius: 1px;
+  background: var(--gs-neutral-9);
+}
+
+.gs-control.is-disabled { color: var(--gs-text-tertiary); }
+
+.gs-control.is-disabled .gs-control__indicator {
+  border-color: var(--gs-neutral-7);
+  background: var(--gs-neutral-8);
+}
+
+.gs-control--radio.is-disabled.is-selected .gs-control__indicator::after { background: var(--gs-neutral-5); }
+
+.gs-control--checkbox.is-disabled.is-selected:not(.is-mixed) .gs-control__indicator::after {
+  border-color: var(--gs-neutral-5);
+}
+
+.gs-control--checkbox.is-disabled.is-mixed .gs-control__indicator::after { background: var(--gs-neutral-5); }
+
+.switch-spec-grid {
+  display: grid;
+  grid-template-columns: 72px repeat(4, minmax(72px, 1fr));
+  gap: 16px 24px;
+}
+
+.switch-spec-card { margin-top: 16px; }
+.switch-spec-col { display: grid; grid-template-rows: 22px repeat(4, 22px); gap: 16px; justify-items: center; }
+.switch-spec-col--states { justify-items: start; }
+.switch-spec-col__title,
+.switch-spec-state { color: var(--gs-text-tertiary); font-size: 14px; font-weight: 400; line-height: 22px; }
+
+.gs-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  color: var(--gs-text-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.gs-switch--spec { min-height: 22px; }
+
+.gs-switch__track {
+  position: relative;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--gs-neutral-6);
+}
+
+.gs-switch__track::after {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  content: "";
+  border-radius: 50%;
+  background: var(--gs-neutral-9);
+  transition: width 120ms ease, transform 120ms ease;
+}
+
+.gs-switch.is-hover:not(.is-on) .gs-switch__track { background: var(--gs-neutral-5); }
+.gs-switch.is-pressed:not(.is-on) .gs-switch__track { background: var(--gs-neutral-5); }
+.gs-switch.is-disabled:not(.is-on) { color: var(--gs-text-tertiary); }
+.gs-switch.is-disabled:not(.is-on) .gs-switch__track { background: var(--gs-neutral-6); }
+.gs-switch.is-disabled:not(.is-on) .gs-switch__track::after { background: var(--gs-neutral-7); }
+
+.gs-switch.is-on .gs-switch__track::after { transform: translateX(18px); }
+.gs-switch.is-pressed .gs-switch__track::after { width: 20px; border-radius: 7px; }
+.gs-switch.is-on.is-pressed .gs-switch__track::after { transform: translateX(12px); }
+.gs-switch--blue.is-on .gs-switch__track { background: var(--gs-primary-2); }
+.gs-switch--red.is-on .gs-switch__track { background: var(--gs-red-2); }
+.gs-switch--green.is-on .gs-switch__track { background: var(--gs-green-2); }
+
+.gs-switch--blue.is-on.is-hover .gs-switch__track,
+.gs-switch--blue.is-on.is-pressed .gs-switch__track { background: var(--gs-primary-3); }
+.gs-switch--red.is-on.is-hover .gs-switch__track,
+.gs-switch--red.is-on.is-pressed .gs-switch__track { background: var(--gs-red-3); }
+.gs-switch--green.is-on.is-hover .gs-switch__track,
+.gs-switch--green.is-on.is-pressed .gs-switch__track { background: var(--gs-green-3); }
+
+.gs-switch--blue.is-on.is-disabled .gs-switch__track::after { background: var(--gs-primary-3); }
+.gs-switch--red.is-on.is-disabled .gs-switch__track::after { background: var(--gs-red-3); }
+.gs-switch--green.is-on.is-disabled .gs-switch__track::after { background: var(--gs-green-3); }
+
+.gs-switch.is-disabled { color: var(--gs-text-tertiary); }
+
+.control-live-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 56px;
+  margin: 16px 0 0;
+  padding: 20px;
+  border: 1px solid var(--gs-neutral-6);
+}
+
+fieldset.control-live-demo { min-inline-size: 0; }
+.control-live-demo__divider { width: 1px; height: 20px; background: var(--gs-neutral-6); }
+
+.gs-live-control,
+.gs-live-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  color: var(--gs-text-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.gs-live-control input,
+.gs-live-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gs-live-control__indicator {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: 0 0 16px;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--gs-neutral-6);
+  background: var(--gs-neutral-9);
+}
+
+.gs-live-control--radio .gs-live-control__indicator { border-radius: 50%; }
+.gs-live-control--checkbox .gs-live-control__indicator { border-radius: var(--gs-radius-sm); }
+.gs-live-control:hover input:not(:disabled) + .gs-live-control__indicator { border-color: var(--gs-primary-2); }
+.gs-live-control input:checked + .gs-live-control__indicator { border-color: var(--gs-primary-2); background: var(--gs-primary-2); }
+.gs-live-control--radio input:checked + .gs-live-control__indicator { background: var(--gs-neutral-9); }
+.gs-live-control--radio input:checked + .gs-live-control__indicator::after { width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--gs-primary-2); }
+.gs-live-control--checkbox input:checked + .gs-live-control__indicator::after { width: 8px; height: 5px; content: ""; border: solid var(--gs-neutral-9); border-width: 0 0 2px 2px; transform: translateY(-1px) rotate(-45deg); }
+.gs-live-control--checkbox input:indeterminate + .gs-live-control__indicator {
+  border-color: var(--gs-primary-2);
+  background: var(--gs-primary-2);
+}
+.gs-live-control--checkbox input:indeterminate + .gs-live-control__indicator::after {
+  width: 8px;
+  height: 2px;
+  content: "";
+  border: 0;
+  border-radius: 1px;
+  background: var(--gs-neutral-9);
+  transform: none;
+}
+.gs-live-control input:focus-visible + .gs-live-control__indicator,
+.gs-live-switch input:focus-visible + .gs-live-switch__track { outline: 2px solid var(--gs-primary-3); outline-offset: 2px; }
+.gs-live-control input:disabled + .gs-live-control__indicator { border-color: var(--gs-neutral-7); background: var(--gs-neutral-8); }
+.gs-live-control input:disabled ~ span:last-child,
+.gs-live-switch input:disabled ~ span:first-child { color: var(--gs-text-tertiary); }
+.gs-live-control input:disabled:checked + .gs-live-control__indicator { background: var(--gs-neutral-8); }
+.gs-live-control--radio input:disabled:checked + .gs-live-control__indicator::after { background: var(--gs-neutral-5); }
+.gs-live-control--checkbox input:disabled:checked + .gs-live-control__indicator::after { border-color: var(--gs-neutral-5); }
+.gs-live-control.is-disabled, .gs-live-switch.is-disabled { cursor: not-allowed; }
+
+.gs-live-switch { justify-content: space-between; min-width: 120px; }
+.gs-live-switch__track { position: relative; flex: 0 0 36px; width: 36px; height: 18px; border-radius: 9px; background: var(--gs-neutral-6); }
+.gs-live-switch__track::after { position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; content: ""; border-radius: 50%; background: var(--gs-neutral-9); transition: width 120ms ease, transform 120ms ease, background-color 160ms ease; }
+.gs-live-switch input:checked + .gs-live-switch__track::after { transform: translateX(18px); }
+.gs-live-switch:active input:not(:disabled) + .gs-live-switch__track::after { width: 20px; }
+.gs-live-switch:active input:not(:disabled) + .gs-live-switch__track::after { border-radius: 7px; }
+.gs-live-switch:active input:not(:disabled):checked + .gs-live-switch__track::after { transform: translateX(12px); }
+.gs-live-switch--blue input:checked + .gs-live-switch__track { background: var(--gs-primary-2); }
+.gs-live-switch--red input:checked + .gs-live-switch__track { background: var(--gs-red-2); }
+.gs-live-switch--green input:checked + .gs-live-switch__track { background: var(--gs-green-2); }
+.gs-live-switch:hover input:not(:disabled):not(:checked) + .gs-live-switch__track,
+.gs-live-switch:active input:not(:disabled):not(:checked) + .gs-live-switch__track { background: var(--gs-neutral-5); }
+.gs-live-switch--blue:hover input:not(:disabled):checked + .gs-live-switch__track { background: var(--gs-primary-3); }
+.gs-live-switch--red:hover input:not(:disabled):checked + .gs-live-switch__track { background: var(--gs-red-3); }
+.gs-live-switch--green:hover input:not(:disabled):checked + .gs-live-switch__track { background: var(--gs-green-3); }
+.gs-live-switch input:disabled + .gs-live-switch__track { background: var(--gs-neutral-6); }
+.gs-live-switch input:disabled + .gs-live-switch__track::after { background: var(--gs-neutral-7); }
+.gs-live-switch--blue input:disabled:checked + .gs-live-switch__track { background: var(--gs-primary-2); }
+.gs-live-switch--red input:disabled:checked + .gs-live-switch__track { background: var(--gs-red-2); }
+.gs-live-switch--green input:disabled:checked + .gs-live-switch__track { background: var(--gs-green-2); }
+.gs-live-switch--blue input:disabled:checked + .gs-live-switch__track::after { background: var(--gs-primary-3); }
+.gs-live-switch--red input:disabled:checked + .gs-live-switch__track::after { background: var(--gs-red-3); }
+.gs-live-switch--green input:disabled:checked + .gs-live-switch__track::after { background: var(--gs-green-3); }
+
+@media (max-width: 840px) {
+  .switch-spec-grid { grid-template-columns: 72px repeat(4, minmax(58px, 1fr)); gap: 16px; }
+}
+
+@media (max-width: 520px) {
+  .figma-control-row { gap: 16px; }
+  .switch-spec-card { overflow-x: auto; }
+  .switch-spec-grid { min-width: 480px; }
+  .control-live-demo { gap: 16px; }
+}

@@ -1,0 +1,157 @@
+.input-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; margin-top: 0; }
+.input-layout > .input-variant { min-width: 0; margin-top: 0 !important; }
+.input-variant h2 { position: relative; padding-left: 10px; font-size: 18px; line-height: 26px; margin-bottom: 20px; }
+.input-variant h2::before { content: ""; position: absolute; left: 0; top: 4px; width: 4px; height: 18px; border-radius: 1px; background: var(--gs-primary-2); }
+.input-state-stack { display: grid; gap: 16px; }
+.input-state-row { display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: start; gap: 8px; min-width: 0; }
+.input-state-label { color: var(--gs-text-tertiary); font-size: 13px; line-height: 32px; white-space: nowrap; }
+.input-state-content { min-width: 0; }
+.input-state-content > .input-helper { margin: 4px 0 0; }
+.input-helper { color: var(--gs-red-2) !important; font-size: 12px !important; line-height: 20px !important; }
+.gs-input-labeled { display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 8px; min-width: 0; }
+.gs-input-labeled > span { color: var(--gs-text-secondary); font-size: 14px; line-height: 22px; white-space: nowrap; }
+.gs-input-field { box-sizing: border-box; min-width: 0; width: 100%; min-height: 32px; height: 32px; display: flex; align-items: center; gap: 8px; padding: 0 8px; border: 1px solid var(--gs-neutral-6); border-radius: var(--gs-radius-sm); background: var(--gs-neutral-9); color: var(--gs-text-primary); transition: border-color .12s ease, box-shadow .12s ease; }
+.gs-input-field > input { box-sizing: border-box; flex: 1 1 auto; min-width: 0; width: 100%; height: 30px; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif; }
+.gs-input-field > input::placeholder { color: var(--gs-text-tertiary); font-weight: 300; opacity: 1; }
+.gs-input-field:not(.is-disabled):not(.is-error):hover { border-color: var(--gs-primary-2); }
+.gs-input-field:not(.is-disabled):not(.is-error):focus-within { border-color: var(--gs-primary-2); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gs-primary-2) 20%, transparent); }
+.gs-input-field.is-hover { border-color: var(--gs-primary-2); }
+.gs-input-field.is-focused { border-color: var(--gs-primary-2); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gs-primary-2) 20%, transparent); }
+.gs-input-field.is-error { border-color: var(--gs-red-2); }
+.gs-input-field.is-disabled { border-color: var(--gs-neutral-6); background: var(--gs-neutral-7); color: var(--gs-text-tertiary); }
+.gs-input-field.is-disabled > input { color: var(--gs-text-tertiary); cursor: not-allowed; }
+.gs-input-field.is-disabled .gs-input-addon { color: var(--gs-text-tertiary); }
+.gs-input-field [hidden] { display: none !important; }
+/* 清空/显隐操作使用 Button 的图形按钮外观；这里只处理它们嵌入输入框后的占位与边缘对齐。 */
+.gs-input-clear, .gs-input-eye { flex: 0 0 32px; margin-right: -8px; }
+.gs-input-clear__icon, .gs-input-eye__icon { display: block; width: 16px; height: 16px; flex: 0 0 16px; pointer-events: none; }
+.gs-input-addon { box-sizing: border-box; display: inline-flex; align-items: center; align-self: stretch; flex: 0 0 auto; margin-left: -8px; padding: 0 8px; background: var(--gs-neutral-7); color: var(--gs-text-secondary); border-right: 1px solid var(--gs-neutral-6); white-space: nowrap; }
+.gs-input-addon--suffix { margin: 0 -8px 0 0; border-right: 0; border-left: 1px solid var(--gs-neutral-6); }
+.gs-input-chevron { width: 16px; height: 16px; flex: 0 0 16px; display: inline-block; }
+.gs-input-composite {
+  padding: 0;
+  gap: 0;
+  overflow: visible;
+  background: var(--gs-neutral-7);
+}
+.gs-input-composite > .gs-input-addon {
+  margin: 0;
+  padding: 0 8px;
+  border: 0;
+  background: var(--gs-neutral-7);
+}
+.gs-input-composite > input {
+  position: relative;
+  z-index: 1;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: 0;
+  background: var(--gs-neutral-9);
+  outline: 0;
+}
+/* 装饰输入框的交互边界只作用于中间可编辑段；前缀和后缀保持外壳样式。 */
+.gs-input-field.gs-input-composite:not(.is-disabled):not(.is-error):hover,
+.gs-input-field.gs-input-composite:not(.is-disabled):not(.is-error):focus-within,
+.gs-input-composite.is-hover,
+.gs-input-composite.is-focused,
+.gs-input-composite.is-error {
+  border-color: var(--gs-neutral-6);
+  box-shadow: none;
+}
+.gs-input-composite:not(.is-disabled) > input:hover,
+.gs-input-composite:not(.is-disabled) > input:focus,
+.gs-input-composite.is-hover > input,
+.gs-input-composite.is-focused > input {
+  border-color: var(--gs-primary-2);
+}
+.gs-input-composite.is-focused > input,
+.gs-input-composite:not(.is-disabled):focus-within > input {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gs-primary-2) 20%, transparent);
+}
+.gs-input-composite.is-error > input { border-color: var(--gs-red-2); }
+.gs-input-composite.is-disabled > input {
+  border-color: var(--gs-neutral-6);
+  background: var(--gs-neutral-7);
+  color: var(--gs-text-tertiary);
+}
+.gs-input-number-control, .input-live-number { min-width: 0; display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; gap: 8px; align-items: center; }
+.gs-input-step-button { appearance: none; box-sizing: border-box; width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--gs-neutral-6); border-radius: var(--gs-radius-sm); background: var(--gs-neutral-9); color: var(--gs-text-secondary); cursor: pointer; transition: background-color .16s, border-color .16s, color .16s; }
+.gs-input-step-icon { display: block; width: 20px; height: 20px; flex: 0 0 20px; }
+.gs-input-step-button:hover:not(:disabled),
+.gs-input-step-button.is-hover:not(:disabled) { background: var(--gs-neutral-9); border-color: var(--gs-primary-2); color: var(--gs-primary-2); }
+.gs-input-step-button:active:not(:disabled),
+.gs-input-step-button.is-pressed:not(:disabled) { background: var(--gs-primary-4); border-color: var(--gs-primary-1); color: var(--gs-primary-1); }
+.gs-input-step-button:focus-visible { outline: 2px solid var(--gs-primary-3); outline-offset: 2px; }
+.gs-input-step-button:disabled,
+.gs-input-step-button.is-disabled { background: var(--gs-neutral-9); border-color: var(--gs-neutral-6); color: var(--gs-neutral-5); cursor: not-allowed; transition: none; }
+.gs-input-number-control .gs-input-field { justify-content: center; }
+.gs-input-number-control .gs-input-field > input { text-align: center; }
+.input-live-number:hover .gs-input-field:not(.is-disabled):not(.is-error),
+.gs-input-number-control:hover .gs-input-field:not(.is-disabled):not(.is-error) { border-color: var(--gs-primary-2); }
+.gs-input-field > input[type="number"] { -moz-appearance: textfield; }
+.gs-input-field > input[type="number"]::-webkit-inner-spin-button,
+.gs-input-field > input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: none; }
+.gs-input-spinner-control { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) 32px; align-items: stretch; }
+.gs-input-spinner-control > .gs-input-field { min-width: 0; border-radius: var(--gs-radius-sm) 0 0 var(--gs-radius-sm); }
+.gs-input-spinner-control:not(.is-disabled):hover > .gs-input-field:not(.is-error),
+.gs-input-spinner-control:not(.is-disabled):hover > .gs-input-spinner-buttons { border-color: var(--gs-primary-2); }
+.gs-input-spinner-control:not(.is-disabled):focus-within > .gs-input-field:not(.is-error),
+.gs-input-spinner-control:not(.is-disabled):focus-within > .gs-input-spinner-buttons { border-color: var(--gs-primary-2); }
+.gs-input-spinner-buttons { box-sizing: border-box; width: 32px; height: 32px; min-width: 0; display: grid; grid-template-rows: 1fr 1fr; overflow: hidden; border: 1px solid var(--gs-neutral-6); border-left: 0; border-radius: 0 var(--gs-radius-sm) var(--gs-radius-sm) 0; background: var(--gs-neutral-7); }
+.gs-input-spinner-button { appearance: none; position: relative; min-width: 0; min-height: 0; padding: 0; display: grid; place-items: center; overflow: hidden; border: 0; background: transparent; color: var(--gs-neutral-3); cursor: pointer; }
+.gs-input-spinner-button::after { content: ""; position: absolute; top: 3px; left: 4px; right: 4px; z-index: 0; height: 8px; border-radius: 2px; background: var(--gs-neutral-8); opacity: 0; }
+.gs-input-spinner-button:hover:not(:disabled)::after,
+.gs-input-spinner-button:focus-visible:not(:disabled)::after,
+.gs-input-spinner-button:active:not(:disabled)::after { opacity: 1; }
+.gs-input-spinner-button + .gs-input-spinner-button { position: relative; border-top: 0; }
+.gs-input-spinner-button + .gs-input-spinner-button::before { content: ""; position: absolute; top: 0; left: 4px; right: 4px; height: 1px; background: var(--gs-neutral-5); }
+.gs-input-spinner-icon { position: relative; z-index: 1; display: block; width: 32px; height: 16px; }
+.gs-input-spinner-button:hover:not(:disabled) { color: var(--gs-primary-2); }
+.gs-input-spinner-button:focus-visible:not(:disabled) { color: var(--gs-primary-2); outline: 0; }
+.gs-input-spinner-button:active:not(:disabled) { color: var(--gs-primary-1); }
+.gs-input-spinner-button:disabled { color: var(--gs-neutral-5); cursor: not-allowed; }
+.gs-input-spinner-control .gs-input-field.is-disabled + .gs-input-spinner-buttons { border-color: var(--gs-neutral-6); border-left: 0; background: var(--gs-neutral-8); }
+.gs-input-spinner-control .gs-input-field.is-disabled + .gs-input-spinner-buttons .gs-input-spinner-button + .gs-input-spinner-button::before { background: var(--gs-neutral-6); }
+.gs-input-spinner-control .gs-input-field.is-focused + .gs-input-spinner-buttons { border-color: var(--gs-primary-2); }
+.gs-input-spinner-control .gs-input-field.is-error + .gs-input-spinner-buttons { border-color: var(--gs-neutral-6); }
+.input-number-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; min-width: 0; }
+.input-number-pair > .gs-input-number-control { grid-template-columns: 32px minmax(0, 1fr) 32px; }
+.gs-input-tags { height: auto; min-height: 32px; padding: 4px 8px; flex-wrap: wrap; align-content: center; gap: 4px; }
+.gs-input-tags > .gs-tag { display: inline-flex; flex: 0 0 auto; align-self: center; min-width: auto; }
+.gs-input-tags > input { flex: 1 1 80px; min-width: 46px; height: 22px; align-self: center; }
+.gs-input-tags .gs-tag--small { height: 20px; }
+.gs-input-tags .gs-tag__close { cursor: default; }
+.gs-input-tags:not(.is-disabled) .gs-tag__close { cursor: pointer; }
+.gs-input-tags.is-disabled { pointer-events: none; }
+.gs-input-tags.is-disabled > input::placeholder { color: var(--gs-text-tertiary); opacity: 1; }
+.gs-input-range { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr); align-items: center; gap: 4px; }
+.gs-input-range > span { color: var(--gs-text-tertiary); text-align: center; }
+.input-live-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
+.input-live-item { min-width: 0; display: grid; gap: 8px; }
+.input-live-label { color: var(--gs-text-secondary); font-size: 14px; line-height: 22px; }
+.input-live-field { width: 100%; }
+.input-live-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.control-live-demo .gs-input-tags { min-width: 0; }
+.input-component-section { margin-top: 40px !important; }
+.input-component-section h2 { margin-bottom: 8px; }
+.input-component-section > p { margin: 0 0 16px; }
+.input-component-demo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; align-items: start; }
+.input-example { min-width: 0; display: grid; gap: 8px; }
+.input-example__label { color: var(--gs-text-tertiary); font-size: 12px; line-height: 20px; }
+.input-example .input-live-field { width: 100%; }
+.input-example .gs-input-labeled { width: 100%; }
+.input-example .gs-input-range { width: 100%; }
+.input-number-group { grid-column: 1 / -1; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 40px; }
+.input-number-group__title { grid-column: 1 / -1; color: var(--gs-text-secondary); font-size: 13px; line-height: 20px; }
+
+@media (max-width: 900px) {
+  .input-layout { grid-template-columns: 1fr; gap: 40px; }
+  .input-component-demo { grid-template-columns: 1fr; }
+  .input-number-group { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .input-state-row { grid-template-columns: 82px minmax(0, 1fr); }
+  .input-live-grid, .input-number-pair { grid-template-columns: 1fr; }
+  .gs-input-labeled { grid-template-columns: 56px minmax(0, 1fr); }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "GeoShare Web UI"
+  short_description: "Build consistent GeoShare B-end web interfaces."
+  default_prompt: "Use $geoshare-web-ui to design or implement a GeoShare B-end web interface."

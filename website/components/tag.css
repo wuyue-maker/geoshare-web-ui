@@ -1,0 +1,154 @@
+.gs-tag {
+  --tag-solid: var(--gs-primary-2);
+  --tag-soft: var(--gs-primary-4);
+  --tag-ink: var(--gs-primary-2);
+  --tag-border: var(--tag-solid);
+  --tag-solid-ink: var(--gs-neutral-9);
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  height: 24px;
+  min-width: 56px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--gs-radius-sm);
+  background: var(--tag-solid);
+  color: var(--tag-solid-ink);
+  font-family: "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.gs-tag--small {
+  height: 20px;
+  min-width: 40px;
+  padding-inline: 4px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.gs-tag--outline {
+  border-color: var(--tag-border);
+  background: var(--tag-soft);
+  color: var(--tag-ink);
+}
+
+/* Light Tag: semantic soft surface without a visible border. */
+.gs-tag--light {
+  border-color: transparent;
+  background: var(--tag-soft);
+  color: var(--tag-ink);
+}
+
+.gs-tag--red { --tag-solid: var(--gs-red-2); --tag-soft: var(--gs-red-4); --tag-ink: var(--gs-red-2); }
+.gs-tag--orange { --tag-solid: var(--gs-orange-2); --tag-soft: var(--gs-orange-4); --tag-ink: var(--gs-orange-2); }
+.gs-tag--yellow { --tag-solid: var(--gs-yellow-2); --tag-soft: var(--gs-yellow-4); --tag-ink: var(--gs-yellow-2); }
+.gs-tag--green { --tag-solid: var(--gs-green-2); --tag-soft: var(--gs-green-4); --tag-ink: var(--gs-green-2); }
+.gs-tag--cyan { --tag-solid: var(--gs-cyan-2); --tag-soft: var(--gs-cyan-4); --tag-ink: var(--gs-cyan-2); }
+.gs-tag--primary { --tag-solid: var(--gs-primary-2); --tag-soft: var(--gs-primary-4); --tag-ink: var(--gs-primary-2); }
+.gs-tag--neutral {
+  --tag-solid: var(--gs-neutral-6);
+  --tag-soft: var(--gs-neutral-6);
+  --tag-ink: var(--gs-neutral-3);
+  --tag-border: var(--gs-neutral-3);
+  --tag-solid-ink: var(--gs-text-secondary);
+}
+.gs-tag--neutral.gs-tag--light { --tag-soft: var(--gs-neutral-7); }
+.gs-tag--neutral.gs-tag--closeable { --tag-soft: var(--gs-neutral-6); }
+
+/* Disabled tags use a distinct neutral surface so they remain legible inside a disabled field. */
+.gs-tag.is-disabled {
+  border-color: transparent;
+  background: var(--gs-neutral-6);
+  color: var(--gs-text-tertiary);
+  cursor: not-allowed;
+}
+.gs-tag.is-disabled.gs-tag--outline { border-color: var(--gs-neutral-6); background: var(--gs-neutral-6); }
+.gs-tag.is-disabled .gs-tag__close { color: var(--gs-text-tertiary); cursor: not-allowed; pointer-events: none; }
+
+.gs-tag--closeable {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  place-content: center;
+  align-items: center;
+  gap: var(--gs-space-1);
+  min-width: 64px;
+  padding-inline: 7px;
+}
+.gs-tag--small.gs-tag--closeable {
+  gap: 2px;
+  min-width: 56px;
+  padding-inline: 4px;
+}
+.gs-tag__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: inherit;
+}
+.gs-tag__close {
+  appearance: none;
+  box-sizing: border-box;
+  /* Tag 内嵌按钮仍复用 Button 交互，但覆盖图形按钮默认的 32px 最小宽度。 */
+  min-width: 16px;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.gs-tag__close-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.tag-demo-card { display: grid; gap: var(--gs-space-4); }
+.tag-size-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--gs-space-2);
+}
+.tag-size-label {
+  font: 12px/20px "DINPro", sans-serif;
+  color: var(--gs-text-tertiary);
+}
+.tag-flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--gs-space-3) var(--gs-space-4);
+  min-width: 0;
+}
+.tag-demo-actions {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: var(--gs-space-3);
+  padding-top: var(--gs-space-3);
+  border-top: 1px solid var(--gs-neutral-6);
+}
+.tag-live-status { font-size: 12px; color: var(--gs-text-tertiary); }
+
+@media (max-width: 720px) {
+  .tag-size-row { grid-template-columns: 1fr; gap: var(--gs-space-1); }
+  .tag-flow { gap: var(--gs-space-2) var(--gs-space-3); }
+}

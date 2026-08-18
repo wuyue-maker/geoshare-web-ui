@@ -1,0 +1,119 @@
+.gs-dtp-card{padding:24px}
+.gs-dtp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.gs-dtp-example{display:grid;gap:8px;min-width:0}
+.gs-dtp-example__label{font-size:14px;line-height:22px;color:var(--gs-text-tertiary)}
+.gs-dtp-field{position:relative;width:320px;max-width:100%;min-width:0}
+.gs-dtp-trigger{width:100%;height:32px;min-height:32px;display:flex;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--gs-neutral-6);border-radius:var(--gs-radius-sm);background:var(--gs-neutral-9);color:var(--gs-text-primary);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.gs-dtp-trigger:hover:not(:disabled){border-color:var(--gs-primary-2)}
+.gs-dtp-trigger.is-active{border-color:var(--gs-primary-2);box-shadow:0 0 0 3px var(--gs-primary-5)}
+.gs-dtp-trigger:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:2px}
+.gs-dtp-trigger:disabled,.gs-dtp-trigger.is-disabled{background:var(--gs-neutral-7);color:var(--gs-text-tertiary);border-color:var(--gs-neutral-6);cursor:not-allowed}
+.gs-dtp-trigger__icon{width:16px;height:16px;display:inline-flex;flex:none;margin-left:auto;color:var(--gs-text-tertiary)}
+.gs-dtp-trigger__icon .gs-icon{width:16px;height:16px}
+.gs-dtp-trigger__icon--end{margin-left:auto}
+.gs-dtp-trigger__value{min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-dtp-trigger__value.is-placeholder{color:var(--gs-text-tertiary)}
+.gs-dtp-popover{position:absolute;z-index:1000;top:calc(100% + 8px);left:0;min-width:100%;max-width:min(360px,calc(100vw - 32px));padding:16px;background:var(--gs-neutral-9);border:0;border-radius:var(--gs-radius-md);box-shadow:var(--gs-shadow-lg)}
+.gs-dtp-popover[hidden]{display:none}
+.gs-dtp-popover__title{margin-bottom:12px;font-size:14px;font-weight:500;color:var(--gs-text-primary)}
+.gs-dtp-time-grid,.gs-dtp-year-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.gs-dtp-year-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gs-dtp-option{min-height:32px;padding:4px 8px;border:0;border-radius:var(--gs-radius-sm);background:transparent;color:var(--gs-text-secondary);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;text-align:center;cursor:pointer}
+.gs-dtp-option:hover:not(:disabled){background:var(--gs-neutral-8);color:var(--gs-primary-2)}
+.gs-dtp-option.is-current{background:var(--gs-primary-5);color:var(--gs-primary-2)}
+.gs-dtp-option:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:-2px}
+.gs-dtp-option:disabled{color:var(--gs-text-disabled,var(--gs-text-tertiary));cursor:not-allowed}
+.gs-dtp-calendar__head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;color:var(--gs-text-primary)}
+.gs-dtp-calendar__head strong{font-size:14px;font-weight:500}
+.gs-dtp-nav{appearance:none;box-sizing:border-box;width:32px;height:32px;min-width:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:var(--gs-radius-sm);background:transparent;color:var(--gs-text-secondary);cursor:pointer;transition:background-color .16s,border-color .16s,color .16s}
+.gs-dtp-nav .gs-figma-date-nav-icon{display:block;width:20px;height:20px;flex:none;color:inherit}
+.gs-dtp-nav:hover{background:transparent;border-color:transparent;color:var(--gs-primary-2)}
+.gs-dtp-nav:active{background:transparent;border-color:transparent;color:var(--gs-primary-1)}
+.gs-dtp-nav:disabled{background:transparent;border-color:transparent;color:var(--gs-text-tertiary);cursor:not-allowed}
+.gs-dtp-weekdays,.gs-dtp-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center}
+.gs-dtp-weekdays{margin-bottom:4px;color:var(--gs-text-tertiary);font-size:12px;line-height:20px}
+.gs-dtp-calendar-grid .gs-dtp-option{min-height:30px;padding:4px 0}
+.gs-dtp-popover__footer{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--gs-neutral-7)}
+.gs-dtp-action{height:32px;padding:0 12px;border:1px solid var(--gs-primary-2);border-radius:var(--gs-radius-sm);background:var(--gs-primary-2);color:var(--gs-neutral-9);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer}
+.gs-dtp-action--quiet{border-color:var(--gs-neutral-6);background:var(--gs-neutral-9);color:var(--gs-text-secondary)}
+.gs-dtp-action:focus-visible,.gs-dtp-nav:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:2px}
+.gs-dtp-range{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px}
+.gs-dtp-range__separator{color:var(--gs-text-tertiary);font-size:14px}
+@media (max-width:780px){.gs-dtp-grid{grid-template-columns:1fr}.gs-dtp-range{grid-template-columns:1fr}.gs-dtp-range__separator{display:none}}
+
+/* 时间选择：按 Figma 的状态行与三列滚轮面板呈现 */
+.gs-dtp-time-card{position:relative;z-index:1;overflow:visible;padding:24px 24px 32px}
+.gs-dtp-state-list{display:grid;gap:28px}
+.gs-dtp-state-row{position:relative;display:grid;grid-template-columns:160px minmax(0,414px);align-items:start;column-gap:16px}
+.gs-dtp-state-label{padding-top:8px;color:var(--gs-text-tertiary);font-size:16px;line-height:24px}
+.gs-dtp-state-row[data-dtp-state="hover"] .gs-dtp-trigger{border-color:var(--gs-primary-2)}
+.gs-dtp-state-row.is-active .gs-dtp-trigger.is-active{border-color:var(--gs-primary-2);box-shadow:0 0 0 3px var(--gs-primary-5)}
+.gs-dtp-time-card .gs-dtp-field{width:320px;max-width:100%}
+.gs-dtp-trigger__icon--end{width:16px;height:16px}
+.gs-dtp-time-popover{width:100%;max-width:none;padding:16px 8px;box-sizing:border-box;border-color:transparent;border-radius:var(--gs-radius-md)}
+/* 时间面板脱离文档流，浮在激活输入框下方，不改变后续状态行布局。 */
+.gs-dtp-state-row.is-active{z-index:3}
+.gs-dtp-state-row.is-active .gs-dtp-time-popover{position:absolute;top:calc(100% + 8px);left:0;width:320px;max-width:calc(100vw - 48px)}
+.gs-dtp-time-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));height:276px;gap:8px;overflow:hidden}
+.gs-dtp-time-column{position:relative;height:276px;overflow:hidden;isolation:isolate}
+.gs-dtp-time-column::before{content:"";position:absolute;z-index:0;top:120px;right:0;left:0;height:36px;border-radius:var(--gs-radius-sm);background:var(--gs-primary-5);pointer-events:none}
+.gs-dtp-time-wheel{position:relative;z-index:1;display:grid;grid-auto-rows:36px;align-content:start;box-sizing:border-box;width:100%;height:100%;gap:4px;overflow-y:auto;padding:120px 0;scroll-padding-block:120px;scroll-snap-type:y proximity;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;will-change:scroll-position;scrollbar-width:none;-ms-overflow-style:none}
+.gs-dtp-time-wheel::-webkit-scrollbar{display:none}
+.gs-dtp-time-wheel:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:-2px;border-radius:var(--gs-radius-sm)}
+.gs-dtp-time-item{display:grid;place-items:center;height:36px;color:var(--gs-text-secondary);font-size:16px;line-height:24px;scroll-snap-align:center;cursor:pointer;opacity:.72;transform:scale(.96);transition:color .18s ease,opacity .18s ease,transform .18s ease}
+.gs-dtp-time-item.is-in-slot{color:var(--gs-primary-2);opacity:1;transform:scale(1)}
+.gs-dtp-time-popover .gs-dtp-option{height:36px;min-height:36px;padding:0 8px;font-size:16px;line-height:24px;border-radius:var(--gs-radius-sm)}
+.gs-dtp-time-popover .gs-dtp-option.is-current{font-weight:400}
+.gs-dtp-time-footer{display:grid;grid-template-columns:1fr auto auto;align-items:center;justify-content:initial;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--gs-neutral-6)}
+.gs-dtp-time-footer .gs-button:first-child{justify-self:start}
+.gs-dtp-time-footer .gs-button:nth-child(2){justify-self:end}
+.gs-dtp-time-footer .gs-button:last-child{justify-self:end}
+.gs-dtp-time-footer .gs-button{box-sizing:border-box;min-width:80px;height:32px;padding:0 8px;border:1px solid var(--button-border,var(--gs-primary-2));border-radius:var(--gs-radius-sm);background:var(--button-bg,var(--gs-primary-2));color:var(--button-color,var(--gs-neutral-9));font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif}
+.gs-dtp-time-footer .gs-button--text,.gs-dtp-time-footer .gs-button--text-primary{min-width:auto}
+.gs-dtp-time-footer .gs-button[data-dtp-action="cancel"],.gs-dtp-time-footer .gs-button[data-dtp-action="confirm"]{width:64px;min-width:64px}
+.gs-dtp-action--text{border-color:transparent;background:transparent;color:var(--gs-primary-2);font-weight:500}
+.gs-dtp-action--muted{color:var(--gs-text-tertiary)}
+@media (max-width:780px){.gs-dtp-state-row{grid-template-columns:1fr;row-gap:4px}.gs-dtp-state-label{padding-top:0}.gs-dtp-time-popover{width:calc(100vw - 48px)}.gs-dtp-time-columns{gap:8px}}
+
+/* 日期+时间：左右独立面板，浮层不参与页面排版。 */
+.gs-dtp-card{overflow:visible}
+.gs-dtp-datetime-stack{display:grid;gap:24px}
+.gs-dtp-datetime-field{position:relative;min-width:0;width:400px;max-width:100%}
+.gs-dtp-datetime-field.is-open{z-index:50}
+.gs-dtp-datetime-trigger{width:100%;height:32px;min-height:32px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--gs-neutral-6);border-radius:var(--gs-radius-sm);background:var(--gs-neutral-9);color:var(--gs-text-primary);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.gs-dtp-datetime-trigger:hover:not(:disabled),.gs-dtp-datetime-trigger.is-active{border-color:var(--gs-primary-2)}
+.gs-dtp-datetime-trigger.is-active{box-shadow:0 0 0 3px var(--gs-primary-5)}
+.gs-dtp-datetime-trigger:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:2px}
+.gs-dtp-datetime-trigger:disabled,.gs-dtp-datetime-trigger.is-disabled{background:var(--gs-neutral-7);color:var(--gs-text-tertiary);border-color:var(--gs-neutral-6);cursor:not-allowed;box-shadow:none}
+.gs-dtp-datetime__value{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-dtp-datetime__value.is-placeholder{color:var(--gs-text-tertiary)}
+.gs-dtp-datetime__separator{color:var(--gs-text-secondary);text-align:center}
+.gs-dtp-datetime__icon{width:16px;height:16px;display:inline-flex;color:var(--gs-text-tertiary)}
+.gs-dtp-datetime__icon .gs-icon{width:16px;height:16px}
+.gs-dtp-datetime-popover{position:absolute;top:calc(100% + 8px);left:0;width:520px;max-width:calc(100vw - 32px);padding:8px;z-index:1100;box-sizing:border-box;border-radius:8px;box-shadow:0 0 8px rgba(20,23,26,.1)}
+.gs-dtp-datetime-panels{display:grid;grid-template-columns:280px minmax(0,1fr);align-items:stretch;gap:0}
+.gs-dtp-datetime-date-panel{min-width:0}
+.gs-dtp-datetime-panels > .gs-dtp-datetime-time-panel{display:flex;flex-direction:column;min-width:0;margin-top:0;border-left:1px solid var(--gs-neutral-6);padding-left:0}
+.gs-dtp-datetime-date-head{box-sizing:border-box;display:flex;height:40px;align-items:center;justify-content:space-between;margin:0;padding:12px 8px 4px}
+.gs-dtp-datetime-date-head strong{display:flex;gap:16px;flex:0 0 auto;color:var(--gs-text-secondary);text-align:center;font-size:16px;line-height:24px;font-weight:500}
+.gs-dtp-datetime-date-head .gs-dtp-nav{width:32px;height:32px;min-width:32px;padding:0}
+.gs-dtp-datetime-date-body,.gs-dtp-datetime-time-columns{box-sizing:border-box;height:228px}
+.gs-dtp-datetime-weekdays,.gs-dtp-datetime-calendar{display:grid;grid-template-columns:repeat(7,24px);justify-content:space-between;padding:0 8px;text-align:center}
+.gs-dtp-datetime-weekdays{margin:8px 0 6px;color:var(--gs-text-secondary);font-size:14px;line-height:22px}
+.gs-dtp-datetime-calendar{gap:6px 0}
+.gs-dtp-datetime-option{box-sizing:border-box;width:24px;height:24px;min-height:24px;padding:1px;border:0;border-radius:3px;background:transparent;color:var(--gs-text-secondary);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer}
+.gs-dtp-datetime-option:hover:not(:disabled){background:var(--gs-neutral-8)}
+.gs-dtp-datetime-option.is-current{background:var(--gs-primary-6);color:var(--gs-primary-2)}
+.gs-dtp-datetime-option:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:-2px}
+.gs-dtp-datetime-option:disabled{color:var(--gs-text-tertiary);cursor:not-allowed}
+.gs-dtp-datetime-time-panel > .gs-dtp-datetime-time-title{box-sizing:border-box;display:flex;height:40px;align-items:center;justify-content:center;margin:0;padding:12px 8px 4px;text-align:center;font-size:16px;line-height:24px;font-weight:500;color:var(--gs-text-secondary)}
+.gs-dtp-datetime-time-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:8px}
+.gs-dtp-datetime-time-column{display:grid;gap:6px}
+.gs-dtp-datetime-time-column .gs-dtp-datetime-option{width:100%;height:24px;min-height:24px;font-size:14px;line-height:22px}
+.gs-dtp-datetime-time-column .gs-dtp-datetime-option.is-current{height:32px;min-height:32px;padding:4px 8px;border-radius:4px}
+.gs-dtp-datetime-footer{height:48px;box-sizing:border-box;margin-top:0;padding:8px;border-top:1px solid var(--gs-neutral-6);display:flex;align-items:center;justify-content:space-between}
+.gs-dtp-datetime-footer .gs-dtp-action{width:64px;padding:0;font-weight:500}
+.gs-dtp-datetime-footer .gs-dtp-action--text{border:0;background:transparent;color:var(--gs-primary-2)}
+.gs-dtp-datetime-footer .gs-dtp-action--muted{color:var(--gs-text-tertiary)}
+.gs-dtp-datetime-footer__actions{display:flex;gap:16px;align-items:center}
+@media(max-width:780px){.gs-dtp-datetime-field{width:100%}.gs-dtp-datetime-popover{width:calc(100vw - 32px);max-width:calc(100vw - 32px);padding:16px}.gs-dtp-datetime-panels{grid-template-columns:1fr;gap:16px}.gs-dtp-datetime-time-panel{border-left:0;border-top:1px solid var(--gs-neutral-7);padding:16px 0 0}}
