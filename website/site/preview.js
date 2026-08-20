@@ -1,4 +1,5 @@
 const gsIcon = window.GeoShareIcons.icon;
+const uploadSampleImage = 'https://www.figma.com/api/mcp/asset/7a842362-bf6a-474b-8929-aaffdaaf53d8.png';
 function dateNavIcon(direction) {
   const icons = { prevYear: 'chevronDoubleLeft', prev: 'chevronLeft', next: 'chevronRight', nextYear: 'chevronDoubleRight' };
   return gsIcon(icons[direction], 'gs-figma-date-nav-icon');
@@ -28,15 +29,18 @@ const pageData = {
   '#/components/button': { crumb: '通用组件 / Button 按钮', title: 'Button 按钮', lead: '用于触发即时操作。按视觉样式选择按钮；页面同时展示默认与禁用示例，悬停和按下仅通过瞬时交互反馈。', toc: ['基础按钮', '下拉按钮', '特殊图形按钮', '组合按钮', '其它颜色按钮', '使用规则', 'API'], body: buttonBodyInteractiveV2() },
   '#/components/tag': { crumb: '通用组件 / Tag 标签', title: 'Tag 标签', lead: '用于标记对象的属性、分类或业务状态；按信息语义选择色调，只有可关闭标签提供移除操作。', toc: ['实色标签', '浅色标签', '边线标签', '可关闭标签', '使用规则', '无障碍', 'API'], body: tagBody() },
   '#/components/progress': { crumb: '数据展示 / Progress 进度条', title: 'Progress 进度条', lead: '用于展示任务的连续完成比例或未知时长的等待状态，不承担流程阶段导航。', toc: ['基础进度条', '尺寸与标签', '语义状态', '不确定进度', '使用规则', 'API'], body: progressBody() },
+  '#/components/slider': { crumb: '数据录入 / Slider 滑块', title: 'Slider 滑块', lead: '用于在连续数值范围内快速选择一个值，并通过提示文本和结果反馈保持当前选择可见。', toc: ['提示文本', '使用规则', '无障碍', 'API'], body: sliderBody() },
   '#/components/timeline': { crumb: '数据展示 / Timeline 时间轴', title: 'Timeline 时间轴', lead: '按时间顺序展示事件、操作记录与状态变更，适合审计记录、任务进展和业务历程。', toc: ['基础时间轴', '状态时间轴', '交替布局', '使用规则', '无障碍', 'API'], body: timelineBody() },
   '#/components/tree': { crumb: '数据展示 / Tree 树形结构', title: 'Tree 树形结构', lead: '用于展示具有父子层级的数据，并支持展开、选择与复选。', toc: ['基础树', '复选树', '交互与无障碍', '使用规则', 'API'], body: treeBody() },
   '#/components/switch': { crumb: '数据录入 / Switch 开关', title: 'Switch 开关', lead: '用于立即生效的二元开关设置；开启或关闭都应有清晰的文字说明。', toc: ['基础开关', '使用规则', 'API'], body: switchBody() },
   '#/components/radio': { crumb: '数据录入 / Radio 单选框', title: 'Radio 单选框', lead: '用于从互斥选项中选择一个值。', toc: ['基础单选框', '使用规则', 'API'], body: radioBody() },
   '#/components/checkbox': { crumb: '数据录入 / Checkbox 复选框', title: 'Checkbox 复选框', lead: '用于选择一个或多个独立选项，并支持半选状态表达部分选择。', toc: ['基础复选框', '使用规则', 'API'], body: checkboxBody() },
+  '#/components/upload': { crumb: '数据录入 / Upload 上传', title: 'Upload 上传', lead: '用于选择图片或文件，并清晰反馈待上传、上传中、成功和异常状态。', toc: ['图片上传', '按钮上传', '输入上传', '上传列表', '使用规则', '无障碍', 'API'], body: uploadBodyCompact({ maxCount: 5 }) },
+  '#/components/color-picker': { crumb: '数据录入 / ColorPicker 颜色选择器', title: 'ColorPicker 颜色选择器', lead: '颜色选择器拆分为常规单色选择器，以及支持单色 / 渐变切换的选择器。', toc: ['常规单色颜色选择器', '单色渐变切换颜色选择器', '使用规则', '无障碍', 'API'], body: colorPickerBody() },
   '#/components/input': { crumb: '数据录入 / Input 输入框', title: 'Input 输入框', lead: '用于接收单行文本、密码、数字和结构化输入；通过统一尺寸、状态与辅助信息保持表单一致性。', toc: ['带标题输入框', '密码输入框', '装饰输入框', '数字输入框', '标签输入框', '范围输入框', '使用规则', '无障碍', 'API'], body: inputBodySimplified() },
   '#/components/search': { crumb: '数据录入 / Search 搜索框', title: 'Search 搜索框', lead: '用于从列表、资源或页面内容中快速定位目标。', toc: ['小搜索框', '大搜索框', '使用规则', '无障碍', 'API'], body: searchBody() },
   '#/components/picker': { crumb: '数据录入 / Select 选择器', title: 'Select 选择器', lead: '用于从预设选项中选择一个值，并支持单选、多选、级联选择与禁用状态。', toc: ['单选框', '多选框', '级联选框', '使用规则', '无障碍', 'API'], body: pickerBody() },
-  '#/components/date-time-picker': { crumb: '数据录入 / Laydate 时间和日期选择器', title: '时间和日期选择器', lead: '用于选择时间、日期与日期时间范围，支持独立或联动面板。', toc: ['时间选择', '日期选择', '日期加时间选择', '年份选择', '使用规则', 'API'], body: dateTimePickerBodySingle() },
+  '#/components/date-time-picker': { crumb: '数据录入 / Laydate 时间和日期选择器', title: '时间和日期选择器', lead: '用于选择时间、日期与日期时间范围，支持独立或联动面板。', toc: ['时间选择', '日期选择', '日期加时间选择', '日期区间联动选择', '年份选择', '使用规则', 'API'], body: dateTimePickerBodySingle() },
 };
 function paletteHtml() { return `<div class="color-groups">${palettes.map(([name, colors]) => `<div class="palette"><h3>${name}</h3><div class="swatches">${colors.map(([label, color]) => `<div class="swatch"><i style="background:${color}"></i><b>${label}</b><code>${color}</code></div>`).join('')}</div></div>`).join('')}</div>`; }
 function typeContent() { return `<div class="spec-table"><div><b>中文</b><span>Alibaba PuHuiTi 3</span><span>Light / Regular / Medium / Bold / Heavy</span></div><div><b>英文</b><span class="cabin">Cabin</span><span>SemiBold</span></div><div><b>数字</b><span class="din">DINPro 1234567890</span><span>Regular / Medium / Bold</span></div></div><div class="type-list"><div><span>20 / 28 Medium</span><strong class="t20">这是一段文字</strong></div><div><span>18 / 26 Medium</span><strong class="t18">这是一段文字</strong></div><div><span>16 / 24 Regular</span><strong class="t16 regular">这是一段文字</strong></div><div><span>14 / 22 Regular</span><strong class="t14 regular">这是一段文字</strong></div><div><span>12 / 20 Regular</span><strong class="t12 regular">这是一段文字</strong></div></div>`; }
@@ -70,6 +74,13 @@ function tagCloseButton(label) {
   return button(closeIconSvg(), 'gs-button--icon gs-button--text gs-tag__close', `aria-label="移除${safeLabel}标签" data-tag-close`);
 }
 function escapeHtml(value='') { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
+function uploadFileNameMarkup(fileName) {
+  const value = String(fileName || '');
+  const dot = value.lastIndexOf('.');
+  const extension = dot > 0 ? value.slice(dot) : '';
+  const base = extension ? value.slice(0, dot) : value;
+  return `<span class="upload-file-name" title="${escapeHtml(value)}"><span class="upload-file-name__base">${escapeHtml(base)}</span>${extension ? `<span class="upload-file-name__extension">${escapeHtml(extension)}</span>` : ''}</span>`;
+}
 function tagInputChip(label) { const safeLabel=escapeHtml(label); return `<span class="gs-tag gs-tag--neutral gs-tag--small gs-tag--closeable" data-tag-item><span class="gs-tag__label">${safeLabel}</span>${tagCloseButton(label)}</span>`; }
 function buttonBody() { const colors=[['红色','red'],['橙色','orange'],['黄色','yellow'],['绿色','green'],['青色','cyan']]; const colorDemo=colors.map(([name,key])=>`<div class="color-button-line"><div class="demo-title">${name}</div><div class="button-row">${button('默认',`gs-button--${key}`)}${button('悬停',`gs-button--${key} is-hover`)}${button('按下',`gs-button--${key} is-pressed`)}${button('禁用',`gs-button--${key}`,'disabled')}</div></div>`).join(''); return `<section id="基础按钮"><h2>基础按钮</h2><p>主按钮用于局部区域的主操作；次按钮用于并列的次要操作。标准高度为 32px，圆角 4px，文字为 14/22px。</p><div class="demo-card"><div class="demo-title">主按钮</div><div class="button-row">${button('按钮')}${button('悬停','is-hover')}${button('按下','is-pressed')}${button('禁用','','disabled')}</div></div><div class="demo-card"><div class="demo-title">次按钮</div><div class="button-row">${button('按钮','gs-button--secondary')}${button('悬停','gs-button--secondary is-hover')}${button('选中','gs-button--secondary is-pressed')}${button('禁用','gs-button--secondary','disabled')}</div></div></section><section id="下拉按钮"><h2>下拉按钮</h2><p>当主要操作包含相关备选操作时使用。箭头只表示可展开，不替代明确的操作命名。</p><div class="demo-card"><div class="demo-title">下拉按钮</div><div class="button-row">${button('新建 <i class="gs-button__chevron"></i>')}${button('更多 <i class="gs-button__chevron"></i>','gs-button--secondary')}</div></div></section><section id="图形按钮"><h2>图形按钮</h2><p>图形按钮尺寸为 32 × 32px，图标为 20px。正式产品中必须提供可理解的图标和 <code>aria-label</code>。</p><div class="demo-card"><div class="demo-title">图形按钮</div><div class="button-row">${button('＋','gs-button--icon','aria-label="新增"')}${button('⌕','gs-button--icon gs-button--secondary','aria-label="搜索"')}${button('⋯','gs-button--icon gs-button--secondary','aria-label="更多操作"')}</div></div></section><section id="组合按钮"><h2>组合按钮</h2><p>用于相邻、相关的模式或操作。组只保留最外侧圆角，内部共享边框。</p><div class="demo-card"><div class="demo-title">组合按钮</div><div class="gs-button-group">${button('默认','gs-button--secondary')}${button('悬停','gs-button--secondary is-hover')}${button('选中','gs-button--secondary is-pressed')}${button('禁用','gs-button--secondary','disabled')}</div></div></section><section id="其它颜色按钮"><h2>其它颜色按钮</h2><p>Figma 定义五种颜色：红、橙、黄、绿、青。直接使用基础规范的颜色阶：<code>/2</code> 默认、<code>/3</code> 悬停、<code>/1</code> 按下、<code>/4</code> 禁用。</p><div class="demo-card color-button-grid">${colorDemo}</div></section><section id="使用规则"><h2>使用规则</h2><ul><li>同一操作区域最多保留一个主按钮。</li><li>其它色按钮用于稳定的领域语义，不能仅用来装饰工具栏。</li><li>没有清晰语义的图标，不得单独作为图形按钮。</li><li>禁用状态不可响应点击；若原因不明显，应在附近给予说明。</li><li>焦点状态必须保留，确保键盘操作可用。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>variant</code><span>primary | secondary | color</span><span>按钮类型，默认 primary</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>icon</code><span>node</span><span>图标内容；图形按钮需辅助名称</span></div><div><code>loading</code><span>boolean</span><span>提交中状态，阻止重复触发</span></div></div></section>`; }
 function legacyButtonBody() {
@@ -171,10 +182,13 @@ function buttonBodyInteractiveV2() {
   const special = [4, 8, 12, 16].map(radius => `<div class="special-style-card"><h3>${radius}px 圆角</h3><div class="special-style-grid">${sample('主色填充', `gs-button--icon gs-icon-radius-${radius}`, iconPair, 'aria-label="链接"')}${sample('中性填充', `gs-button--icon gs-button--neutral gs-icon-radius-${radius}`, iconPair, 'aria-label="链接"')}${sample('描边', `gs-button--icon gs-button--secondary gs-icon-radius-${radius}`, iconPair, 'aria-label="链接"')}</div></div>`).join('');
   const specialText = `<div class="special-style-card special-text-card"><h3>无底色图形按钮</h3><p>无底色图形按钮没有容器圆角差异，因此只保留一组默认与禁用示例。</p><div class="special-style-grid">${sample('无底色', 'gs-button--icon gs-button--text', iconPair, 'aria-label="链接"')}</div></div>`;
   const combinationTextItems = `<button type="button" class="gs-combination__item">默认按钮</button><button type="button" class="gs-combination__item is-hover">悬停按钮</button><button type="button" class="gs-combination__item is-selected" aria-pressed="true">选中按钮</button><button type="button" class="gs-combination__item" disabled>默认禁用</button><button type="button" class="gs-combination__item is-selected" aria-pressed="true" disabled>选中禁用</button>`;
-  const combinationIconItems = [['默认',''],['悬停','is-hover'],['选中','is-selected'],['默认禁用','is-disabled'],['选中禁用','is-selected is-disabled']].map(([label,state])=>`<button type="button" class="gs-combination__item ${state}" aria-label="${label}"${state.includes('is-selected') ? ' aria-pressed="true"' : ''}${state.includes('is-disabled') ? ' disabled' : ''}>${iconPair}</button>`).join('');
-  const groups = `<div class="combination-showcase"><div class="combination-example"><h3>文字边线</h3><div class="gs-combination gs-combination--outline" aria-label="文字边线组合按钮">${combinationTextItems}</div></div><div class="combination-example"><h3>文字面状</h3><div class="gs-combination gs-combination--filled" aria-label="文字面状组合按钮">${combinationTextItems}</div></div><div class="combination-example"><h3>文字无边线</h3><div class="gs-combination gs-combination--text" aria-label="文字无边线组合按钮">${combinationTextItems}</div></div><div class="combination-example"><h3>图标面状</h3><div class="gs-combination gs-combination--icon" aria-label="图标面状组合按钮">${combinationIconItems}</div></div></div>`;
+  const combinationIconItems = [['默认',''],['悬停','is-hover'],['选中','is-selected'],['默认禁用','is-disabled'],['选中禁用','is-selected is-disabled']].map(([label,state])=>`<button type="button" class="gs-combination__item ${state}" aria-label="${label}"${state.includes('disabled') ? ' disabled' : ''}${state.includes('selected') ? ' aria-pressed="true"' : ''}>${iconPair}</button>`).join('');
+  const completeTextItems = ['选项一','选项二','选项三'].map((label,index)=>`<button type="button" class="gs-combination__item${index === 0 ? ' is-selected' : ''}" data-combination-option aria-pressed="${index === 0 ? 'true' : 'false'}"${index === 2 ? ' disabled' : ''}>${label}</button>`).join('');
+  const completeIconItems = ['选项一','选项二','选项三'].map((label,index)=>`<button type="button" class="gs-combination__item${index === 0 ? ' is-selected' : ''}" data-combination-option aria-label="${label}" aria-pressed="${index === 0 ? 'true' : 'false'}"${index === 2 ? ' disabled' : ''}>${iconPair}</button>`).join('');
+  const combinationExample = (title, cls, completeItems, states) => `<div class="combination-example"><h3>${title}</h3><div class="combination-example__column"><span class="combination-example__label">完整示例（三选项）</span><div class="gs-combination gs-combination--interactive ${cls}" data-combination-group aria-label="${title}完整交互示例">${completeItems}</div></div><div class="combination-example__column"><span class="combination-example__label">状态参考</span><div class="gs-combination ${cls}" aria-label="${title}状态参考">${states}</div></div></div>`;
+  const groups = `<div class="combination-showcase">${combinationExample('文字边线','gs-combination--outline',completeTextItems,combinationTextItems)}${combinationExample('文字面状','gs-combination--filled',completeTextItems,combinationTextItems)}${combinationExample('文字无边线','gs-combination--text',completeTextItems,combinationTextItems)}${combinationExample('图标面状','gs-combination--icon',completeIconItems,combinationIconItems)}</div>`;
   const colors = [['红色（异常）','red'],['橙色（注意）','orange'],['黄色（提示）','yellow'],['绿色（正常）','green'],['青色（其它）','cyan']].map(([label, cls]) => sample(label, `gs-button--${cls}`)).join('');
-  return `<section id="基础按钮"><h2>基础按钮</h2><p>每种样式展示默认与禁用两个示例；鼠标悬停或按下时查看瞬时反馈，不产生持久选中状态。</p><div class="demo-card live-demo-card"><div class="live-style-grid">${basic}</div></div></section><section id="下拉按钮"><h2>下拉按钮</h2><p>普通下拉和拆分下拉分别覆盖主色、中性、描边和文字外观。</p><div class="demo-card live-demo-card"><div class="live-style-grid dropdown-live-grid">${dropdown}</div></div></section><section id="特殊图形按钮"><h2>特殊图形按钮</h2><p>图形按钮统一为 32 × 32px。主色填充、中性填充和描边按容器圆角展示；无底色图形按钮只展示一次。</p><div class="demo-card special-live-grid">${special}${specialText}</div></section><section id="组合按钮"><h2>组合按钮</h2><p>严格按照 Figma 展示文字边线、文字无边线、文字面状和图标面状四类，以及默认、悬停、选中、默认禁用和选中禁用状态。</p><div class="demo-card combination-demo-card">${groups}</div></section><section id="其它颜色按钮"><h2>其它颜色按钮</h2><p>仅包含 Figma 定义的五种语义色，并分别提供默认与禁用示例。</p><div class="demo-card live-demo-card"><div class="live-style-grid semantic-live-grid">${colors}</div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>同一操作区域最多保留一个主按钮。</li><li>页面不设置持久化选中按钮；按下反馈只在交互期间出现。</li><li>禁用按钮不可响应点击，并使用对应禁用色阶。</li><li>图形按钮必须有清晰的图标和辅助名称。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>variant</code><span>primary | neutral | secondary | dashed | text | color</span><span>按钮外观</span></div><div><code>dropdown</code><span>boolean | split</span><span>普通下拉或拆分下拉</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>icon</code><span>node</span><span>图标内容；需提供辅助名称</span></div></div></section>`;
+  return `<section id="基础按钮"><h2>基础按钮</h2><p>每种样式展示默认与禁用两个示例；鼠标悬停或按下时查看瞬时反馈，不产生持久选中状态。</p><div class="demo-card live-demo-card"><div class="live-style-grid">${basic}</div></div></section><section id="下拉按钮"><h2>下拉按钮</h2><p>普通下拉和拆分下拉分别覆盖主色、中性、描边和文字外观。</p><div class="demo-card live-demo-card"><div class="live-style-grid dropdown-live-grid">${dropdown}</div></div></section><section id="特殊图形按钮"><h2>特殊图形按钮</h2><p>图形按钮统一为 32 × 32px。主色填充、中性填充和描边按容器圆角展示；无底色图形按钮只展示一次。</p><div class="demo-card special-live-grid">${special}${specialText}</div></section><section id="组合按钮"><h2>组合按钮</h2><p>每种组合类型前置一个可操作的四选项完整示例，后面保留原有平铺全状态参考。</p><div class="demo-card combination-demo-card">${groups}</div></section><section id="其它颜色按钮"><h2>其它颜色按钮</h2><p>仅包含 Figma 定义的五种语义色，并分别提供默认与禁用示例。</p><div class="demo-card live-demo-card"><div class="live-style-grid semantic-live-grid">${colors}</div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>同一操作区域最多保留一个主按钮。</li><li>组合按钮完整示例在同组内保持单选，状态参考用于核对全部视觉状态。</li><li>禁用按钮不可响应点击，并使用对应禁用色阶。</li><li>图形按钮必须有清晰的图标和辅助名称。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>variant</code><span>primary | neutral | secondary | dashed | text | color</span><span>按钮外观</span></div><div><code>dropdown</code><span>boolean | split</span><span>普通下拉或拆分下拉</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>icon</code><span>node</span><span>图标内容；需提供辅助名称</span></div></div></section>`;
 }
 function tag(label, tone, size='medium', closeable=false) { const close = closeable ? tagCloseButton(label) : ''; return `<span class="gs-tag gs-tag--${tone} gs-tag--${size}${closeable ? ' gs-tag--outline gs-tag--closeable' : ''}" data-tag-item><span class="gs-tag__label">${label}</span>${close}</span>`; }
 function tagSet(variant, size) { const tones=[['告警','red'],['警告','orange'],['提示','yellow'],['正常','green'],['其它','cyan'],['主色','primary'],['中性','neutral']]; return tones.map(([label,tone])=>variant==='closable' ? tag(label,tone,size,true) : `<span class="gs-tag gs-tag--${tone} gs-tag--${size}${variant==='outline' ? ' gs-tag--outline' : variant==='light' ? ' gs-tag--light' : ''}"><span class="gs-tag__label">${label}</span></span>`).join(''); }
@@ -183,6 +197,9 @@ function tagBody() { return `<section id="实色标签"><h2>实色标签</h2><p>
 function progressExample(value, label=`${value}%`, cls='', name='') { const accessibleLabel=label || `${value}%`; return `<div class="progress-sample">${name ? `<span class="progress-sample__name">${name}</span>` : ''}<div class="gs-progress ${cls}" role="progressbar" aria-label="${name || '任务进度'}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${value}" aria-valuetext="${accessibleLabel}" style="--gs-progress-value:${value}%"><div class="gs-progress__track"><div class="gs-progress__bar"></div></div>${cls.includes('gs-progress--hide-info') ? '' : `<span class="gs-progress__label">${label}</span>`}</div></div>`; }
 function progressBody() {
   return `<section id="基础进度条"><h2>基础进度条</h2><p>进度值限制在 0–100。使用下方操作验证数值变化、完成状态和异常状态。</p><div class="demo-card"><div class="progress-controls"><button type="button" class="gs-button gs-button--secondary" data-progress-delta="-10">− 10</button><button type="button" class="gs-button gs-button--secondary" data-progress-delta="10">＋ 10</button><button type="button" class="gs-button gs-button--secondary" data-progress-status="exception">标记异常</button><button type="button" class="gs-button gs-button--text-primary" data-progress-reset>重置</button></div><div class="gs-progress" data-progress-live role="progressbar" aria-label="数据导入进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62" aria-valuetext="62%，正在导入" style="--gs-progress-value:62%"><div class="gs-progress__track"><div class="gs-progress__bar"></div></div><span class="gs-progress__label">62%</span></div></div></section><section id="尺寸与标签"><h2>尺寸与标签</h2><p>默认轨道为 8px，小尺寸为 4px；标签可显示百分比、自定义业务文本或隐藏。</p><div class="demo-card progress-demo-stack">${progressExample(48,'48%','','默认尺寸')}${progressExample(72,'72%','gs-progress--small','小尺寸')}${progressExample(36,'','gs-progress--hide-info','隐藏标签')}${progressExample(100,'3 / 3 项','gs-progress--success','自定义标签')}</div></section><section id="语义状态"><h2>语义状态</h2><p>状态需同时使用颜色和可见文字表达，不能只依赖色彩。</p><div class="demo-card progress-demo-stack">${progressExample(64,'64% · 进行中','','正常')}${progressExample(100,'100% · 已完成','gs-progress--success','成功')}${progressExample(76,'76% · 请注意','gs-progress--warning','注意')}${progressExample(42,'42% · 发生异常','gs-progress--exception','异常')}</div></section><section id="不确定进度"><h2>不确定进度</h2><p>无法计算完成比例时使用循环色块，不展示虚构百分比；减少动态效果偏好下自动停止动画。</p><div class="demo-card"><div class="gs-progress gs-progress--indeterminate" role="progressbar" aria-label="正在加载数据"><div class="gs-progress__track"><div class="gs-progress__bar"></div></div></div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>用于连续完成度；离散流程阶段使用 Steps 步骤条。</li><li>进度条是只读反馈，可操作数值选择使用 Slider 滑块。</li><li>不确定进度不显示百分比，完成或异常等关键节点再进行辅助通知。</li><li>状态颜色必须配合文字说明。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>value</code><span>number</span><span>当前值，自动限制在 0–max</span></div><div><code>max</code><span>number</span><span>最大值，默认 100</span></div><div><code>status</code><span>normal | success | warning | exception</span><span>业务语义状态</span></div><div><code>size</code><span>default | small</span><span>8px 或 4px 轨道</span></div><div><code>showInfo</code><span>boolean</span><span>是否显示右侧标签</span></div><div><code>format</code><span>function</span><span>格式化可见文本与 aria-valuetext</span></div><div><code>indeterminate</code><span>boolean</span><span>是否为未知完成比例</span></div></div></section>`;
+}
+function sliderBody() {
+  return `<section id="提示文本"><h2>提示文本</h2><p>滑块提示默认在圆形按钮附近悬停或聚焦时出现；需要业务单位时可自定义提示内容，也可以关闭提示并把当前值同步到结果区域。</p><div class="demo-card gs-slider-demo-card"><div class="gs-slider-demo-grid"><div class="gs-slider-example"><div class="demo-title">自定义提示文本</div><div class="demo-caption">拖动滑块，提示文本会随数值更新。</div><div class="gs-slider" data-slider data-slider-unit="GB"><input class="gs-slider__input" type="range" min="20" max="1000" step="10" value="240" aria-label="存储空间"><output class="gs-slider__output" data-slider-output>240 GB</output></div></div><div class="gs-slider-example"><div class="demo-title">关闭提示并同步结果</div><div class="gs-slider" data-slider data-slider-tips="false"><input class="gs-slider__input" type="range" min="0" max="100" step="1" value="58" aria-label="当前数值"><span class="gs-slider__result" data-slider-result>当前数值：58</span></div></div><div class="gs-slider-example"><div class="demo-title">始终显示提示</div><div class="demo-caption">适合需要持续确认当前值的设置场景。</div><div class="gs-slider" data-slider data-slider-tips-always="true"><input class="gs-slider__input" type="range" min="0" max="100" step="5" value="75" aria-label="完成比例"><output class="gs-slider__output" data-slider-output>75</output></div></div><div class="gs-slider-example gs-slider-example--disabled"><div class="demo-title">禁用滑块</div><div class="demo-caption">不可操作时保留当前值和禁用原因。</div><div class="gs-slider" data-slider data-slider-tips-always="true"><input class="gs-slider__input" type="range" min="0" max="100" step="1" value="35" disabled aria-label="不可用数值"><output class="gs-slider__output is-always" data-slider-output>35</output></div></div></div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>用于连续数值或有明确顺序的范围选择；离散选项优先使用 Select。</li><li>默认值应落在最常用的业务区间，并通过提示或结果文本让当前值可确认。</li><li>步长必须与数据精度一致；范围边界应在附近明确展示。</li><li>需要精确录入时，可与数字输入框组合；禁用状态不可拖动或通过键盘改变。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>使用原生 range 输入承载键盘操作、焦点和方向键调整，必须提供可理解的 aria-label。</li><li>提示文本是辅助反馈，不代替可访问名称；数值变化通过结果区域或 aria-live 低频同步。</li><li>保留 2px 焦点轮廓，禁用态同时降低轨道、滑块与文字对比度。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>value</code><span>number</span><span>当前值</span></div><div><code>min / max</code><span>number</span><span>可选范围，默认 0–100</span></div><div><code>step</code><span>number</span><span>单次调整步长，默认 1</span></div><div><code>tips</code><span>boolean</span><span>是否显示值提示，默认 true</span></div><div><code>tipsAlways</code><span>boolean</span><span>是否始终显示提示文本</span></div><div><code>setTips</code><span>(value) =&gt; string</span><span>格式化提示文本，可附加业务单位</span></div><div><code>onChange</code><span>(value) =&gt; void</span><span>值变化时触发</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div></div></section>`;
 }
 function timelineItem({id, title, time, datetime, description, status='default', statusLabel='记录', meta='', current=false, action=false}) {
   const tagTone = { completed: 'green', current: 'primary', warning: 'orange', error: 'red', pending: 'neutral', default: 'neutral' }[status] || 'neutral';
@@ -225,7 +242,53 @@ function updateTreeParents(item) { let parent=item.parentElement?.closest('.gs-t
 function toggleTreeCheck(item) { if(item.classList.contains('is-disabled')) return; const checked=item.getAttribute('aria-checked')==='true'; const next=checked ? 'false' : 'true'; item.setAttribute('aria-checked',next); item.querySelectorAll(':scope > .gs-tree__children .gs-tree__item').forEach(node=>{ if(!node.classList.contains('is-disabled')) node.setAttribute('aria-checked',next); }); updateTreeParents(item); }
 function activateTreeItem(item) { if(item.classList.contains('is-disabled')) return; const tree=item.closest('[data-tree]'); if(tree.hasAttribute('data-checkable')) toggleTreeCheck(item); else if(tree.dataset.selection==='single'){ tree.querySelectorAll('.gs-tree__item[aria-selected="true"]').forEach(node=>{ node.setAttribute('aria-selected','false'); node.classList.remove('is-selected'); }); item.setAttribute('aria-selected','true'); item.classList.add('is-selected'); } }
 function visibleTreeItems(tree) { return [...tree.querySelectorAll('.gs-tree__item')].filter(item=>{ let parent=item.parentElement?.closest('.gs-tree__item'); while(parent){ if(parent.getAttribute('aria-expanded')==='false') return false; parent=parent.parentElement?.closest('.gs-tree__item'); } return true; }); }
-function initComponentDemos(app) { app.querySelectorAll('[data-tree]').forEach(tree=>{ const current=tree.querySelector('.gs-tree__item.is-selected') || tree.querySelector('.gs-tree__item'); if(current) current.tabIndex=0; tree.querySelectorAll('.gs-tree__item[aria-checked]').forEach(item=>{ if(directTreeChildren(item).length) updateTreeParents(directTreeChildren(item)[0] || item); }); }); app.querySelectorAll('[data-checkbox-demo]').forEach(syncCheckboxDemo); app.querySelectorAll('.gs-input-range input').forEach(input=>input.setAttribute('data-numeric-only','')); app.querySelectorAll('.gs-dtp-popover__footer [data-dtp-action]').forEach(action=>{ action.classList.add('gs-button'); if(action.textContent.trim()==='取消') action.classList.add('gs-button--secondary'); }); app.querySelectorAll('.gs-dtp-popover--calendar .gs-dtp-popover__footer').forEach(footer=>{ const today=document.createElement('button'); today.type='button'; today.className='gs-button gs-button--text-primary'; today.dataset.dtpAction='today'; today.setAttribute('aria-label','今天'); today.textContent='今天'; const actions=document.createElement('span'); actions.className='gs-dtp-calendar-footer-actions'; [...footer.querySelectorAll('[data-dtp-action]')].forEach(action=>actions.append(action)); footer.append(today,actions); }); }
+function formatSliderValue(root, value) { const unit = root.dataset.sliderUnit || ''; return `${value}${unit ? ` ${unit}` : ''}`; }
+function syncSlider(root) {
+  const input = root?.querySelector('[data-slider-input], .gs-slider__input');
+  if (!input) return;
+  const min = Number(input.min || 0); const max = Number(input.max || 100); const value = Number(input.value);
+  const percent = max === min ? 0 : ((value - min) / (max - min)) * 100;
+  const label = formatSliderValue(root, value);
+  root.style.setProperty('--gs-slider-value', `${Math.max(0, Math.min(100, percent))}%`);
+  const inputRect = input.getBoundingClientRect(); const rootRect = root.getBoundingClientRect(); const thumbSize = 22;
+  const thumbPosition = max === min ? 0 : (value - min) / (max - min);
+  root.style.setProperty('--gs-slider-tip-left', `${inputRect.left - rootRect.left + (thumbSize / 2) + (inputRect.width - thumbSize) * thumbPosition}px`);
+  const output = root.querySelector('[data-slider-output]');
+  if (output) { output.textContent = label; output.classList.toggle('is-always', root.dataset.sliderTipsAlways === 'true'); }
+  const example = root.closest('.gs-slider-example');
+  const result = example?.querySelector('[data-slider-result]');
+  if (result) result.textContent = `当前数值：${value}`;
+  input.setAttribute('aria-valuetext', label);
+}
+function handleSliderInput(event) { const input = event.target; if (!(input instanceof HTMLInputElement) || !input.matches('[data-slider-input], .gs-slider__input')) return; syncSlider(input.closest('[data-slider]')); }
+function setSliderTipVisible(root, visible) { const output = root?.querySelector('[data-slider-output]'); if (!output || root.dataset.sliderTipsAlways === 'true') return; output.classList.toggle('is-visible', visible); }
+function hideSliderTips(except) { document.querySelectorAll('[data-slider]').forEach(root => { if (root !== except) setSliderTipVisible(root, false); }); }
+function sliderThumbPosition(root) { const input = root?.querySelector('.gs-slider__input'); if (!input) return null; const rect = input.getBoundingClientRect(); const min = Number(input.min || 0); const max = Number(input.max || 100); const value = Number(input.value); const percent = max === min ? 0 : (value - min) / (max - min); return { x: rect.left + rect.width * percent, y: rect.top + rect.height / 2 }; }
+function pointerOverSliderThumb(root, event) { const position = sliderThumbPosition(root); if (!position || typeof event.clientX !== 'number') return false; return Math.abs(event.clientX - position.x) <= 14 && Math.abs(event.clientY - position.y) <= 14; }
+function handleSliderPointerDown(event) { const input = event.target.closest?.('.gs-slider__input'); const root = input?.closest('[data-slider]'); if (!root || input.disabled) return; hideSliderTips(root); root.dataset.sliderPointerActive = 'true'; setSliderTipVisible(root, true); }
+function handleSliderPointerMove(event) { const root = event.target.closest?.('[data-slider]') || document.querySelector('[data-slider][data-slider-pointer-active="true"]'); if (!root) { hideSliderTips(); return; } hideSliderTips(root); if (root.dataset.sliderTipsAlways === 'true') return; setSliderTipVisible(root, pointerOverSliderThumb(root, event)); }
+function handleSliderPointerUp(event) { const root = event.target.closest?.('[data-slider]') || document.querySelector('[data-slider][data-slider-pointer-active="true"]'); if (!root) { hideSliderTips(); return; } hideSliderTips(root); if (root.dataset.sliderTipsAlways !== 'true') setSliderTipVisible(root, pointerOverSliderThumb(root, event)); delete root.dataset.sliderPointerActive; }
+function handleSliderFocus(event) { const root = event.target.closest?.('[data-slider]'); if (!root || root.dataset.sliderTipsAlways === 'true') return; setSliderTipVisible(root, event.type === 'focusin'); }
+function wrapUploadButtonDemo(app) {
+  const section = app.querySelector('#按钮上传');
+  const paragraph = section?.querySelector(':scope > p');
+  const states = section?.querySelector(':scope > .upload-button-state-reference');
+  if (!section || !paragraph || !states || section.querySelector(':scope > .upload-button-demo-card')) return;
+  const card = document.createElement('div');
+  card.className = 'upload-button-demo-card';
+  paragraph.after(card);
+  card.append(paragraph, states);
+}
+function ensureColorPickerInputFields(app) {
+  app.querySelectorAll('[data-color-value], [data-color-alpha-text]').forEach(input => {
+    if (input.parentElement?.classList.contains('gs-input-field')) return;
+    const field = document.createElement('div');
+    field.className = 'gs-input-field gs-color-picker__format-input';
+    input.replaceWith(field);
+    field.append(input);
+  });
+}
+function initComponentDemos(app) { wrapUploadButtonDemo(app); app.querySelectorAll('[data-slider]').forEach(syncSlider); app.querySelectorAll('[data-tree]').forEach(tree=>{ const current=tree.querySelector('.gs-tree__item.is-selected') || tree.querySelector('.gs-tree__item'); if(current) current.tabIndex=0; tree.querySelectorAll('.gs-tree__item[aria-checked]').forEach(item=>{ if(directTreeChildren(item).length) updateTreeParents(directTreeChildren(item)[0] || item); }); }); app.querySelectorAll('[data-checkbox-demo]').forEach(syncCheckboxDemo); ensureColorPickerInputFields(app); app.querySelectorAll('[data-color-picker]').forEach(updateColorPicker); app.querySelectorAll('.gs-input-range input').forEach(input=>input.setAttribute('data-numeric-only','')); app.querySelectorAll('.gs-dtp-popover__footer [data-dtp-action]').forEach(action=>{ action.classList.add('gs-button'); if(action.textContent.trim()==='取消') action.classList.add('gs-button--secondary'); }); app.querySelectorAll('[data-dtp-range-action]').forEach(action=>{ action.classList.add('gs-button'); if(action.textContent.trim()==='取消') action.classList.add('gs-button--secondary'); }); app.querySelectorAll('.gs-dtp-popover--calendar .gs-dtp-popover__footer').forEach(footer=>{ const today=document.createElement('button'); today.type='button'; today.className='gs-button gs-button--text-primary'; today.dataset.dtpAction='today'; today.setAttribute('aria-label','今天'); today.textContent='今天'; const actions=document.createElement('span'); actions.className='gs-dtp-calendar-footer-actions'; [...footer.querySelectorAll('[data-dtp-action]')].forEach(action=>actions.append(action)); footer.append(today,actions); }); }
 function syncCheckboxDemo(group) { const master=group.querySelector('[data-checkbox-master]'); const items=[...group.querySelectorAll('[data-checkbox-item]:not(:disabled)')]; const checked=items.filter(item=>item.checked).length; master.checked=checked===items.length && checked>0; master.indeterminate=checked>0 && checked<items.length; }
 function handleControlChange(event) {
   const input=event.target;
@@ -510,6 +573,14 @@ function selectPickerOption(picker, option) {
   picker.querySelectorAll('.gs-select-option[aria-selected="true"]').forEach(node => { node.setAttribute('aria-selected', 'false'); node.classList.remove('is-selected'); });
   option.setAttribute('aria-selected', 'true'); option.classList.add('is-selected');
   closePicker(picker);
+  if (picker.dataset.picker === 'color-format') {
+    const format = picker.querySelector('[data-color-format]');
+    const colorPicker = picker.closest('[data-color-picker]');
+    if (format && colorPicker) {
+      format.value = value;
+      updateColorPicker(colorPicker, true);
+    }
+  }
 }
 function pickerMultiTag(label, value = label, closable = true) {
   const safeLabel = escapeHtml(label);
@@ -589,9 +660,386 @@ function handlePickerKeydown(event) {
   else if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); option.click(); }
   else if (event.key === 'Escape') { event.preventDefault(); closePicker(picker); picker.querySelector('[data-picker-trigger]')?.focus(); }
 }
+function clampColorValue(value, min, max) { return Math.min(max, Math.max(min, Number(value) || 0)); }
+function hsvToRgb(h, s, v) {
+  const saturation = s / 100;
+  const value = v / 100;
+  const chroma = value * saturation;
+  const segment = h / 60;
+  const x = chroma * (1 - Math.abs(segment % 2 - 1));
+  const [r1, g1, b1] = segment < 1 ? [chroma, x, 0] : segment < 2 ? [x, chroma, 0] : segment < 3 ? [0, chroma, x] : segment < 4 ? [0, x, chroma] : segment < 5 ? [x, 0, chroma] : [chroma, 0, x];
+  const m = value - chroma;
+  return [r1, g1, b1].map(channel => Math.round((channel + m) * 255));
+}
+function rgbToHsv(r, g, b) {
+  const red = r / 255, green = g / 255, blue = b / 255;
+  const max = Math.max(red, green, blue), min = Math.min(red, green, blue), delta = max - min;
+  let hue = 0;
+  if (delta) {
+    if (max === red) hue = 60 * (((green - blue) / delta) % 6);
+    else if (max === green) hue = 60 * ((blue - red) / delta + 2);
+    else hue = 60 * ((red - green) / delta + 4);
+  }
+  if (hue < 0) hue += 360;
+  const saturation = max === 0 ? 0 : delta / max;
+  return [Math.round(hue), Math.round(saturation * 100), Math.round(max * 100)];
+}
+function parseColorValue(value) {
+  const raw = String(value || '').trim();
+  const hex = raw.match(/^#([0-9a-f]{3,8})$/i);
+  if (hex) {
+    const expanded = hex[1].length === 3 ? hex[1].split('').map(char => char + char).join('') : hex[1];
+    const channels = [0, 2, 4].map(index => parseInt(expanded.slice(index, index + 2), 16));
+    return { rgb: channels, alpha: expanded.length >= 8 ? parseInt(expanded.slice(6, 8), 16) / 255 : 1 };
+  }
+  const rgb = raw.match(/^rgba?\(\s*([\d.]+)\s*[, ]\s*([\d.]+)\s*[, ]\s*([\d.]+)(?:\s*[,/]\s*([\d.]+))?\s*\)$/i);
+  if (rgb) return { rgb: rgb.slice(1, 4).map(channel => clampColorValue(channel, 0, 255)), alpha: clampColorValue(rgb[4] === undefined ? 1 : rgb[4], 0, 1) };
+  return null;
+}
+function formatColorPickerValue(root) {
+  const rgb = hsvToRgb(Number(root.dataset.hue), Number(root.dataset.saturation), Number(root.dataset.lightness));
+  const alpha = Number(root.dataset.alpha);
+  const format = root.querySelector('[data-color-format]')?.value || 'css';
+  if (format === 'hex') {
+    const hex = rgb.map(channel => channel.toString(16).padStart(2, '0')).join('').toUpperCase();
+    return alpha < 1 ? `#${hex}${Math.round(alpha * 255).toString(16).padStart(2, '0').toUpperCase()}` : `#${hex}`;
+  }
+  if (format === 'rgb') return alpha < 1 ? `rgba(${rgb.join(',')},${Number(alpha.toFixed(2))})` : `rgb(${rgb.join(',')})`;
+  return `rgba(${rgb.join(',')},${Number(alpha.toFixed(2))})`;
+}
+function setColorPickerFromHex(root, value, announce = false) {
+  const parsed = parseColorValue(value);
+  if (!parsed) return false;
+  const [hue, saturation, lightness] = rgbToHsv(...parsed.rgb);
+  root.dataset.hue = String(hue);
+  root.dataset.saturation = String(saturation);
+  root.dataset.lightness = String(lightness);
+  root.dataset.alpha = String(parsed.alpha);
+  updateColorPicker(root, announce);
+  return true;
+}
+function ensureGradientEditor(root) {
+  const angleInput = root?.querySelector('[data-color-angle]');
+  if (!angleInput || angleInput.dataset.gradientEnhanced) return;
+  angleInput.dataset.gradientEnhanced = 'true';
+  angleInput.hidden = true;
+  const editor = document.createElement('div');
+  editor.className = 'gs-color-picker__gradient-editor';
+  editor.dataset.gradientEditor = '';
+  editor.setAttribute('role', 'slider');
+  editor.setAttribute('tabindex', '0');
+  editor.setAttribute('aria-label', '渐变编辑条');
+  const track = document.createElement('span');
+  track.className = 'gs-color-picker__gradient-track';
+  const stops = document.createElement('span');
+  stops.className = 'gs-color-picker__gradient-stops';
+  [0, 100].forEach((position, index) => {
+    const stop = document.createElement('button');
+    stop.type = 'button';
+    stop.className = `gs-color-picker__gradient-stop${index === 0 ? ' is-selected' : ''}`;
+    stop.dataset.gradientStop = String(position);
+    stop.dataset.gradientHue = '0';
+    stop.dataset.gradientSaturation = '0';
+    stop.dataset.gradientLightness = '100';
+    stop.dataset.gradientAlpha = '1';
+    stop.style.left = `${position}%`;
+    stop.setAttribute('aria-label', `渐变点 ${position}%`);
+    stops.append(stop);
+  });
+  editor.append(track, stops);
+  angleInput.parentElement.insertBefore(editor, angleInput);
+}
+function syncGradientStopToPicker(root, stop) {
+  if (!root || !stop) return;
+  root.dataset.hue = stop.dataset.gradientHue || root.dataset.hue;
+  root.dataset.saturation = stop.dataset.gradientSaturation || root.dataset.saturation;
+  root.dataset.lightness = stop.dataset.gradientLightness || root.dataset.lightness;
+  root.dataset.alpha = stop.dataset.gradientAlpha || root.dataset.alpha;
+}
+function syncPickerToGradientStop(root) {
+  if (root?.dataset.mode !== 'gradient') return;
+  const stop = root?.querySelector('.gs-color-picker__gradient-stop.is-selected');
+  if (!stop) return;
+  stop.dataset.gradientHue = root.dataset.hue;
+  stop.dataset.gradientSaturation = root.dataset.saturation;
+  stop.dataset.gradientLightness = root.dataset.lightness;
+  stop.dataset.gradientAlpha = root.dataset.alpha;
+  updateGradientStopStyles(root);
+}
+function updateGradientStopStyles(root) {
+  root?.querySelectorAll('[data-gradient-stop]').forEach(stop => {
+    const rgb = hsvToRgb(Number(stop.dataset.gradientHue), Number(stop.dataset.gradientSaturation), Number(stop.dataset.gradientLightness));
+    const solid = `rgb(${rgb.join(' ')})`;
+    const alpha = `rgb(${rgb.join(' ')} / ${stop.dataset.gradientAlpha || 1})`;
+    stop.style.background = `linear-gradient(90deg, ${solid} 0 50%, ${alpha} 50% 100%), repeating-conic-gradient(#d5d7d9 0 25%, #fff 0 50%) 50% / 6px 6px`;
+  });
+}
+function updateGradientTrack(root) {
+  const track = root?.querySelector('[data-gradient-editor] .gs-color-picker__gradient-track');
+  if (!track) return;
+  const stops = [...root.querySelectorAll('[data-gradient-stop]')]
+    .sort((a, b) => Number(a.dataset.gradientStop) - Number(b.dataset.gradientStop))
+    .map(stop => {
+      const rgb = hsvToRgb(Number(stop.dataset.gradientHue), Number(stop.dataset.gradientSaturation), Number(stop.dataset.gradientLightness));
+      return `rgb(${rgb.join(' ')} / ${stop.dataset.gradientAlpha || 1}) ${stop.dataset.gradientStop}%`;
+    });
+  track.style.background = `linear-gradient(90deg, ${stops.join(', ')}), repeating-conic-gradient(#d5d7d9 0 25%, #fff 0 50%) 50% / 6px 6px`;
+}
+function removeGradientStop(root, stop) {
+  const stops = [...root.querySelectorAll('[data-gradient-stop]')];
+  if (!stop || stops.length <= 2) return false;
+  stop.remove();
+  const next = root.querySelector('[data-gradient-stop]');
+  next?.classList.add('is-selected');
+  if (next) syncGradientStopToPicker(root, next);
+  delete root.dataset.gradientDragging;
+  updateColorPicker(root, true);
+  const live = root.querySelector('[data-color-live]');
+  if (live) live.textContent = '已删除渐变点';
+  return true;
+}
+function updateColorPicker(root, announce = false) {
+  if (!root) return;
+  ensureGradientEditor(root);
+  syncPickerToGradientStop(root);
+  updateGradientTrack(root);
+  const hue = clampColorValue(root.dataset.hue, 0, 360);
+  const saturationValue = clampColorValue(root.dataset.saturation, 0, 100);
+  const lightness = clampColorValue(root.dataset.lightness, 0, 100);
+  const alpha = clampColorValue(root.dataset.alpha, 0, 1);
+  const angle = clampColorValue(root.dataset.colorAngle || 70, 0, 360);
+  root.dataset.hue = String(hue); root.dataset.saturation = String(saturationValue); root.dataset.lightness = String(lightness); root.dataset.alpha = String(alpha); root.dataset.colorAngle = String(angle);
+  root.style.setProperty('--gs-cp-hue', hue);
+  root.style.setProperty('--gs-cp-saturation', saturationValue);
+  root.style.setProperty('--gs-cp-lightness', lightness);
+  root.style.setProperty('--gs-cp-alpha', alpha);
+  root.style.setProperty('--gs-cp-angle', `${angle}deg`);
+  const isGradient = root.dataset.mode === 'gradient';
+  root.classList.toggle('gs-color-picker--gradient', isGradient);
+  const currentRgb = hsvToRgb(hue, saturationValue, lightness);
+  const currentColor = `rgb(${currentRgb.join(' ')} / ${alpha})`;
+  root.style.setProperty('--gs-cp-current-color', currentColor);
+  const opaqueColor = `rgb(${currentRgb.join(' ')})`;
+  const previewColor = `linear-gradient(90deg, ${opaqueColor} 0 50%, ${currentColor} 50% 100%), repeating-conic-gradient(#d5d7d9 0 25%, #fff 0 50%) 50% / 8px 8px`;
+  const preview = root.querySelector('[data-color-preview]');
+  if (preview) {
+    preview.style.background = previewColor;
+    preview.setAttribute('aria-label', `当前颜色 ${formatColorPickerValue(root)}`);
+  }
+  const angleControl = root.querySelector('.gs-color-picker__gradient-angle');
+  if (angleControl) angleControl.hidden = !isGradient;
+  root.style.setProperty('--gs-cp-saturation-position', `${saturationValue}%`);
+  root.style.setProperty('--gs-cp-lightness-position', `${100 - lightness}%`);
+  const hueInput = root.querySelector('[data-color-hue]');
+  const alphaInput = root.querySelector('[data-color-alpha]');
+  if (hueInput) hueInput.value = String(hue);
+  if (alphaInput) alphaInput.value = String(alpha);
+  const alphaText = root.querySelector('[data-color-alpha-text]');
+  if (alphaText) {
+    alphaText.type = 'number';
+    alphaText.min = '0';
+    alphaText.max = '100';
+    alphaText.step = '1';
+    alphaText.inputMode = 'decimal';
+    if (document.activeElement !== alphaText) alphaText.value = String(Math.round(alpha * 100));
+  }
+  const angleInput = root.querySelector('[data-color-angle]');
+  const angleText = root.querySelector('[data-color-angle-text]');
+  if (angleInput) angleInput.value = String(angle);
+  if (angleText && document.activeElement !== angleText) angleText.value = String(angle);
+  const valueInput = root.querySelector('[data-color-value]');
+  if (valueInput && document.activeElement !== valueInput) valueInput.value = formatColorPickerValue(root);
+  const saturationPanel = root.querySelector('[data-color-saturation]');
+  if (saturationPanel) { saturationPanel.setAttribute('aria-valuenow', String(saturationValue)); saturationPanel.setAttribute('aria-valuetext', `${saturationValue}% 饱和度，${lightness}% 明度`); }
+  if (announce) { const live = root.querySelector('[data-color-live]'); if (live) live.textContent = `颜色已更新为 ${formatColorPickerValue(root)}`; }
+}
+function setColorPickerSaturation(root, event) {
+  const panel = root?.querySelector('[data-color-saturation]');
+  if (!panel) return;
+  const rect = panel.getBoundingClientRect();
+  const saturation = clampColorValue(((event.clientX - rect.left) / rect.width) * 100, 0, 100);
+  const lightness = clampColorValue(100 - ((event.clientY - rect.top) / rect.height) * 100, 0, 100);
+  root.dataset.saturation = String(Math.round(saturation));
+  root.dataset.lightness = String(Math.round(lightness));
+  updateColorPicker(root, true);
+}
+function handleColorPickerClick(event) {
+  const target = event.target.closest?.('[data-color-mode],[data-color-swatch],[data-color-action]');
+  const gradientEditor = event.target.closest?.('[data-gradient-editor]');
+  if (gradientEditor) {
+    const root = gradientEditor.closest('[data-color-picker]');
+    const stop = event.target.closest('[data-gradient-stop]');
+    if (stop) {
+      gradientEditor.querySelectorAll('[data-gradient-stop]').forEach(item => item.classList.toggle('is-selected', item === stop));
+      if (root) { syncGradientStopToPicker(root, stop); updateColorPicker(root, true); }
+      return true;
+    }
+    const rect = gradientEditor.querySelector('.gs-color-picker__gradient-track')?.getBoundingClientRect() || gradientEditor.getBoundingClientRect();
+    const position = Math.round(Math.min(100, Math.max(0, ((event.clientX - rect.left) / rect.width) * 100)));
+    const exists = [...gradientEditor.querySelectorAll('[data-gradient-stop]')].some(item => Math.abs(parseFloat(item.style.left) - position) < 4);
+    if (!exists) {
+      const newStop = document.createElement('button');
+      newStop.type = 'button';
+      newStop.className = 'gs-color-picker__gradient-stop is-selected';
+      newStop.dataset.gradientStop = String(position);
+      newStop.dataset.gradientHue = root?.dataset.hue || '210';
+      newStop.dataset.gradientSaturation = root?.dataset.saturation || '100';
+      newStop.dataset.gradientLightness = root?.dataset.lightness || '55';
+      newStop.dataset.gradientAlpha = root?.dataset.alpha || '1';
+      newStop.style.left = `${position}%`;
+      newStop.setAttribute('aria-label', `渐变点 ${position}%`);
+      gradientEditor.querySelectorAll('[data-gradient-stop]').forEach(item => item.classList.remove('is-selected'));
+      gradientEditor.querySelector('.gs-color-picker__gradient-stops')?.append(newStop);
+      if (root) { updateColorPicker(root, true); const live = root.querySelector('[data-color-live]'); if (live) live.textContent = `已添加${position}%渐变点`; }
+    }
+    return true;
+  }
+  if (!target) return false;
+  const root = target.closest('[data-color-picker]');
+  if (target.matches('[data-color-mode]') && root) {
+    root.dataset.mode = target.dataset.colorMode;
+    root.classList.toggle('gs-color-picker--gradient', target.dataset.colorMode === 'gradient');
+    if (target.dataset.colorMode === 'gradient') syncGradientStopToPicker(root, root.querySelector('.gs-color-picker__gradient-stop.is-selected'));
+    updateColorPicker(root, true);
+    const angle = root.querySelector('.gs-color-picker__gradient-angle');
+    if (angle) angle.hidden = target.dataset.colorMode !== 'gradient';
+    root.querySelectorAll('[data-color-mode]').forEach(button => { const selected = button === target; button.classList.toggle('is-selected', selected); button.setAttribute('aria-selected', String(selected)); });
+    const live = root.querySelector('[data-color-live]'); if (live) live.textContent = `已切换为${target.textContent.trim()}模式`;
+    return true;
+  }
+  if (target.matches('[data-color-swatch]')) {
+    const value = target.dataset.colorSwatch;
+    const picker = root || document.querySelector('[data-color-picker]');
+    if (picker) setColorPickerFromHex(picker, value, true);
+    const referenceLive = document.querySelector('[data-color-reference-live]'); if (referenceLive) referenceLive.textContent = `已选择${target.getAttribute('aria-label')?.replace(/^选择/, '') || '颜色'}`;
+    return true;
+  }
+  if (target.matches('[data-color-action]')) {
+    if (root && target.dataset.colorAction === 'clear') {
+      root.dataset.hue = '0'; root.dataset.saturation = '0'; root.dataset.lightness = '100'; root.dataset.alpha = '1';
+      updateColorPicker(root, true);
+      const live = root.querySelector('[data-color-live]'); if (live) live.textContent = '已清除颜色';
+      return true;
+    }
+    if (root && target.dataset.colorAction === 'confirm') {
+      root.dataset.confirmedValue = formatColorPickerValue(root);
+      const live = root.querySelector('[data-color-live]'); if (live) live.textContent = `已确认颜色 ${root.dataset.confirmedValue}`;
+      return true;
+    }
+    return false;
+  }
+  return false;
+}
+function handleColorPickerInput(event) {
+  const input = event.target;
+  const root = input.closest?.('[data-color-picker]');
+  if (!root) return;
+  if (input.matches('[data-color-hue]')) root.dataset.hue = input.value;
+  else if (input.matches('[data-color-alpha]')) root.dataset.alpha = input.value;
+  else if (input.matches('[data-color-alpha-text]')) root.dataset.alpha = String(clampColorValue(input.value, 0, 100) / 100);
+  else if (input.matches('[data-color-angle]')) root.dataset.colorAngle = input.value;
+  else if (input.matches('[data-color-angle-text]')) root.dataset.colorAngle = clampColorValue(input.value, 0, 360);
+  else if (input.matches('[data-color-value]')) { if (setColorPickerFromHex(root, input.value)) updateColorPicker(root, true); return; }
+  updateColorPicker(root, true);
+}
+function handleColorPickerChange(event) {
+  const input = event.target;
+  const root = input.closest?.('[data-color-picker]');
+  if (!root || !input.matches('[data-color-format]')) return;
+  updateColorPicker(root, true);
+}
+function handleColorPickerFocusOut(event) {
+  const input = event.target;
+  const root = input.closest?.('[data-color-picker]');
+  if (!root || !input.matches('[data-color-value],[data-color-alpha-text]')) return;
+  setTimeout(() => updateColorPicker(root, true), 0);
+}
+function handleColorPickerPointerDown(event) {
+  const stop = event.target.closest?.('[data-gradient-stop]');
+  if (stop) {
+    const editor = stop.closest('[data-gradient-editor]');
+    const root = editor?.closest('[data-color-picker]');
+    if (editor && root) {
+      editor.querySelectorAll('[data-gradient-stop]').forEach(item => item.classList.toggle('is-selected', item === stop));
+      syncGradientStopToPicker(root, stop);
+      root.dataset.gradientDragging = 'true';
+      editor.setPointerCapture?.(event.pointerId);
+      return;
+    }
+  }
+  const panel = event.target.closest?.('[data-color-saturation]');
+  if (!panel) return;
+  const root = panel.closest('[data-color-picker]');
+  if (!root) return;
+  root.dataset.colorDragging = 'true';
+  panel.setPointerCapture?.(event.pointerId);
+  setColorPickerSaturation(root, event);
+}
+function handleColorPickerPointerMove(event) {
+  const root = event.target.closest?.('[data-color-picker]') || document.querySelector('[data-color-picker][data-color-dragging="true"],[data-color-picker][data-gradient-dragging="true"]');
+  if (root?.dataset.gradientDragging === 'true') {
+    const editor = root.querySelector('[data-gradient-editor]');
+    const stop = editor?.querySelector('.gs-color-picker__gradient-stop.is-selected');
+    if (editor && stop) {
+      const editorRect = editor.getBoundingClientRect();
+      const trackRect = editor.querySelector('.gs-color-picker__gradient-track')?.getBoundingClientRect() || editorRect;
+      const outsideEditor = event.clientY < editorRect.top - 12 || event.clientY > editorRect.bottom + 12;
+      if (outsideEditor) {
+        root.dataset.gradientDeletePending = 'true';
+        stop.classList.add('is-delete-pending');
+        return;
+      }
+      delete root.dataset.gradientDeletePending;
+      stop.classList.remove('is-delete-pending');
+      const position = Math.round(Math.min(100, Math.max(0, ((event.clientX - trackRect.left) / trackRect.width) * 100)));
+      stop.dataset.gradientStop = String(position);
+      stop.style.left = `${position}%`;
+      stop.setAttribute('aria-label', `渐变点 ${position}%`);
+      updateGradientTrack(root);
+    }
+    return;
+  }
+  if (root?.dataset.colorDragging === 'true') setColorPickerSaturation(root, event);
+}
+function handleColorPickerPointerUp(event) {
+  const root = event.target.closest?.('[data-color-picker]') || document.querySelector('[data-color-picker][data-color-dragging="true"],[data-color-picker][data-gradient-dragging="true"]');
+  if (root?.dataset.gradientDragging === 'true') {
+    const stop = root.querySelector('.gs-color-picker__gradient-stop.is-selected');
+    if (event.type === 'pointerup' && root.dataset.gradientDeletePending === 'true' && stop) removeGradientStop(root, stop);
+    else if (stop) stop.classList.remove('is-delete-pending');
+    delete root.dataset.gradientDeletePending;
+  }
+  if (root) { delete root.dataset.colorDragging; delete root.dataset.gradientDragging; }
+}
+function handleColorPickerKeydown(event) {
+  const panel = event.target.closest?.('[data-color-saturation]');
+  if (!panel) return;
+  const root = panel.closest('[data-color-picker]');
+  if (!root || !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+  const step = event.shiftKey ? 10 : 1;
+  if (event.key === 'ArrowLeft') root.dataset.saturation = Number(root.dataset.saturation) - step;
+  if (event.key === 'ArrowRight') root.dataset.saturation = Number(root.dataset.saturation) + step;
+  if (event.key === 'ArrowUp') root.dataset.lightness = Number(root.dataset.lightness) + step;
+  if (event.key === 'ArrowDown') root.dataset.lightness = Number(root.dataset.lightness) - step;
+  updateColorPicker(root, true);
+  event.preventDefault();
+}
 function handleComponentClick(event) {
   const app=document.querySelector('#app');
   if (handleDateTimeClick(event)) return;
+  const combinationOption=event.target.closest('[data-combination-option]');
+  if (combinationOption && app.contains(combinationOption)) {
+    const group=combinationOption.closest('[data-combination-group]');
+    group?.querySelectorAll('[data-combination-option]').forEach(item=>{
+      item.classList.remove('is-selected');
+      item.setAttribute('aria-pressed','false');
+    });
+    combinationOption.classList.add('is-selected');
+    combinationOption.setAttribute('aria-pressed','true');
+    return;
+  }
+  if (handleUploadClick(event)) return;
+  if (handleColorPickerClick(event)) return;
   // Picker dismissal also needs to run for clicks outside a picker. Keep the
   // single delegated listener on #app so every open popup closes consistently.
   handlePickerClick(event);
@@ -606,6 +1054,284 @@ function handleComponentClick(event) {
   if(timelineButton && app.contains(timelineButton)){ const details=timelineButton.closest('.gs-timeline__content').querySelector('.gs-timeline__details'); const expanded=timelineButton.getAttribute('aria-expanded')==='true'; timelineButton.setAttribute('aria-expanded',String(!expanded)); timelineButton.textContent=expanded?'查看详情':'收起详情'; details.hidden=expanded; return; }
   const row=event.target.closest('[data-tree-row]');
   if(row && app.contains(row)){ const item=row.closest('.gs-tree__item'); focusTreeItem(item); if(event.target.closest('[data-tree-toggle]') && item.hasAttribute('aria-expanded')) item.setAttribute('aria-expanded',String(item.getAttribute('aria-expanded')!=='true')); else activateTreeItem(item); }
+}
+let uploadPreviewReturnFocus = null;
+function closeUploadPreview() {
+  document.querySelector('[data-upload-preview-modal]')?.remove();
+  const returnFocus = uploadPreviewReturnFocus;
+  uploadPreviewReturnFocus = null;
+  if (returnFocus?.isConnected) returnFocus.focus();
+}
+function openUploadPreview(app, source, returnFocus) {
+  if (!app || !source?.src) return;
+  closeUploadPreview();
+  uploadPreviewReturnFocus = returnFocus;
+  const modal = document.createElement('div');
+  modal.className = 'gs-upload-preview-modal';
+  modal.dataset.uploadPreviewModal = '';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', '图片预览');
+  modal.innerHTML = `<button type="button" class="gs-upload-preview-modal__backdrop" data-upload-preview-close aria-label="关闭图片预览"></button><div class="gs-upload-preview-modal__panel"><button type="button" class="gs-button gs-button--icon gs-button--text gs-upload-preview-modal__close" data-upload-preview-close aria-label="关闭图片预览">${gsIcon('close')}</button><img class="gs-upload-preview-modal__image" src="${escapeHtml(source.src)}" alt="${escapeHtml(source.alt || '上传图片预览')}" /></div>`;
+  app.append(modal);
+  modal.querySelector('.gs-upload-preview-modal__close')?.focus();
+}
+function uploadLiveMessage(root, message) { const live = root?.querySelector('[data-upload-live],[data-upload-list-live]'); if (live) live.textContent = message; }
+function getUploadMaxCount(panel) {
+  const value = Number(panel?.dataset.uploadMaxCount);
+  return Number.isFinite(value) && value > 0 ? Math.floor(value) : 5;
+}
+function syncUploadListPanel(panel) {
+  if (!panel) return;
+  const body = panel.querySelector('[data-upload-list-body]');
+  if (!body) return;
+  const hasFiles = [...body.querySelectorAll('tr')].some(row => !row.querySelector('.upload-dropzone'));
+  if (!hasFiles && !body.querySelector('.upload-dropzone')) body.innerHTML = '<tr><td colspan="4"><div class="upload-dropzone"><span>点击上方“选择文件”或将文件拖拽到此区域</span></div></td></tr>';
+  const submit = panel.querySelector('[data-upload-submit]');
+  if (!submit) return;
+  submit.disabled = !hasFiles;
+  submit.classList.toggle('is-disabled', !hasFiles);
+  if (hasFiles) { submit.removeAttribute('disabled'); submit.removeAttribute('aria-disabled'); }
+  else { submit.setAttribute('disabled', ''); submit.setAttribute('aria-disabled', 'true'); }
+}
+function resetUploadImage(image) {
+  if (!image) return;
+  image.classList.remove('is-complete', 'is-preview', 'is-uploading');
+  image.classList.add('is-empty');
+  image.innerHTML = `<span class="gs-upload-image__content">${gsIcon('add', 'gs-upload-add-icon')}<span>点击上传图片</span></span><input class="upload-native-input" type="file" accept="image/*" data-upload-input aria-label="选择图片" />`;
+}
+function renderInputUploadProgress(field, fileName) {
+  if (!field) return;
+  const state = field.closest('.upload-input-state') || field.closest('.upload-state');
+  const display = field.querySelector('.upload-file-input');
+  const button = field.querySelector('.gs-upload-button');
+  if (!display || !button || !state) return;
+  if (state._uploadInputProgressTimer) clearInterval(state._uploadInputProgressTimer);
+  if (state._uploadInputFinishTimer) clearTimeout(state._uploadInputFinishTimer);
+  state._uploadInputProgressTimer = null;
+  state._uploadInputFinishTimer = null;
+  state.classList.remove('is-success', 'is-error');
+  state.classList.add('is-uploading');
+  field.querySelector('.upload-input-remove')?.remove();
+  display.classList.remove('is-placeholder', 'is-disabled');
+  let progress = 0;
+  const renderProgress = () => {
+    display.innerHTML = `${uploadFileNameMarkup(fileName)}<span class="upload-file-input__status"><i class="gs-upload-spinner" aria-hidden="true"></i>${progress}%</span>`;
+  };
+  const finish = (result = 'success') => {
+    state._uploadInputProgressTimer = null;
+    state._uploadInputFinishTimer = null;
+    state.classList.remove('is-uploading');
+    state.classList.add(`is-${result}`);
+    const statusIcon = result === 'success' ? gsIcon('uploadSuccess') : gsIcon('closeCircleFilled');
+    display.innerHTML = `${uploadFileNameMarkup(fileName)}<span class="upload-file-input__status is-${result}">${statusIcon}</span>`;
+    button.innerHTML = `${gsIcon('upload', 'gs-upload-button__icon')}重新上传`;
+    button.insertAdjacentHTML('afterend', '<button type="button" class="gs-button gs-button--text-primary upload-input-remove" data-upload-remove aria-label="删除文件">删除</button>');
+  };
+  renderProgress();
+  state._uploadInputProgressTimer = setInterval(() => {
+    progress = Math.min(100, progress + 10);
+    renderProgress();
+    if (progress >= 100) {
+      clearInterval(state._uploadInputProgressTimer);
+      state._uploadInputProgressTimer = null;
+      state._uploadInputFinishTimer = setTimeout(() => finish('success'), 180);
+    }
+  }, 100);
+}
+function resetInputUploadState(state) {
+  if (!state) return;
+  if (state._uploadInputProgressTimer) clearInterval(state._uploadInputProgressTimer);
+  if (state._uploadInputFinishTimer) clearTimeout(state._uploadInputFinishTimer);
+  state._uploadInputProgressTimer = null;
+  state._uploadInputFinishTimer = null;
+  const field = state.querySelector('.upload-file-field');
+  const display = field?.querySelector('.upload-file-input');
+  const button = field?.querySelector('.gs-upload-button');
+  if (display) { display.textContent = '还未选择文件'; display.classList.add('is-placeholder'); }
+  if (button) button.innerHTML = `${gsIcon('upload', 'gs-upload-button__icon')}上传文件`;
+  field?.querySelector('.upload-input-remove')?.remove();
+  state.classList.remove('is-uploading', 'is-success', 'is-error');
+}
+function resetButtonUploadState(state) {
+  if (!state) return;
+  if (state._uploadProgressTimer) clearInterval(state._uploadProgressTimer);
+  if (state._uploadProgressFinishTimer) clearTimeout(state._uploadProgressFinishTimer);
+  state._uploadProgressTimer = null;
+  state._uploadProgressFinishTimer = null;
+  const field = state.querySelector('.upload-file-field');
+  const display = field?.querySelector('.upload-file-input');
+  const button = field?.querySelector('.gs-upload-button');
+  const fileState = state.querySelector('.upload-file-state');
+  if (display) { display.textContent = '还未选择文件'; display.classList.add('is-placeholder'); }
+  if (button) button.innerHTML = `${gsIcon('upload', 'gs-upload-button__icon')}上传文件`;
+  fileState?.querySelectorAll('.upload-file-state__row').forEach(row => row.remove());
+  if (!state.querySelector(':scope > .upload-helper') && state.dataset.uploadHelper) {
+    state.insertAdjacentHTML('beforeend', `<p class="upload-helper">${escapeHtml(state.dataset.uploadHelper)}</p>`);
+  }
+  const input = field?.querySelector('[data-upload-input]');
+  if (input) input.value = '';
+  state.classList.remove('is-uploading', 'is-success', 'is-error');
+}
+function handleUploadClick(event) {
+  const app = document.querySelector('#app');
+  initUploadListDemos(app);
+  const target = event.target instanceof Element ? event.target : null;
+  if (!target || !app.contains(target)) return false;
+  const previewClose = target.closest('[data-upload-preview-close]');
+  if (previewClose) { closeUploadPreview(); return true; }
+  const trigger = target.closest('[data-upload-trigger]');
+  if (trigger) {
+    const panel = trigger.closest('.upload-list-panel,.upload-file-state,.upload-interactive-card');
+    const input = panel?.querySelector('[data-upload-list-input],[data-upload-input]') || trigger.parentElement?.querySelector('[data-upload-input]');
+    if (input instanceof HTMLInputElement && !trigger.disabled) input.click();
+    return true;
+  }
+  const image = target.closest('[data-upload-image]');
+  if (image && image.classList.contains('is-empty') && !image.classList.contains('is-disabled') && !target.closest('[data-upload-delete],[data-upload-preview]') && !(target instanceof HTMLInputElement)) {
+    image.querySelector('[data-upload-input]')?.click();
+    return true;
+  }
+  const deleteImage = target.closest('[data-upload-delete]');
+  if (deleteImage) { resetUploadImage(deleteImage.closest('[data-upload-image]')); uploadLiveMessage(deleteImage.closest('[data-upload-demo]'), '已删除图片'); return true; }
+  const preview = target.closest('[data-upload-preview]');
+  if (preview) {
+    const image = preview.closest('[data-upload-image]')?.querySelector('.gs-upload-image__preview');
+    if (image) openUploadPreview(app, image, preview);
+    uploadLiveMessage(preview.closest('[data-upload-demo]'), '已打开图片预览');
+    return true;
+  }
+  const removeRow = target.closest('[data-upload-row-remove],[data-upload-remove]');
+  if (removeRow) { event.preventDefault(); const inputState = removeRow.closest('.upload-input-state'); if (inputState) { resetInputUploadState(inputState); uploadLiveMessage(inputState, '已删除文件'); return true; } const buttonState = removeRow.closest('.upload-button-state-reference .upload-state'); if (buttonState) { resetButtonUploadState(buttonState); uploadLiveMessage(buttonState, '已删除文件'); return true; } const panel = removeRow.closest('.upload-list-panel'); removeRow.closest('tr,.upload-file-state__row')?.remove(); syncUploadListPanel(panel); uploadLiveMessage(panel || removeRow.closest('.upload-reference-card'), '已删除文件'); return true; }
+  const cancel = target.closest('[data-upload-cancel]');
+  if (cancel) { const panel = cancel.closest('.upload-list-panel'); panel?.querySelectorAll('tbody tr').forEach(row => { if (!row.querySelector('.upload-dropzone')) row.remove(); }); syncUploadListPanel(panel); uploadLiveMessage(panel, '已取消上传'); return true; }
+  const submit = target.closest('[data-upload-submit]');
+  if (submit && !submit.disabled) {
+    const panel = submit.closest('.upload-list-panel');
+    panel?.querySelectorAll('.upload-table__status').forEach(status => {
+      status.outerHTML = uploadStatusMarkup('success');
+    });
+    submit.disabled = true;
+    uploadLiveMessage(panel, '文件已上传完成');
+    return true;
+  }
+  return false;
+}
+function handleUploadChange(event) {
+  const input = event.target;
+  if (!(input instanceof HTMLInputElement) || !input.matches('[data-upload-input],[data-upload-list-input]')) return;
+  const files = [...(input.files || [])];
+  if (!files.length) return;
+  const image = input.closest('[data-upload-image]');
+  if (image && files[0].type.startsWith('image/')) {
+    const url = URL.createObjectURL(files[0]);
+    image.classList.remove('is-empty', 'is-uploading');
+    image.classList.add('is-complete', 'is-preview');
+    image.innerHTML = `<img class="gs-upload-image__preview" src="${url}" alt="${escapeHtml(files[0].name)}" /><span class="gs-upload-image__overlay" data-upload-overlay><button type="button" class="gs-button gs-button--icon gs-button--text" data-upload-preview aria-label="预览图片">${gsIcon('browse')}</button><i class="gs-upload-divider" aria-hidden="true"></i><button type="button" class="gs-button gs-button--icon gs-button--text" data-upload-delete aria-label="删除图片">${gsIcon('delete')}</button></span><input class="upload-native-input" type="file" accept="image/*" data-upload-input aria-label="选择图片" />`;
+    uploadLiveMessage(image.closest('[data-upload-demo]'), `已选择图片 ${files[0].name}`);
+    return;
+  }
+  const panel = input.closest('.upload-list-panel');
+  if (panel && input.matches('[data-upload-list-input]')) {
+    const maxCount = getUploadMaxCount(panel);
+    let additions = [];
+    const body = panel.querySelector('[data-upload-list-body]');
+    if (body) {
+      const existingNames = new Set([...body.querySelectorAll('tr td:first-child')].map(cell => cell.textContent.trim()));
+      const currentCount = body.querySelectorAll('tr').length;
+      const available = Math.max(0, maxCount - (currentCount === 1 && body.querySelector('.upload-dropzone') ? 0 : currentCount));
+      additions = files.filter(file => !existingNames.has(file.name)).slice(0, available);
+      if (additions.length) {
+        if (body.querySelector('.upload-dropzone')) body.innerHTML = '';
+        body.insertAdjacentHTML('beforeend', additions.map(file => `<tr><td>${uploadFileNameMarkup(file.name)}</td><td>${Math.max(1, Math.round(file.size / 1024))}K</td><td>${uploadStatusMarkup('pending')}</td><td><a class="upload-file-action" href="#" data-upload-row-remove aria-label="删除${escapeHtml(file.name)}">删除</a></td></tr>`).join(''));
+      }
+    }
+    syncUploadListPanel(panel);
+    uploadLiveMessage(panel, additions.length < files.length ? `最多上传 ${maxCount} 个文件` : `已选择 ${files.length} 个文件`);
+    input.value = '';
+    return;
+  }
+  const field = input.closest('.upload-file-field');
+  if (field && input.matches('[data-upload-input]')) {
+    const display = field.querySelector('.upload-file-input');
+    const buttonState = field.closest('.upload-button-state-reference');
+    const state = field.closest('.upload-state');
+    if (buttonState && state) {
+      if (display) { display.textContent = files[0].name; display.classList.remove('is-placeholder'); }
+      const helper = state.querySelector(':scope > .upload-helper');
+      if (helper) { state.dataset.uploadHelper = helper.textContent; helper.remove(); }
+      state.classList.add('is-uploading');
+      startUploadButtonProgress(state, files[0].name);
+    } else {
+      renderInputUploadProgress(field, files[0].name);
+    }
+    uploadLiveMessage(field.closest('.upload-state'), `已选择文件 ${files[0].name}`);
+  }
+}
+function startUploadButtonProgress(state, fileName) {
+  if (!state) return;
+  if (state._uploadProgressTimer) clearInterval(state._uploadProgressTimer);
+  if (state._uploadProgressFinishTimer) clearTimeout(state._uploadProgressFinishTimer);
+  state._uploadProgressTimer = null;
+  state._uploadProgressFinishTimer = null;
+  state.classList.remove('is-success');
+  const fileState = state.querySelector('.upload-file-state');
+  const button = state.querySelector('.gs-upload-button');
+  if (!fileState || !button) return;
+  let progress = 0;
+  const renderProgress = () => {
+    fileState.querySelectorAll('.upload-file-state__row').forEach(row => row.remove());
+    const row = document.createElement('div');
+    row.className = 'upload-file-state__row';
+    row.innerHTML = `${uploadFileNameMarkup(fileName)}<span class="upload-file-input__status"><i class="gs-upload-spinner" aria-hidden="true"></i>${progress}%</span>`;
+    fileState.append(row);
+  };
+  const finish = () => {
+    state._uploadProgressTimer = null;
+    state._uploadProgressFinishTimer = null;
+    state.classList.remove('is-uploading');
+    state.classList.add('is-success');
+    button.innerHTML = `${gsIcon('upload', 'gs-upload-button__icon')}重新上传`;
+    fileState.querySelectorAll('.upload-file-state__row').forEach(row => row.remove());
+    const row = document.createElement('div');
+    row.className = 'upload-file-state__row';
+    row.innerHTML = `${uploadFileNameMarkup(fileName)}<button type="button" class="gs-button gs-button--icon gs-button--text upload-file-remove" data-upload-remove aria-label="删除文件">${gsIcon('closeCircleFilled', 'upload-file-remove__icon')}</button>`;
+    fileState.append(row);
+  };
+  renderProgress();
+  state._uploadProgressTimer = setInterval(() => {
+    progress = Math.min(100, progress + 10);
+    renderProgress();
+    if (progress >= 100) {
+      clearInterval(state._uploadProgressTimer);
+      state._uploadProgressTimer = null;
+      state._uploadProgressFinishTimer = setTimeout(finish, 180);
+    }
+  }, 100);
+}
+function handleUploadKeydown(event) {
+  if (event.key === 'Escape' && document.querySelector('[data-upload-preview-modal]')) { event.preventDefault(); closeUploadPreview(); return; }
+  const image = event.target.closest?.('[data-upload-image]');
+  if (image && image.classList.contains('is-empty') && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); image.click(); }
+}
+function initUploadListDemos(app) {
+  app.querySelectorAll('#上传列表 .upload-list-panel.upload-single-example').forEach(panel => {
+    const trigger = panel.querySelector('.upload-list-toolbar button');
+    if (!trigger || panel.querySelector('[data-upload-list-input]')) return;
+    trigger.setAttribute('data-upload-trigger', '');
+    const input = document.createElement('input');
+    input.className = 'upload-native-input';
+    input.type = 'file';
+    input.multiple = getUploadMaxCount(panel) > 1;
+    input.accept = '*/*';
+    input.setAttribute('data-upload-list-input', '');
+    input.setAttribute('aria-label', '选择多个文件');
+    panel.querySelector('tbody')?.setAttribute('data-upload-list-body', '');
+    panel.querySelector('.upload-list-actions button:first-child')?.setAttribute('data-upload-cancel', '');
+    panel.querySelector('.upload-list-actions button:last-child')?.setAttribute('data-upload-submit', '');
+    syncUploadListPanel(panel);
+    panel.append(input);
+  });
 }
 function handleTocClick(event) { const link=event.target.closest('a[data-section]'); if(!link) return; const section=document.getElementById(link.dataset.section); if(section){ event.preventDefault(); section.scrollIntoView({behavior:'smooth',block:'start'}); } }
 function handleTreeKeydown(event) { const item=event.target.closest('.gs-tree__item'); if(!item || event.target!==item) return; const tree=item.closest('[data-tree]'); const visible=visibleTreeItems(tree); const index=visible.indexOf(item); let target=null; if(event.key==='ArrowDown') target=visible[Math.min(index+1,visible.length-1)]; if(event.key==='ArrowUp') target=visible[Math.max(index-1,0)]; if(event.key==='Home') target=visible[0]; if(event.key==='End') target=visible[visible.length-1]; if(event.key==='ArrowRight'){ if(item.getAttribute('aria-expanded')==='false') item.setAttribute('aria-expanded','true'); else if(item.getAttribute('aria-expanded')==='true') target=directTreeChildren(item)[0]; } if(event.key==='ArrowLeft'){ if(item.getAttribute('aria-expanded')==='true') item.setAttribute('aria-expanded','false'); else target=item.parentElement?.closest('.gs-tree__item'); } if(event.key==='Enter' || event.key===' '){ activateTreeItem(item); event.preventDefault(); return; } if(target){ event.preventDefault(); focusTreeItem(target); } }
@@ -627,6 +1353,83 @@ function radioDemo(label, group, checked=false, disabled=false) {
 function checkboxDemo(label, attribute, checked=false, disabled=false) {
   return `<label class="gs-live-control gs-live-control--checkbox ${disabled?'is-disabled':''}"><input type="checkbox" ${attribute} ${checked?'checked':''} ${disabled?'disabled':''}><span class="gs-live-control__indicator" aria-hidden="true"></span><span>${label}</span></label>`;
 }
+function uploadPictureState({ state = 'empty', label, helper = '提示内容', interactive = false, disabled = false, showLabel = true } = {}) {
+  const isComplete = state === 'complete' || state === 'preview';
+  const stateLabel = label || ({ empty: '未上传', hover: '未上传悬停', uploading: '上传中', complete: '上传完成', preview: '上传悬停' }[state] || '图片上传');
+  const classes = ['gs-upload-image', `is-${state}`];
+  if (disabled) classes.push('is-disabled');
+  const input = interactive ? '<input class="upload-native-input" type="file" accept="image/*" data-upload-input aria-label="选择图片" />' : '';
+  const actions = interactive
+    ? `<span class="gs-upload-image__overlay" data-upload-overlay><button type="button" class="gs-button gs-button--icon gs-button--text" data-upload-preview aria-label="预览图片">${gsIcon('browse')}</button><i class="gs-upload-divider" aria-hidden="true"></i><button type="button" class="gs-button gs-button--icon gs-button--text" data-upload-delete aria-label="删除图片">${gsIcon('delete')}</button></span>`
+    : `<span class="gs-upload-image__overlay" data-upload-overlay aria-hidden="true"><span>${gsIcon('browse')}</span><i class="gs-upload-divider"></i><span>${gsIcon('delete')}</span></span>`;
+  const content = isComplete
+    ? `<img class="gs-upload-image__preview" src="${uploadSampleImage}" alt="已上传的图片示例" />${actions}${input}`
+    : state === 'uploading'
+      ? `<span class="gs-upload-image__content"><i class="gs-upload-spinner" aria-hidden="true"></i><span>上传中 40%</span></span>${input}`
+      : `<span class="gs-upload-image__content">${gsIcon('add', 'gs-upload-add-icon')}<span>点击上传图片</span></span>${input}`;
+  return `<div class="upload-state">${showLabel ? `<span class="upload-state__label">${stateLabel}</span>` : ''}<div class="${classes.join(' ')}"${interactive ? ' data-upload-image role="button" tabindex="0"' : ''}${disabled ? ' aria-disabled="true"' : ''}>${content}</div><p class="upload-helper${helper.includes('错误') ? ' is-error' : ''}">${helper}</p></div>`;
+}
+
+function uploadButtonState({ state = 'default', label, helper = '提示内容', interactive = false, disabled = false, showLabel = true, showFileRow = true, fileCount = 1 } = {}) {
+  const isSuccess = state === 'success';
+  const isError = state === 'error';
+  const isUploading = state === 'uploading';
+  const stateLabel = label || ({ default: '默认', uploading: '上传中', error: '上传异常', success: '上传成功' }[state] || '上传文件');
+  const actionLabel = isError || isSuccess ? '重新上传' : '上传文件';
+  const removeControl = interactive
+    ? `<button type="button" class="gs-button gs-button--icon gs-button--text upload-file-remove" data-upload-remove aria-label="删除文件">${gsIcon('closeCircleFilled', 'upload-file-remove__icon')}</button>`
+    : `<span class="gs-button gs-button--icon gs-button--text upload-file-remove" aria-hidden="true">${gsIcon('closeCircleFilled', 'upload-file-remove__icon')}</span>`;
+  const labelNode = showLabel ? `<span class="upload-state__label">${stateLabel}</span>` : '';
+  const fileRow = isUploading
+    ? '<div class="upload-file-state__row"><span class="upload-helper">文件名.jpg</span><span class="upload-file-input__status"><i class="gs-upload-spinner" aria-hidden="true"></i>40%</span></div>'
+    : isSuccess && showFileRow
+      ? Array.from({ length: Math.max(1, fileCount) }, () => `<div class="upload-file-state__row"><span class="upload-helper">文件名.jpg</span>${removeControl}</div>`).join('')
+      : isError && showFileRow ? `<div class="upload-file-state__row"><span class="upload-helper">文件名.jpg</span>${removeControl}</div>` : '';
+  const input = interactive ? '<input class="upload-native-input" type="file" data-upload-input aria-label="选择文件" />' : '';
+  const trigger = interactive ? ' data-upload-trigger' : '';
+  return `<div class="upload-state">${labelNode}<div class="upload-file-state"><div class="upload-file-field"><span class="upload-file-input${state === 'default' || disabled ? ' is-placeholder' : ''}${disabled ? ' is-disabled' : ''}">${state === 'default' || disabled ? '还未选择文件' : '文件名.jpg'}${isUploading ? '<span class="upload-file-input__status"><i class="gs-upload-spinner" aria-hidden="true"></i>40%</span>' : ''}${isSuccess ? '<span class="upload-file-input__status is-success">●</span>' : ''}${isError ? '<span class="upload-file-input__status is-error">●</span>' : ''}</span><button type="button" class="gs-button gs-button--secondary gs-upload-button"${trigger}${disabled ? ' disabled' : ''}>${gsIcon('upload', 'gs-upload-button__icon')}${actionLabel}</button>${input}</div>${fileRow}</div>${helper ? `<p class="upload-helper${isError ? ' is-error' : ''}">${isError ? '错误提示语，文字过多时宽度折行' : helper}</p>` : ''}</div>`;
+}
+
+function uploadInputState({ state = 'default', label, helper = '提示内容', interactive = false, disabled = false, showLabel = true } = {}) {
+  const isUploading = state === 'uploading';
+  const isSuccess = state === 'success';
+  const isError = state === 'error';
+  const stateLabel = label || ({ default: '未上传默认', uploading: '上传中', disabled: '禁用', success: '上传成功', error: '上传失败' }[state] || '输入上传');
+  const value = state === 'default' || state === 'disabled' ? '还未选择文件' : '文件名.jpg';
+  const input = interactive ? '<input class="upload-native-input" type="file" data-upload-input aria-label="选择文件" />' : '';
+  const status = isUploading ? '<span class="upload-file-input__status"><i class="gs-upload-spinner" aria-hidden="true"></i>40%</span>' : isSuccess ? `<span class="upload-file-input__status is-success">${gsIcon('uploadSuccess')}</span>` : isError ? `<span class="upload-file-input__status is-error">${gsIcon('closeCircleFilled')}</span>` : '';
+  const trigger = interactive ? ' data-upload-trigger' : '';
+  const removeAction = isSuccess || isError ? '<button type="button" class="gs-button gs-button--text-primary upload-input-remove" aria-hidden="true" tabindex="-1">删除</button>' : '';
+  return `<div class="upload-state upload-input-state is-${state}">${showLabel ? `<span class="upload-state__label">${stateLabel}</span>` : ''}<div class="upload-file-field"><span class="upload-file-input${value === '还未选择文件' ? ' is-placeholder' : ''}${disabled ? ' is-disabled' : ''}">${value}${status}</span><button type="button" class="gs-button gs-button--secondary gs-upload-button"${trigger}${disabled ? ' disabled' : ''}>${gsIcon('upload', 'gs-upload-button__icon')}${isSuccess || isError ? '重新上传' : '上传文件'}</button>${removeAction}${input}</div><p class="upload-helper${isError ? ' is-error' : ''}">${isError ? '错误提示语，文字过多时宽度折行' : helper}</p></div>`;
+}
+
+function uploadStatusMarkup(state = 'pending') {
+  const metadata = {
+    pending: { icon: 'upload-pending.svg', label: '待上传' },
+    success: { icon: 'upload-success.svg', label: '已上传' },
+    error: { icon: 'upload-error.svg', label: '异常/错误' },
+  }[state] || { icon: 'upload-pending.svg', label: '待上传' };
+  return `<span class="upload-table__status upload-table__status--${state}"><img src="assets/icons/${metadata.icon}" alt="" aria-hidden="true">${metadata.label}</span>`;
+}
+
+function uploadTableRows() {
+  return ['文件名.txt', '文件名.txt', '文件名.txt', '文件名.txt', '文件名.txt'].map((name, index) => `<tr><td>${name}</td><td>40K</td><td>${uploadStatusMarkup('pending')}</td><td><a class="upload-file-action" href="#" data-upload-row-remove aria-label="删除${name}第${index + 1}项">删除</a></td></tr>`).join('');
+}
+
+function uploadBody() {
+  return `<section id="图片上传"><h2>图片上传</h2><p>适合头像、封面和地图缩略图等图片场景。主示例支持选择图片、预览和删除；旁边保留一个禁用示例。</p><div class="demo-card upload-interactive-card" data-upload-demo><div class="upload-reference-grid"><div class="upload-reference-card"><h3>交互示例</h3>${uploadPictureState({ state: 'complete', interactive: true, helper: '支持 JPG、PNG，单张不超过 10MB' })}</div><div class="upload-reference-card"><h3>禁用示例</h3>${uploadPictureState({ state: 'empty', disabled: true, helper: '当前不可上传' })}</div></div><span class="upload-a11y-status" data-upload-live role="status" aria-live="polite"></span></div><div class="upload-reference-grid upload-static-reference"><div class="upload-reference-card"><h3>状态参考</h3><div class="upload-state-list">${uploadPictureState({ state: 'empty' })}${uploadPictureState({ state: 'hover' })}${uploadPictureState({ state: 'uploading' })}</div></div><div class="upload-reference-card"><h3>完成状态</h3><div class="upload-state-list">${uploadPictureState({ state: 'complete' })}${uploadPictureState({ state: 'preview' })}</div></div></div></section><section id="按钮上传"><h2>按钮上传</h2><p>用于文件选择和轻量上传操作。上传状态应在按钮附近呈现，异常时提供明确的重新上传入口。</p><div class="demo-card upload-reference-grid"><div class="upload-reference-card"><h3>单文件</h3><div class="upload-state-list">${uploadButtonState({ state: 'default', helper: '支持常见文件格式' })}${uploadButtonState({ state: 'uploading' })}</div></div><div class="upload-reference-card"><h3>结果状态</h3><div class="upload-state-list">${uploadButtonState({ state: 'error', helper: '错误提示语，文字过多时宽度折行' })}${uploadButtonState({ state: 'success' })}</div></div><div class="upload-reference-card"><h3>禁用</h3>${uploadButtonState({ state: 'default', disabled: true, helper: '提示内容' })}</div></div></section><section id="输入上传"><h2>输入上传</h2><p>将当前文件名作为输入框内容展示，适合表单上下文；状态信息位于输入框内部右侧。</p><div class="demo-card upload-reference-grid"><div class="upload-reference-card"><h3>默认与上传中</h3><div class="upload-state-list">${uploadInputState({ state: 'default' })}${uploadInputState({ state: 'uploading' })}</div></div><div class="upload-reference-card"><h3>成功与异常</h3><div class="upload-state-list">${uploadInputState({ state: 'success' })}${uploadInputState({ state: 'error', helper: '错误提示语，文字过多时宽度折行' })}</div></div><div class="upload-reference-card"><h3>禁用</h3>${uploadInputState({ state: 'disabled', disabled: true })}</div></div></section><section id="上传列表"><h2>上传列表</h2><p>批量上传使用表格表达文件名、大小、状态和操作，支持拖拽或点击选择文件。</p><div class="upload-list-layout"><div class="demo-card upload-list-panel"><div class="upload-list-toolbar"><button type="button" class="gs-button gs-button--secondary">选择文件</button><span class="upload-helper">支持批量上传文件，文件格式不限，最多只能上传 5 份文件</span></div><table class="upload-table" aria-label="空的上传列表"><thead><tr><th>文件名</th><th>大小</th><th>状态</th><th>操作</th></tr></thead><tbody><tr><td colspan="4"><div class="upload-dropzone"><span>点击上方“选择文件”或将文件拖拽到此区域</span></div></td></tr></tbody></table><div class="upload-list-actions"><button type="button" class="gs-button gs-button--secondary">取消上传</button><button type="button" class="gs-button" disabled>点击上传</button></div></div><div class="demo-card upload-list-panel"><div class="upload-list-toolbar"><button type="button" class="gs-button gs-button--secondary">选择文件</button><span class="upload-helper">支持批量上传文件，文件格式不限，最多只能上传 5 份文件</span></div><table class="upload-table" aria-label="待上传文件列表"><thead><tr><th>文件名</th><th>大小</th><th>状态</th><th>操作</th></tr></thead><tbody>${uploadTableRows().replaceAll(' data-upload-row-remove','')}</tbody></table><div class="upload-list-actions"><button type="button" class="gs-button gs-button--secondary">取消上传</button><button type="button" class="gs-button">点击上传</button></div></div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>按业务场景选择图片、按钮、输入框或列表式上传，不在一个控件中混合多种入口。</li><li>上传中阻止重复提交；失败时保留文件名并提供“重新上传”，成功时提供预览或删除。</li><li>提示语说明文件类型、大小和数量限制；限制校验应在选择后立即反馈。</li><li>批量上传使用表格保持列对齐，状态同时使用文字和语义色表达。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>图片选择区域提供按钮语义、可见焦点和键盘触发能力。</li><li>查看、删除、重新上传和取消上传均使用真实按钮或链接并提供可理解名称。</li><li>状态变化写入 <code>aria-live="polite"</code>，不只依赖颜色或动画。</li></ul></section><section id="API"><h2>API</h2><div class="api-table upload-api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>type</code><span>picture | button | input | list</span><span>上传外观，默认 button</span></div><div><code>fileList</code><span>UploadFile[]</span><span>受控文件列表</span></div><div><code>accept</code><span>string</span><span>原生文件类型筛选</span></div><div><code>multiple</code><span>boolean</span><span>是否允许选择多个文件</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>maxCount</code><span>number</span><span>最大文件数量</span></div><div><code>onChange</code><span>(info) =&gt; void</span><span>选择、进度或状态变化时触发</span></div><div><code>onPreview</code><span>(file) =&gt; void</span><span>点击图片预览时触发</span></div><div><code>onRemove</code><span>(file) =&gt; boolean | Promise&lt;boolean&gt;</span><span>删除前回调</span></div></div></section>`;
+}
+
+function uploadBodyCompact({ maxCount = 5 } = {}) {
+  const safeMaxCount = Number.isFinite(Number(maxCount)) && Number(maxCount) > 0 ? Math.floor(Number(maxCount)) : 5;
+  const picture = uploadPictureState({ state: 'empty', interactive: true, showLabel: false, helper: '额外提示语，文字过多时宽度折行' });
+  const pictureDisabled = uploadPictureState({ state: 'empty', disabled: true, showLabel: false, helper: '当前不可上传' });
+  const buttonStates = uploadButtonState({ state: 'default', helper: '额外提示语，文字过多时宽度折行', interactive: true, showLabel: false });
+  const inputExample = uploadInputState({ state: 'default', interactive: true, showLabel: false });
+  const emptyList = '<tr><td colspan="4"><div class="upload-dropzone"><span>点击上方“选择文件”或将文件拖拽到此区域</span></div></td></tr>';
+  return `<section id="图片上传"><h2>图片上传</h2><p>适合头像、封面和地图缩略图等图片场景。这里仅展示一个完整交互示例，状态会在操作过程中反馈。</p><div class="demo-card upload-interactive-card" data-upload-demo><div class="upload-reference-grid"><div class="upload-reference-card"><h3>示例</h3>${picture}</div><div class="upload-reference-card"><h3>禁用示例</h3>${pictureDisabled}</div></div><span class="upload-a11y-status" data-upload-live role="status" aria-live="polite"></span></div></section><section id="按钮上传"><h2>按钮上传</h2><p>适合单个文件或轻量上传操作；状态信息和操作入口保持垂直排列。</p><div class="upload-button-state-reference">${buttonStates}</div></section><section id="输入上传"><h2>输入上传</h2><p>适合表单上下文，将当前文件名作为输入框内容展示；状态由真实业务反馈驱动。</p><div class="demo-card upload-single-example"><div class="upload-reference-card"><h3>示例</h3>${inputExample}</div></div></section><section id="上传列表"><h2>上传列表</h2><p>适合批量文件上传；默认展示空拖拽区，使用一张表格表达文件名、大小、状态和操作。</p><div class="demo-card upload-list-panel upload-single-example" data-upload-max-count="${safeMaxCount}"><div class="upload-list-toolbar"><button type="button" class="gs-button gs-button--secondary">选择文件</button><span class="upload-helper">支持批量上传文件，文件格式不限，最多只能上传 ${safeMaxCount} 份文件</span></div><table class="upload-table" aria-label="上传文件列表"><thead><tr><th>文件名</th><th>大小</th><th>状态</th><th>操作</th></tr></thead><tbody>${emptyList}</tbody></table><div class="upload-list-actions"><button type="button" class="gs-button gs-button--secondary">取消上传</button><button type="button" class="gs-button" disabled>点击上传</button></div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>按业务场景选择图片、按钮、输入框或列表式上传，每种类型只提供一个主要示例。</li><li>上传中阻止重复提交；失败时保留文件名并提供“重新上传”，成功时提供预览或删除。</li><li>提示语说明文件类型、大小和数量限制；限制校验应在选择后立即反馈。</li><li>批量上传使用表格保持列对齐，状态同时使用文字和语义色表达。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>图片选择区域提供按钮语义、可见焦点和键盘触发能力。</li><li>查看、删除、重新上传和取消上传均使用真实按钮或链接并提供可理解名称。</li><li>状态变化写入 <code>aria-live="polite"</code>，不只依赖颜色或动画。</li></ul></section><section id="API"><h2>API</h2><div class="api-table upload-api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>type</code><span>picture | button | input | list</span><span>上传外观，默认 button</span></div><div><code>fileList</code><span>UploadFile[]</span><span>受控文件列表</span></div><div><code>accept</code><span>string</span><span>原生文件类型筛选</span></div><div><code>multiple</code><span>boolean</span><span>是否允许多个文件</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>maxCount</code><span>number</span><span>最大文件数量</span></div><div><code>onChange</code><span>(info) =&gt; void</span><span>选择、进度或状态变化时触发</span></div><div><code>onPreview</code><span>(file) =&gt; void</span><span>点击图片预览时触发</span></div><div><code>onRemove</code><span>(file) =&gt; boolean | Promise&lt;boolean&gt;</span><span>删除前回调</span></div></div></section>`;
+}
+
 function switchBody() {
   const states = [['默认', ''], ['悬停', 'is-hover'], ['按下', 'is-pressed'], ['禁用', 'is-disabled']];
   const column = (title, tone, active=false) => `<div class="switch-spec-col"><span class="switch-spec-col__title">${title}</span>${states.map(([,state])=>switchTrack(tone, `${active?'is-on ':''}${state}`)).join('')}</div>`;
@@ -788,6 +1591,19 @@ function pickerCascaderExample() {
 function pickerBody() {
   return `<section id="单选框"><h2>单选框</h2><p>从互斥选项中选择一个值，点击后展开候选浮层。</p><div class="demo-card gs-picker-card"><div class="gs-picker-grid">${pickerSingleExample({ id: 'picker-single', value: '请选择' })}</div></div></section><section id="多选框"><h2>多选框</h2><p>从多个选项中选择多个值；已选项以标签展示，可继续打开浮层增删选项。</p><div class="demo-card gs-picker-card"><div class="gs-picker-grid">${pickerMultiExample({ id: 'picker-multi' })}</div></div></section><section id="级联选框"><h2>级联选框</h2><p>按父子层级逐级选择；选择父级后展示对应的下一级选项。</p><div class="demo-card gs-picker-card"><div class="gs-picker-grid">${pickerCascaderExample()}</div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>选项较少且需要明确选择时使用 Select；互斥选项很少时可直接使用 Radio。</li><li>单选器默认显示占位提示，选择后显示已选内容；多选器保留已选标签并允许继续修改。</li><li>禁用状态不可打开浮层，禁用选项不能被选择。</li><li>级联选框只用于真实的父子层级，选项名称保持同级粒度一致。</li><li>浮层与触发器保持同一层级，选择后保留当前值。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>触发器使用 button 与 aria-haspopup、aria-expanded、aria-controls。</li><li>候选项使用 role=option 和 aria-selected，禁用项使用原生 disabled。</li><li>多选标签的移除按钮提供独立 accessible name；选择状态不只依赖颜色。</li><li>支持 Enter/Space 打开或切换，Escape 关闭，方向键在候选项之间移动。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>options</code><span>Option[]</span><span>单选或多选候选项</span></div><div><code>mode</code><span>single | multiple</span><span>选择模式，默认 single</span></div><div><code>value</code><span>string | string[]</span><span>当前选中值</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用选择器</span></div><div><code>prefix</code><span>node</span><span>可选的前置图标</span></div><div><code>cascader</code><span>boolean</span><span>是否启用级联层级选择</span></div><div><code>onChange</code><span>(value) =&gt; void</span><span>选项变化时触发</span></div></div></section>`;
 }
+function colorPickerSwatch(color, label, alpha = false) {
+  return `<button type="button" class="gs-color-picker__swatch${alpha ? ' gs-color-picker__swatch--alpha' : ''}" style="--gs-swatch-color:${color}" data-color-swatch="${color}" aria-label="选择${label}"></button>`;
+}
+function colorPickerFormatSelect() {
+  return `<div class="gs-select-wrap gs-color-picker__format-select" data-picker="color-format"><button type="button" class="gs-select" data-picker-trigger aria-haspopup="listbox" aria-expanded="false" aria-controls="color-format-popup"><span class="gs-select__value is-selected" data-color-format-label>CSS</span>${selectChevron()}</button><div id="color-format-popup" class="gs-select-popup" data-picker-popup role="listbox" hidden>${pickerOption('CSS', { value: 'css', selected: true })}${pickerOption('HEX', { value: 'hex' })}${pickerOption('RGB', { value: 'rgb' })}</div><select class="gs-color-picker__select" data-color-format aria-hidden="true" tabindex="-1"><option value="css">CSS</option><option value="hex">HEX</option><option value="rgb">RGB</option></select></div>`;
+}
+function colorPickerBody() {
+  const recent = [['#009BFF', '蓝色'], ['#85DBBE', '半透明青色'], ['#00A870', '绿色'], ['#F8B996', '半透明橙色'], ['#DF4ED9', '紫色'], ['#E53574', '粉色']];
+  const recentMarkup = recent.map(([color, label], index) => colorPickerSwatch(color, label, index === 1 || index === 3)).join('');
+  const commonControls = ({modeTabs = false, gradient = false, recentMarkup = ''} = {}) => `<div class="gs-color-picker__commit-actions"><button type="button" class="gs-color-picker__commit-button gs-color-picker__commit-button--clear" data-color-action="clear" aria-label="清除颜色">×</button><button type="button" class="gs-color-picker__commit-button gs-color-picker__commit-button--confirm" data-color-action="confirm" aria-label="确定颜色">✓</button></div>${modeTabs ? `<div class="gs-color-picker__mode" role="tablist" aria-label="颜色模式"><button type="button" class="gs-color-picker__mode-button${gradient ? '' : ' is-selected'}" role="tab" aria-selected="${gradient ? 'false' : 'true'}" data-color-mode="solid">单色</button><button type="button" class="gs-color-picker__mode-button${gradient ? ' is-selected' : ''}" role="tab" aria-selected="${gradient ? 'true' : 'false'}" data-color-mode="gradient">渐变</button></div>` : ''}<div class="gs-color-picker__gradient-angle"${gradient ? '' : ' hidden'}><input class="gs-color-picker__range gs-color-picker__range--gradient" type="range" min="0" max="360" value="70" data-color-angle aria-label="渐变角度"><input class="gs-color-picker__angle-value" type="number" min="0" max="360" value="70" data-color-angle-text aria-label="渐变角度数值"></div><div class="gs-color-picker__saturation" data-color-saturation role="slider" tabindex="0" aria-label="饱和度和明度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><span class="gs-color-picker__saturation-marker" aria-hidden="true"></span></div><div class="gs-color-picker__controls"><div class="gs-color-picker__slider-stack"><input class="gs-color-picker__range gs-color-picker__range--hue" type="range" min="0" max="360" value="210" data-color-hue aria-label="色相"><input class="gs-color-picker__range gs-color-picker__range--alpha" type="range" min="0" max="1" step="0.01" value="1" data-color-alpha aria-label="透明度"></div><span class="gs-color-picker__preview" data-color-preview aria-hidden="true"></span></div><div class="gs-color-picker__format">${colorPickerFormatSelect()}<input class="gs-color-picker__text" data-color-value type="text" value="rgba(24,144,255,1)" aria-label="颜色值"><input class="gs-color-picker__alpha" data-color-alpha-text type="text" value="100" inputmode="decimal" aria-label="透明度百分比"></div>${recentMarkup ? `<div class="gs-color-picker__section"><span class="gs-color-picker__section-title">最近使用色彩</span><div class="gs-color-picker__swatches">${recentMarkup}</div></div>` : ''}<div class="gs-color-picker__live" data-color-live aria-live="polite"></div>`;
+  const panel = ({label, modeTabs = false, gradient = false, withManagement = false} = {}) => `<div class="gs-color-picker-card"><span class="gs-color-picker-card__label">${label}</span><div class="gs-color-picker${gradient ? ' gs-color-picker--gradient' : ''}" data-color-picker data-mode="${gradient ? 'gradient' : 'solid'}" data-hue="210" data-saturation="100" data-lightness="55" data-alpha="1" data-color-angle="70">${commonControls({modeTabs, gradient, recentMarkup: withManagement ? recentMarkup : ''})}</div></div>`;
+  return `<section id="常规单色颜色选择器"><h2>常规单色颜色选择器</h2><p>用于选择单一颜色，不包含模式切换、最近使用色或系统预设色管理。</p><div class="demo-card gs-color-picker-demo gs-color-picker-demo--single">${panel({label: '交互示例'})}</div></section><section id="单色渐变切换颜色选择器"><h2>单色 / 渐变切换的颜色选择器</h2><p>用于需要在单色与渐变之间切换的场景；以下展示同一组件的单色态与渐变态。</p><div class="demo-card gs-color-picker-demo gs-color-picker-demo--variants">${panel({label: '单色', modeTabs: true, withManagement: true})}${panel({label: '渐变', modeTabs: true, gradient: true, withManagement: true})}</div></section><section id="使用规则"><h2>使用规则</h2><ul><li>常规单色颜色选择器用于只允许单色值的属性，如纯色填充、边框和文字。</li><li>单色 / 渐变切换的颜色选择器只用于产品明确支持两种输出类型的属性。</li><li>最近使用色属于可选能力，仅在需要复用色板时开启。</li><li>透明度和渐变角度必须与颜色值一起保存，不能只保存视觉预览。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>色板使用 slider 语义并支持 Tab、方向键操作；色相、透明度和渐变角度使用原生 range。</li><li>颜色格式、颜色值、透明度和角度输入均提供可理解的辅助名称。</li><li>颜色不能单独承担业务语义；产品界面应同时提供文字、图标或其他可识别信息。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>组件</b><b>属性</b><b>说明</b></div><div><code>ColorPicker</code><span>value</span><span>单色颜色值，默认 CSS 格式</span></div><div><code>ColorPicker</code><span>alpha</span><span>透明度，范围 0–1</span></div><div><code>ColorPicker</code><span>format</span><span>css | hex | rgb</span></div><div><code>ColorPickerSwitch</code><span>mode</span><span>solid | gradient</span></div><div><code>ColorPickerSwitch</code><span>angle</span><span>渐变角度，范围 0–360</span></div><div><code>ColorPickerSwitch</code><span>recentColors</span><span>可选的最近色列表</span></div><div><code>onChange</code><span>(value) =&gt; void</span><span>颜色、透明度、模式或角度变化时触发</span></div></div></section>`;
+}
 function dtpTrigger(id, kind='date', value='', disabled=false, initialOpen=false) {
   const icon = kind === 'time' ? 'clock' : 'calendar';
   const popup = kind === 'time' ? dtpTimePopup(id, value) : kind === 'year' ? dtpYearPopup(id) : dtpDatePopup(id, value);
@@ -817,8 +1633,42 @@ function dtpTimePopup(id, selectedValue='') {
   const middleCycle = Math.floor(cycleCount / 2);
   return `<div id="${id}-popup" class="gs-dtp-popover gs-dtp-time-popover" data-dtp-popup role="dialog" aria-label="选择时间" hidden><div class="gs-dtp-time-columns">${columns.map(([kind, values],columnIndex)=>`<div class="gs-dtp-time-column" data-dtp-column="${kind}"><div class="gs-dtp-time-wheel" data-dtp-time-wheel data-dtp-time-initial="${selected[columnIndex]}" data-dtp-middle-cycle="${middleCycle}" role="listbox" aria-label="${kind === 'hour' ? '小时' : kind === 'minute' ? '分钟' : '秒'}" tabindex="0">${Array.from({length:cycleCount},(_,cycle)=>values.map(v=>`<span class="gs-dtp-time-item${cycle===middleCycle&&v===selected[columnIndex]?' is-in-slot':''}" data-dtp-time-item data-dtp-time-cycle="${cycle}" data-dtp-value="${v}" role="option" aria-selected="${cycle===middleCycle&&v===selected[columnIndex]}">${v}</span>`).join('')).join('')}</div></div>`).join('')}</div><div class="gs-dtp-popover__footer gs-dtp-time-footer"><button type="button" class="gs-button gs-button--text-primary" data-dtp-action="now">现在</button><button type="button" class="gs-button gs-button--secondary" data-dtp-action="cancel">取消</button><button type="button" class="gs-button" data-dtp-action="confirm">确认</button></div></div>`;
 }
-function dtpDatePopup(id, selectedDate = '') { const {year,month}=calendarMonthFromValue(selectedDate); return `<div id="${id}-popup" class="gs-dtp-popover gs-dtp-popover--calendar" data-dtp-popup data-dtp-calendar-year="${year}" data-dtp-calendar-month="${month}" data-dtp-calendar-selected="${escapeHtml(selectedDate)}" role="dialog" aria-label="选择日期" hidden><div class="gs-dtp-calendar__head"><button type="button" class="gs-dtp-nav" data-dtp-nav="prev" aria-label="上个月">${dateNavIcon('prev')}</button><strong data-dtp-calendar-title>${year}年${month}月</strong><button type="button" class="gs-dtp-nav" data-dtp-nav="next" aria-label="下个月">${dateNavIcon('next')}</button></div><div class="gs-dtp-weekdays">${['日','一','二','三','四','五','六'].map(x=>`<span>${x}</span>`).join('')}</div><div class="gs-dtp-calendar-grid" data-dtp-calendar-grid>${dtpCalendarCells(year,month,selectedDate)}</div><div class="gs-dtp-popover__footer"><button type="button" class="gs-dtp-action gs-dtp-action--quiet" data-dtp-action>取消</button><button type="button" class="gs-dtp-action" data-dtp-action>确定</button></div></div>`; }
-function dtpYearPopup(id) { return `<div id="${id}-popup" class="gs-dtp-popover" data-dtp-popup role="dialog" aria-label="选择年份" hidden><div class="gs-dtp-calendar__head"><button type="button" class="gs-dtp-nav" data-dtp-nav="prev" aria-label="上一组年份">${dateNavIcon('prev')}</button><strong>选择年份</strong><button type="button" class="gs-dtp-nav" data-dtp-nav="next" aria-label="下一组年份">${dateNavIcon('next')}</button></div><div class="gs-dtp-year-grid">${Array.from({length:12},(_,i)=>2024+i).map(y=>`<button type="button" class="gs-dtp-option${y===2026?' is-current':''}" data-dtp-option data-dtp-value="${y}">${y}</button>`).join('')}</div><div class="gs-dtp-popover__footer"><button type="button" class="gs-dtp-action gs-dtp-action--quiet" data-dtp-action>取消</button><button type="button" class="gs-dtp-action" data-dtp-action>确定</button></div></div>`; }
+function dtpDatePopup(id, selectedDate = '') { const {year,month}=calendarMonthFromValue(selectedDate); return `<div id="${id}-popup" class="gs-dtp-popover gs-dtp-popover--calendar" data-dtp-popup data-dtp-calendar-year="${year}" data-dtp-calendar-month="${month}" data-dtp-calendar-selected="${escapeHtml(selectedDate)}" role="dialog" aria-label="选择日期" hidden><div class="gs-dtp-calendar__head"><button type="button" class="gs-dtp-nav" data-dtp-nav="prev-year" aria-label="上一年">${dateNavIcon('prevYear')}</button><button type="button" class="gs-dtp-nav" data-dtp-nav="prev" aria-label="上个月">${dateNavIcon('prev')}</button><strong data-dtp-calendar-title>${year}年${month}月</strong><button type="button" class="gs-dtp-nav" data-dtp-nav="next" aria-label="下个月">${dateNavIcon('next')}</button><button type="button" class="gs-dtp-nav" data-dtp-nav="next-year" aria-label="下一年">${dateNavIcon('nextYear')}</button></div><div class="gs-dtp-weekdays">${['日','一','二','三','四','五','六'].map(x=>`<span>${x}</span>`).join('')}</div><div class="gs-dtp-calendar-grid" data-dtp-calendar-grid>${dtpCalendarCells(year,month,selectedDate)}</div><div class="gs-dtp-popover__footer"><button type="button" class="gs-dtp-action gs-dtp-action--quiet" data-dtp-action>取消</button><button type="button" class="gs-dtp-action" data-dtp-action>确定</button></div></div>`; }
+function rangeDateOption(date, inMonth, start, end) {
+  const value = formatCalendarDate(date);
+  const selected = value === start || value === end;
+  const between = Boolean(start && end && value > start && value < end);
+  const classes = ['gs-dtp-range-option'];
+  if (!inMonth) classes.push('is-outside');
+  if (selected) classes.push('is-current');
+  if (value === start) classes.push('is-range-start');
+  if (value === end) classes.push('is-range-end');
+  if (between) classes.push('is-range-between');
+  return `<button type="button" class="${classes.join(' ')}" data-dtp-range-option data-dtp-range-value="${value}"${inMonth ? '' : ' disabled aria-disabled="true"'}>${date.getDate()}</button>`;
+}
+function dtpRangeCalendarPanel(year, month, start, end, index) {
+  const nav = direction => `<button type="button" class="gs-dtp-nav" data-dtp-range-nav="${direction}" aria-label="${direction.includes('prev') ? '向前' : '向后'}${direction.includes('year') ? '一年' : '一个月'}">${dateNavIcon(direction === 'prev-year' ? 'prevYear' : direction === 'prev' ? 'prev' : direction === 'next-year' ? 'nextYear' : 'next')}</button>`;
+  return `<section class="gs-dtp-range-panel" data-dtp-range-panel="${index}"><div class="gs-dtp-range-head">${nav('prev-year')}${nav('prev')}<strong>${year} 年 ${month} 月</strong>${nav('next')}${nav('next-year')}</div><div class="gs-dtp-range-weekdays">${['日','一','二','三','四','五','六'].map(day => `<span>${day}</span>`).join('')}</div><div class="gs-dtp-range-calendar-grid">${calendarCells(year, month, (date, inMonth) => rangeDateOption(date, inMonth, start, end))}</div></section>`;
+}
+function dtpDateRangePopup(id, startValue = '', endValue = '') {
+  const view = calendarMonthFromValue(startValue || endValue);
+  const next = new Date(view.year, view.month, 1);
+  const nextYear = next.getFullYear();
+  const nextMonth = next.getMonth() + 1;
+  const hidden = ' hidden';
+  return `<div id="${id}-range-popup" class="gs-dtp-range-popover" data-dtp-range-popup data-dtp-range-start="${escapeHtml(startValue)}" data-dtp-range-end="${escapeHtml(endValue)}" data-dtp-range-year="${view.year}" data-dtp-range-month="${view.month}" data-dtp-range-left-year="${view.year}" data-dtp-range-left-month="${view.month}" data-dtp-range-right-year="${nextYear}" data-dtp-range-right-month="${nextMonth}" role="dialog" aria-label="选择日期范围"${hidden}><div class="gs-dtp-range-panels" data-dtp-range-panels>${dtpRangeCalendarPanel(view.year, view.month, startValue, endValue, 0)}${dtpRangeCalendarPanel(nextYear, nextMonth, startValue, endValue, 1)}</div><div class="gs-dtp-popover__footer gs-dtp-range-footer"><span class="gs-dtp-range-footer-actions"><button type="button" class="gs-button gs-button--secondary" data-dtp-range-action="cancel">取消</button><button type="button" class="gs-button" data-dtp-range-action="confirm">确认</button></span></div></div>`;
+}
+function dtpDateRangeTrigger(id, startValue = '', endValue = '', disabled = false) {
+  const start = startValue || '请选择日期';
+  const end = endValue || '请选择日期';
+  return `<div class="gs-dtp-range-field${disabled ? ' is-disabled' : ''}" data-dtp-range-field data-dtp-range-start="${escapeHtml(startValue)}" data-dtp-range-end="${escapeHtml(endValue)}"><button type="button" class="gs-dtp-range-trigger${disabled ? ' is-disabled' : ''}" data-dtp-range-trigger aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}-range-popup"${disabled ? ' disabled aria-disabled="true"' : ''}><span class="gs-dtp-range-value${startValue ? '' : ' is-placeholder'}" data-dtp-range-value="start">${escapeHtml(start)}</span><span class="gs-dtp-range-separator" aria-hidden="true">—</span><span class="gs-dtp-range-value${endValue ? '' : ' is-placeholder'}" data-dtp-range-value="end">${escapeHtml(end)}</span><span class="gs-dtp-range-icon" aria-hidden="true">${gsIcon('calendar')}</span></button>${dtpDateRangePopup(id, startValue, endValue)}</div>`;
+}
+function dateRangePickerSection() {
+  return `<section id="日期区间联动选择"><h2>日期区间联动选择</h2><p>选择日期范围，左右面板联动展示相邻月份；选择起止日期后高亮范围。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-range-demo">${dtpExample('交互示例',dtpDateRangeTrigger('dtp-date-range-single'))}${dtpExample('禁用示例',dtpDateRangeTrigger('dtp-date-range-disabled-single','2026-07-20','2026-08-29',true))}</div></div></section>`;
+}
+function yearGroupOptions(start, selected) { return Array.from({length:12},(_,index)=>start+index).map(year=>`<button type="button" class="gs-dtp-option${year===selected?' is-current':''}" data-dtp-option data-dtp-value="${year}">${year}</button>`).join(''); }
+function renderYearGroup(popup, start) { if(!popup) return; const groupStart=Number(start)||2024; const selected=Number(popup.dataset.dtpYearSelected); const title=popup.querySelector('[data-dtp-year-title]'); const grid=popup.querySelector('[data-dtp-year-grid]'); if(title) title.textContent=`${groupStart} - ${groupStart+11}`; if(grid) grid.innerHTML=yearGroupOptions(groupStart,Number.isFinite(selected)?selected:2026); popup.dataset.dtpYearStart=String(groupStart); }
+function dtpYearPopup(id) { const start=2024; return `<div id="${id}-popup" class="gs-dtp-popover gs-dtp-year-popover" data-dtp-popup data-dtp-year-start="${start}" data-dtp-year-selected="2026" role="dialog" aria-label="选择年份" hidden><div class="gs-dtp-calendar__head"><button type="button" class="gs-dtp-nav" data-dtp-nav="prev" aria-label="上一组年份">${dateNavIcon('prevYear')}</button><strong data-dtp-year-title>${start} - ${start+11}</strong><button type="button" class="gs-dtp-nav" data-dtp-nav="next" aria-label="下一组年份">${dateNavIcon('nextYear')}</button></div><div class="gs-dtp-year-grid" data-dtp-year-grid>${yearGroupOptions(start,2026)}</div><div class="gs-dtp-popover__footer"><button type="button" class="gs-dtp-action gs-dtp-action--quiet" data-dtp-action>取消</button><button type="button" class="gs-dtp-action" data-dtp-action>确定</button></div></div>`; }
 function dtpExample(label, content) { return `<div class="gs-dtp-example"><span class="gs-dtp-example__label">${label}</span>${content}</div>`; }
 function dateTimePickerBody() { return `<section id="时间选择"><h2>时间选择</h2><p>选择一天中的时间，支持默认、激活与禁用状态。</p><div class="demo-card gs-dtp-card gs-dtp-time-card"><div class="gs-dtp-state-list"><div class="gs-dtp-state-row" data-dtp-state="default"><span class="gs-dtp-state-label">未选择默认</span>${dtpTrigger('dtp-time-default','time')}</div><div class="gs-dtp-state-row" data-dtp-state="hover"><span class="gs-dtp-state-label">未选择悬停</span>${dtpTrigger('dtp-time-hover','time')}</div><div class="gs-dtp-state-row is-active" data-dtp-state="active"><span class="gs-dtp-state-label">激活选择框</span>${dtpTrigger('dtp-time-active','time','14:45:31',false,true)}</div><div class="gs-dtp-state-row is-disabled" data-dtp-state="disabled"><span class="gs-dtp-state-label">禁用选择</span>${dtpTrigger('dtp-time-disabled','time','14:45:31',true)}</div></div></div></section><section id="日期加时间选择"><h2>日期加时间选择</h2><p>日期与时间可独立选择，适用于起止时间等结构化场景。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-grid"><div class="gs-dtp-example"><span class="gs-dtp-example__label">交互示例</span><div class="gs-dtp-range">${dtpTrigger('dtp-range-date','date')}<span class="gs-dtp-range__separator">至</span>${dtpTrigger('dtp-range-time','time')}</div></div><div class="gs-dtp-example"><span class="gs-dtp-example__label">禁用示例</span><div class="gs-dtp-range">${dtpTrigger('dtp-range-date-disabled','date','2026-08-13',true)}<span class="gs-dtp-range__separator">至</span>${dtpTrigger('dtp-range-time-disabled','time','18:30',true)}</div></div></div></div></section><section id="日期选择"><h2>日期选择</h2><p>选择具体日期，浮层中的日期网格与输入框保持同一交互区域。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-grid">${dtpExample('交互示例',dtpTrigger('dtp-date','date'))}${dtpExample('禁用示例',dtpTrigger('dtp-date-disabled','date','2026-08-13',true))}</div></div></section><section id="年份选择"><h2>年份选择</h2><p>选择年份，适用于年度筛选与统计口径设置。</p><div class="demo-card gs-dtp-card"><div class="gs-dtp-grid">${dtpExample('交互示例',dtpTrigger('dtp-year','year'))}${dtpExample('禁用示例',dtpTrigger('dtp-year-disabled','year','2026',true))}</div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>时间、日期与日期时间范围使用对应类型，避免让用户手动输入格式。</li><li>激活后显示浮层，选择后回填值并关闭；点击外部区域也会关闭浮层。</li><li>禁用状态不可打开、不可选择，且不产生悬停与按下反馈。</li><li>日期范围的起止值应保持清晰的先后关系，并提供可读的格式提示。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>type</code><span>time | date | datetime | year</span><span>选择器类型</span></div><div><code>value</code><span>string | Date</span><span>当前值</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>range</code><span>boolean</span><span>是否启用范围选择</span></div><div><code>onChange</code><span>(value) =&gt; void</span><span>值变化时触发</span></div></div></section>`; }
 function dateTimePickerBodySingle() {
@@ -1023,7 +1873,7 @@ function syncTimeWheels(field, behavior = 'auto') {
 function handleTimeWheelScroll(event) {
   const wheel = event.target.closest?.('[data-dtp-time-wheel]');
   if (!wheel) return;
-  const field = wheel.closest('[data-dtp-field]');
+  const field = wheel.closest('[data-dtp-field],[data-dtp-datetime-field]');
   if (wheel._dtpIsSnapping) {
     if (!wheel._dtpScrollFrame) wheel._dtpScrollFrame = requestAnimationFrame(() => {
       wheel._dtpScrollFrame = 0;
@@ -1053,8 +1903,19 @@ function setDateTimeActivePart(field, part = 'start') {
   field.dataset.dtpDatetimeActivePart = part;
   field.querySelectorAll('[data-dtp-datetime-segment]').forEach(segment => segment.classList.toggle('is-active', segment.dataset.dtpDatetimeSegment === part));
 }
-function closeDateTimePicker(field) { if(!field) return; field.querySelectorAll('[data-dtp-popup],[data-dtp-datetime-popup]').forEach(p=>p.hidden=true); field.querySelectorAll('[data-dtp-trigger],[data-dtp-datetime-trigger]').forEach(t=>{t.setAttribute('aria-expanded','false');t.classList.remove('is-active');}); field.querySelectorAll('[data-dtp-datetime-segment]').forEach(segment=>segment.classList.remove('is-active')); field.classList.remove('is-open'); }
-function closeAllDateTimePickers(except=null) { document.querySelectorAll('[data-dtp-field],[data-dtp-datetime-field]').forEach(f=>{ if(f!==except) closeDateTimePicker(f); }); }
+function closeDateTimePicker(field) { if(!field) return; field.querySelectorAll('[data-dtp-popup],[data-dtp-datetime-popup],[data-dtp-range-popup]').forEach(p=>p.hidden=true); field.querySelectorAll('[data-dtp-trigger],[data-dtp-datetime-trigger],[data-dtp-range-trigger]').forEach(t=>{t.setAttribute('aria-expanded','false');t.classList.remove('is-active');}); field.querySelectorAll('[data-dtp-datetime-segment]').forEach(segment=>segment.classList.remove('is-active')); field.classList.remove('is-open'); }
+function closeAllDateTimePickers(except=null) { document.querySelectorAll('[data-dtp-field],[data-dtp-datetime-field],[data-dtp-range-field]').forEach(f=>{ if(f!==except) closeDateTimePicker(f); }); }
+function openDateRangePicker(field) { if (!field || field.classList.contains('is-disabled')) return; closeAllDateTimePickers(field); const trigger=field.querySelector('[data-dtp-range-trigger]'); const popup=field.querySelector('[data-dtp-range-popup]'); if(!trigger||!popup) return; popup.hidden=false; trigger.setAttribute('aria-expanded','true'); trigger.classList.add('is-active'); field.classList.add('is-open'); }
+function keepDateRangePickerOpen(field) {
+  if (!field || field.classList.contains('is-disabled')) return;
+  const trigger = field.querySelector('[data-dtp-range-trigger]');
+  const popup = field.querySelector('[data-dtp-range-popup]');
+  if (!trigger || !popup) return;
+  popup.hidden = false;
+  trigger.setAttribute('aria-expanded', 'true');
+  trigger.classList.add('is-active');
+  field.classList.add('is-open');
+}
 function dateTimePartElement(field, part) { return field?.querySelector(`[data-dtp-datetime-value="${part}"]`); }
 function dateTimePartText(field, part) { return dateTimePartElement(field, part)?.textContent.trim() || ''; }
 function dateTimeValueOrFallback(field, part) {
@@ -1106,7 +1967,87 @@ function openDateTimePicker(field) {
   field.classList.add('is-open');
   requestAnimationFrame(() => syncTimeWheels(field));
 }
+function updateDateRangeField(field, start, end) {
+  if (!field) return;
+  field.dataset.dtpRangeStart = start || '';
+  field.dataset.dtpRangeEnd = end || '';
+  const popup = field.querySelector('[data-dtp-range-popup]');
+  if (popup) { popup.dataset.dtpRangeStart = start || ''; popup.dataset.dtpRangeEnd = end || ''; }
+  [['start', start, '请选择日期'], ['end', end, '请选择日期']].forEach(([part, value, placeholder]) => {
+    const node = field.querySelector(`[data-dtp-range-value="${part}"]`);
+    if (!node) return;
+    node.textContent = value || placeholder;
+    node.classList.toggle('is-placeholder', !value);
+  });
+}
+function renderDateRangeCalendars(popup) {
+  if (!popup) return;
+  const leftYear = Number(popup.dataset.dtpRangeLeftYear || popup.dataset.dtpRangeYear);
+  const leftMonth = Number(popup.dataset.dtpRangeLeftMonth || popup.dataset.dtpRangeMonth);
+  const rightYear = Number(popup.dataset.dtpRangeRightYear);
+  const rightMonth = Number(popup.dataset.dtpRangeRightMonth);
+  const start = popup.dataset.dtpRangeStart || '';
+  const end = popup.dataset.dtpRangeEnd || '';
+  const right = Number.isFinite(rightYear) && Number.isFinite(rightMonth) ? { year: rightYear, month: rightMonth } : (() => { const next = new Date(leftYear, leftMonth, 1); return { year: next.getFullYear(), month: next.getMonth() + 1 }; })();
+  const panels = popup.querySelector('[data-dtp-range-panels]');
+  if (panels) panels.innerHTML = `${dtpRangeCalendarPanel(leftYear, leftMonth, start, end, 0)}${dtpRangeCalendarPanel(right.year, right.month, start, end, 1)}`;
+}
+function setDateRangeMonth(popup, delta, panelIndex = 0) {
+  if (!popup) return;
+  const side = panelIndex === 1 ? 'Right' : 'Left';
+  const yearKey = `dtpRange${side}Year`;
+  const monthKey = `dtpRange${side}Month`;
+  const current = new Date(Number(popup.dataset[yearKey]), Number(popup.dataset[monthKey]) - 1 + delta, 1);
+  popup.dataset[yearKey] = String(current.getFullYear());
+  popup.dataset[monthKey] = String(current.getMonth() + 1);
+  if (panelIndex === 0) { popup.dataset.dtpRangeYear = popup.dataset[yearKey]; popup.dataset.dtpRangeMonth = popup.dataset[monthKey]; }
+  renderDateRangeCalendars(popup);
+}
 function handleDateTimeClick(event) {
+  const rangeTrigger = event.target.closest('[data-dtp-range-trigger]');
+  if (rangeTrigger) {
+    if (rangeTrigger.disabled) return true;
+    const field = rangeTrigger.closest('[data-dtp-range-field]');
+    const popup = field?.querySelector('[data-dtp-range-popup]');
+    if (popup?.hidden) openDateRangePicker(field); else closeDateTimePicker(field);
+    event.preventDefault();
+    return true;
+  }
+  const rangeOption = event.target.closest('[data-dtp-range-option]');
+  if (rangeOption) {
+    if (rangeOption.disabled) return true;
+    const field = rangeOption.closest('[data-dtp-range-field]');
+    const popup = field?.querySelector('[data-dtp-range-popup]');
+    if (!field || !popup) return true;
+    const value = rangeOption.dataset.dtpRangeValue;
+    let start = popup.dataset.dtpRangeStart || '';
+    let end = popup.dataset.dtpRangeEnd || '';
+    if (!start || end) { start = value; end = ''; }
+    else if (value < start) { end = start; start = value; }
+    else { end = value; }
+    updateDateRangeField(field, start, end);
+    renderDateRangeCalendars(popup);
+    keepDateRangePickerOpen(field);
+    event.preventDefault();
+    event.stopPropagation();
+    return true;
+  }
+  const rangeNav = event.target.closest('[data-dtp-range-nav]');
+  if (rangeNav) {
+    const popup = rangeNav.closest('[data-dtp-range-popup]');
+    const field = rangeNav.closest('[data-dtp-range-field]');
+    const panelIndex = Number(rangeNav.closest('[data-dtp-range-panel]')?.dataset.dtpRangePanel) || 0;
+    setDateRangeMonth(popup, rangeNav.dataset.dtpRangeNav === 'prev-year' ? -12 : rangeNav.dataset.dtpRangeNav === 'next-year' ? 12 : rangeNav.dataset.dtpRangeNav === 'prev' ? -1 : 1, panelIndex);
+    if (field) keepDateRangePickerOpen(field);
+    event.preventDefault();
+    event.stopPropagation();
+    return true;
+  }
+  const rangeAction = event.target.closest('[data-dtp-range-action]');
+  if (rangeAction) {
+    closeDateTimePicker(rangeAction.closest('[data-dtp-range-field]'));
+    return true;
+  }
   const datetimeSegment = event.target.closest('[data-dtp-datetime-segment]');
   if (datetimeSegment) {
     const field = datetimeSegment.closest('[data-dtp-datetime-field]');
@@ -1165,6 +2106,7 @@ function handleDateTimeClick(event) {
       if (target) { target.textContent = `${date} ${time}`; target.classList.remove('is-placeholder'); }
       const popup = field?.querySelector('[data-dtp-datetime-popup]');
       if (popup) syncDateTimePopupToPart(field, activePart);
+      return true;
     }
     closeDateTimePicker(field);
     return true;
@@ -1220,6 +2162,14 @@ function handleDateTimeClick(event) {
       if (popup) popup.dataset.dtpCalendarSelected = option.dataset.dtpValue || option.textContent.trim();
       return true;
     }
+    if (field?.dataset.dtpKind === 'year') {
+      field.querySelectorAll('[data-dtp-option].is-current').forEach(item => item.classList.remove('is-current'));
+      option.classList.add('is-current');
+      if (value) { value.textContent = option.dataset.dtpValue || option.textContent.trim(); value.classList.remove('is-placeholder'); }
+      const popup = field.querySelector('[data-dtp-popup]');
+      if (popup) popup.dataset.dtpYearSelected = option.dataset.dtpValue || option.textContent.trim();
+      return true;
+    }
     if (value) { value.textContent = option.dataset.dtpValue || option.textContent.trim(); value.classList.remove('is-placeholder'); }
     closeDateTimePicker(field);
     return true;
@@ -1232,7 +2182,8 @@ function handleDateTimeClick(event) {
       const value = field.querySelector('[data-dtp-value]');
       if (value) { value.textContent = today; value.classList.remove('is-placeholder'); }
       const popup = field.querySelector('[data-dtp-popup]');
-      if (popup) { popup.dataset.dtpCalendarSelected = today; const [year, month] = today.split('-').map(Number); popup.dataset.dtpCalendarYear = String(year); popup.dataset.dtpCalendarMonth = String(month); setCalendarMonth(popup, 0, true); }
+      if (popup) { popup.dataset.dtpCalendarSelected = today; const [year, month] = today.split('-').map(Number); popup.dataset.dtpCalendarYear = String(year); popup.dataset.dtpCalendarMonth = String(month); setCalendarMonth(popup, 0, false); }
+      return true;
     }
     if (action.dataset.dtpAction === 'now' && field?.dataset.dtpKind === 'time') {
       const value = field.querySelector('[data-dtp-value]');
@@ -1246,15 +2197,20 @@ function handleDateTimeClick(event) {
   const nav = event.target.closest('[data-dtp-nav]');
   if (nav) {
     const popup = nav.closest('[data-dtp-popup]');
-    if (popup?.dataset.dtpCalendarYear) setCalendarMonth(popup, nav.dataset.dtpNav === 'prev' ? -1 : 1);
+    if (popup?.dataset.dtpYearStart) {
+      const currentStart = Number(popup.dataset.dtpYearStart) || 2024;
+      renderYearGroup(popup, currentStart + (nav.dataset.dtpNav === 'prev' ? -12 : 12));
+    } else if (popup?.dataset.dtpCalendarYear) {
+      setCalendarMonth(popup, nav.dataset.dtpNav === 'prev-year' ? -12 : nav.dataset.dtpNav === 'next-year' ? 12 : nav.dataset.dtpNav === 'prev' ? -1 : 1);
+    }
     event.preventDefault();
     return true;
   }
   return false;
 }
-function handleDateTimeOutsideClick(event) { if(!event.target.closest('[data-dtp-field],[data-dtp-datetime-field]')) closeAllDateTimePickers(); }
+function handleDateTimeOutsideClick(event) { if(!event.target.closest('[data-dtp-field],[data-dtp-datetime-field],[data-dtp-range-field]')) closeAllDateTimePickers(); }
 function handleDateTimeKeydown(event) {
-  const field = event.target.closest('[data-dtp-field],[data-dtp-datetime-field]');
+  const field = event.target.closest('[data-dtp-field],[data-dtp-datetime-field],[data-dtp-range-field]');
   if (!field) return;
   const wheel = event.target.closest('[data-dtp-time-wheel]');
   if (wheel && ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(event.key)) {
@@ -1273,6 +2229,6 @@ function handleDateTimeKeydown(event) {
 function placeholder(label) { return { crumb: label, title: label, lead: '该组件正在按照 GeoShare Web UI 规范建设中。', toc: ['组件状态', '后续内容'], body: `<section id="组件状态"><h2>组件状态</h2><div class="component-empty"><span>✦</span><b>即将上线</b><p>完成后将提供组件用途、交互规则、状态、可运行示例与 API 文档。</p></div></section><section id="后续内容"><h2>后续内容</h2><p>如果当前项目需要此组件，请按基础规范先完成业务实现，并将通用能力回收至组件库。</p></section>` }; }
 function getPage() { const hash=location.hash || '#/guide/intro'; if(pageData[hash]) return pageData[hash]; const item=navigation.flatMap(x=>x[1]).find(x=>x[1]===hash); return placeholder(item?.[0] || '页面未找到'); }
 function renderNav() { document.querySelector('#side-nav').innerHTML=navigation.map(([group,items])=>`<section><p>${group}</p>${items.map(([label,href])=>`<a href="${href}" data-href="${href}">${label}</a>`).join('')}</section>`).join(''); }
-function render() { const page=getPage(); const shell=document.querySelector('#article-shell').content.cloneNode(true); shell.querySelector('.breadcrumb').innerHTML=page.crumb; shell.querySelector('h1').textContent=page.title; shell.querySelector('.lead').textContent=page.lead; const articleBody=shell.querySelector('.article-body'); articleBody.innerHTML=location.hash === '#/components/date-time-picker' ? dateTimePickerBodySingle() : page.body; if (location.hash === '#/components/date-time-picker') { const dateSection=articleBody.querySelector('#日期选择'); const datetimeSection=articleBody.querySelector('#日期加时间选择'); if (dateSection && datetimeSection) datetimeSection.before(dateSection); } const app=document.querySelector('#app'); app.replaceChildren(shell); document.querySelectorAll('[data-href]').forEach(a=>a.classList.toggle('active',a.dataset.href===(location.hash||'#/guide/intro'))); document.querySelector('#page-toc').innerHTML=`<p>本页目录</p>${page.toc.map(x=>`<a href="${location.hash || '#/guide/intro'}" data-section="${x}">${x}</a>`).join('')}`; initComponentDemos(app); app.focus({preventScroll:true}); }
+function render() { const page=getPage(); const shell=document.querySelector('#article-shell').content.cloneNode(true); shell.querySelector('.breadcrumb').innerHTML=page.crumb; shell.querySelector('h1').textContent=page.title; shell.querySelector('.lead').textContent=page.lead; const articleBody=shell.querySelector('.article-body'); articleBody.innerHTML=location.hash === '#/components/date-time-picker' ? dateTimePickerBodySingle() : page.body; if (location.hash === '#/components/date-time-picker') { const dateSection=articleBody.querySelector('#日期选择'); const datetimeSection=articleBody.querySelector('#日期加时间选择'); if (dateSection && datetimeSection) datetimeSection.before(dateSection); const yearSection=articleBody.querySelector('#年份选择'); if (yearSection) yearSection.before(document.createRange().createContextualFragment(dateRangePickerSection()).firstElementChild); } const app=document.querySelector('#app'); app.replaceChildren(shell); document.querySelectorAll('[data-href]').forEach(a=>a.classList.toggle('active',a.dataset.href===(location.hash||'#/guide/intro'))); document.querySelector('#page-toc').innerHTML=`<p>本页目录</p>${page.toc.map(x=>`<a href="${location.hash || '#/guide/intro'}" data-section="${x}">${x}</a>`).join('')}`; initComponentDemos(app); app.focus({preventScroll:true}); }
 function search(query) { const q=query.trim().toLowerCase(); document.querySelectorAll('#side-nav a').forEach(a=>{ a.hidden=Boolean(q && !a.textContent.toLowerCase().includes(q)); }); document.querySelectorAll('#side-nav section').forEach(section=>{ section.hidden=Boolean(q && !section.querySelector('a:not([hidden])')); }); }
-renderNav(); render(); const appRoot=document.querySelector('#app'); appRoot.addEventListener('click',handleComponentClick); appRoot.addEventListener('click',handleInputClick); appRoot.addEventListener('click',handleSearchClick); appRoot.addEventListener('change',handleControlChange); appRoot.addEventListener('input',handleNumericInput); appRoot.addEventListener('input',handleInputAffordances); appRoot.addEventListener('input',handleSearchInput); appRoot.addEventListener('pointerdown',handleSearchPointerDown); appRoot.addEventListener('pointerup',handleSearchPointerEnd); appRoot.addEventListener('pointercancel',handleSearchPointerEnd); appRoot.addEventListener('focusin',handleSearchFocus); appRoot.addEventListener('focusout',handleSearchFocus); appRoot.addEventListener('keydown',handleSearchKeydown); appRoot.addEventListener('keydown',handleInputKeydown); appRoot.addEventListener('keydown',handleTagKeydown); appRoot.addEventListener('keydown',handleTreeKeydown); appRoot.addEventListener('keydown',handlePickerKeydown); appRoot.addEventListener('keydown',handleDateTimeKeydown); appRoot.addEventListener('scroll',handleTimeWheelScroll,true); document.addEventListener('click',handlePickerOutsideClick); document.addEventListener('click',handleDateTimeOutsideClick); document.querySelector('#page-toc').addEventListener('click',handleTocClick); addEventListener('hashchange',render); document.querySelector('#search-input').addEventListener('input',e=>search(e.target.value)); addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();document.querySelector('#search-input').focus();}});
+renderNav(); render(); const appRoot=document.querySelector('#app'); appRoot.addEventListener('click',handleComponentClick); appRoot.addEventListener('click',handleInputClick); appRoot.addEventListener('click',handleSearchClick); appRoot.addEventListener('change',handleControlChange); appRoot.addEventListener('change',handleUploadChange); appRoot.addEventListener('change',handleColorPickerChange); appRoot.addEventListener('input',handleSliderInput); appRoot.addEventListener('input',handleNumericInput); appRoot.addEventListener('input',handleInputAffordances); appRoot.addEventListener('input',handleSearchInput); appRoot.addEventListener('input',handleColorPickerInput); appRoot.addEventListener('pointerdown',handleSearchPointerDown); appRoot.addEventListener('pointerdown',handleColorPickerPointerDown); appRoot.addEventListener('pointermove',handleColorPickerPointerMove); appRoot.addEventListener('pointerup',handleSearchPointerEnd); appRoot.addEventListener('pointerup',handleColorPickerPointerUp); appRoot.addEventListener('pointercancel',handleSearchPointerEnd); appRoot.addEventListener('pointercancel',handleColorPickerPointerUp); appRoot.addEventListener('focusin',handleSearchFocus); appRoot.addEventListener('focusout',handleSearchFocus); appRoot.addEventListener('focusout',handleColorPickerFocusOut); appRoot.addEventListener('focusin',handleSliderFocus); appRoot.addEventListener('focusout',handleSliderFocus); appRoot.addEventListener('keydown',handleSearchKeydown); appRoot.addEventListener('keydown',handleInputKeydown); appRoot.addEventListener('keydown',handleTagKeydown); appRoot.addEventListener('keydown',handleTreeKeydown); appRoot.addEventListener('keydown',handlePickerKeydown); appRoot.addEventListener('keydown',handleColorPickerKeydown); appRoot.addEventListener('keydown',handleDateTimeKeydown); appRoot.addEventListener('keydown',handleUploadKeydown); appRoot.addEventListener('scroll',handleTimeWheelScroll,true); document.addEventListener('pointerdown',handleSliderPointerDown); document.addEventListener('pointermove',handleSliderPointerMove); document.addEventListener('pointerup',handleSliderPointerUp); document.addEventListener('pointercancel',handleSliderPointerUp); document.addEventListener('click',handlePickerOutsideClick); document.addEventListener('click',handleDateTimeOutsideClick); document.querySelector('#page-toc').addEventListener('click',handleTocClick); addEventListener('hashchange',render); document.querySelector('#search-input').addEventListener('input',e=>search(e.target.value)); addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();document.querySelector('#search-input').focus();}});

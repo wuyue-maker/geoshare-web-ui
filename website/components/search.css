@@ -12,9 +12,9 @@
 .gs-search-field>input::-webkit-search-cancel-button{display:none;-webkit-appearance:none}
 .gs-search-field:hover{border-color:var(--gs-primary-2)}
 .gs-search-field:focus-within,.gs-search-field.is-active{border-color:var(--gs-primary-2);box-shadow:0 0 0 2px color-mix(in srgb,var(--gs-primary-2) 20%,transparent)}
-.gs-search-icon{display:block;flex:0 0 16px;width:16px;height:16px}
+.gs-search-icon{display:block;flex:0 0 16px;width:16px;height:16px;color:inherit}
 .gs-search-icon--leading{display:none}
-.gs-search-icon--trailing{color:var(--gs-text-tertiary)}
+.gs-search-icon--trailing{color:var(--gs-neutral-4)}
 .gs-search-field.is-active .gs-search-icon--leading{display:block;color:var(--gs-primary-2)}
 .gs-search-field.is-active .gs-search-icon--trailing{display:none}
 .gs-search-clear[hidden]{display:none}

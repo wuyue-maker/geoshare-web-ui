@@ -8,8 +8,8 @@
 .gs-dtp-trigger.is-active{border-color:var(--gs-primary-2);box-shadow:0 0 0 3px var(--gs-primary-5)}
 .gs-dtp-trigger:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:2px}
 .gs-dtp-trigger:disabled,.gs-dtp-trigger.is-disabled{background:var(--gs-neutral-7);color:var(--gs-text-tertiary);border-color:var(--gs-neutral-6);cursor:not-allowed}
-.gs-dtp-trigger__icon{width:16px;height:16px;display:inline-flex;flex:none;margin-left:auto;color:var(--gs-text-tertiary)}
-.gs-dtp-trigger__icon .gs-icon{width:16px;height:16px}
+.gs-dtp-trigger__icon{width:16px;height:16px;display:inline-flex;flex:none;margin-left:auto;color:var(--gs-neutral-4)}
+.gs-dtp-trigger__icon .gs-icon{width:16px;height:16px;color:inherit}
 .gs-dtp-trigger__icon--end{margin-left:auto}
 .gs-dtp-trigger__value{min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gs-dtp-trigger__value.is-placeholder{color:var(--gs-text-tertiary)}
@@ -25,8 +25,8 @@
 .gs-dtp-option:disabled{color:var(--gs-text-disabled,var(--gs-text-tertiary));cursor:not-allowed}
 .gs-dtp-calendar__head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;color:var(--gs-text-primary)}
 .gs-dtp-calendar__head strong{font-size:14px;font-weight:500}
-.gs-dtp-nav{appearance:none;box-sizing:border-box;width:32px;height:32px;min-width:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:var(--gs-radius-sm);background:transparent;color:var(--gs-text-secondary);cursor:pointer;transition:background-color .16s,border-color .16s,color .16s}
-.gs-dtp-nav .gs-figma-date-nav-icon{display:block;width:20px;height:20px;flex:none;color:inherit}
+.gs-dtp-nav{appearance:none;box-sizing:border-box;width:32px;height:32px;min-width:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:var(--gs-radius-sm);background:transparent;color:var(--gs-neutral-3);cursor:pointer;transition:background-color .16s,border-color .16s,color .16s}
+.gs-dtp-nav .gs-icon{display:block;width:20px;height:20px;flex:none;overflow:visible;color:inherit}
 .gs-dtp-nav:hover{background:transparent;border-color:transparent;color:var(--gs-primary-2)}
 .gs-dtp-nav:active{background:transparent;border-color:transparent;color:var(--gs-primary-1)}
 .gs-dtp-nav:disabled{background:transparent;border-color:transparent;color:var(--gs-text-tertiary);cursor:not-allowed}
@@ -47,7 +47,50 @@
 .gs-dtp-action:focus-visible,.gs-dtp-nav:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:2px}
 .gs-dtp-range{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px}
 .gs-dtp-range__separator{color:var(--gs-text-tertiary);font-size:14px}
+.gs-dtp-range-demo{display:grid;grid-template-columns:1fr;gap:24px}
+.gs-dtp-range-field{position:relative;width:400px;max-width:100%;min-width:0}
+.gs-dtp-range-trigger{box-sizing:border-box;width:100%;height:32px;min-height:32px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--gs-neutral-6);border-radius:var(--gs-radius-sm);background:var(--gs-neutral-9);color:var(--gs-text-primary);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.gs-dtp-range-trigger:hover:not(:disabled),.gs-dtp-range-trigger.is-active{border-color:var(--gs-primary-2)}
+.gs-dtp-range-trigger.is-active{box-shadow:0 0 0 3px var(--gs-primary-5)}
+.gs-dtp-range-trigger:focus-visible{outline:2px solid var(--gs-primary-3);outline-offset:2px}
+.gs-dtp-range-trigger:disabled,.gs-dtp-range-trigger.is-disabled{background:var(--gs-neutral-7);color:var(--gs-text-tertiary);border-color:var(--gs-neutral-6);cursor:not-allowed;box-shadow:none}
+.gs-dtp-range-value{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-dtp-range-value.is-placeholder{color:var(--gs-text-tertiary)}
+.gs-dtp-range-separator{color:var(--gs-text-secondary);text-align:center}
+.gs-dtp-range-icon{width:16px;height:16px;display:inline-flex;color:var(--gs-neutral-4)}
+.gs-dtp-range-icon .gs-icon{width:16px;height:16px;color:inherit}
+.gs-dtp-range-field.is-open{z-index:50}
+.gs-dtp-range-popover{position:absolute;z-index:1100;top:calc(100% + 8px);left:0;width:720px;max-width:calc(100vw - 32px);box-sizing:border-box;padding:8px;background:var(--gs-neutral-9);border-radius:var(--gs-radius-md);box-shadow:var(--gs-shadow-lg)}
+.gs-dtp-range-popover[hidden]{display:none}
+.gs-dtp-range-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.gs-dtp-range-panel{min-width:0;padding:0 8px}
+.gs-dtp-range-panel + .gs-dtp-range-panel{border-left:1px solid var(--gs-neutral-6);padding-left:24px}
+.gs-dtp-range-head{box-sizing:border-box;display:flex;height:40px;align-items:center;justify-content:space-between;gap:4px;margin-bottom:8px;color:var(--gs-text-primary)}
+.gs-dtp-range-head strong{flex:1;color:var(--gs-text-secondary);text-align:center;font-size:16px;line-height:24px;font-weight:500;white-space:nowrap}
+.gs-dtp-range-head .gs-dtp-nav{width:32px;height:32px;min-width:32px}
+.gs-dtp-range-weekdays,.gs-dtp-range-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px 0;text-align:center}
+.gs-dtp-range-weekdays{margin-bottom:6px;color:var(--gs-text-secondary);font-size:14px;line-height:22px}
+.gs-dtp-range-option{position:relative;box-sizing:border-box;width:100%;height:24px;min-height:24px;padding:1px 0;border:0;border-radius:3px;background:transparent;color:var(--gs-text-secondary);font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif;text-align:center;cursor:pointer;z-index:1}
+.gs-dtp-range-option.is-range-between{background:var(--gs-primary-6);border-radius:0}
+.gs-dtp-range-option.is-range-start,.gs-dtp-range-option.is-range-end{background:var(--gs-primary-2);color:#fff;border-radius:var(--gs-radius-sm)}
+.gs-dtp-range-option.is-range-start.is-range-end{border-radius:var(--gs-radius-sm)}
+.gs-dtp-range-option.is-outside{color:var(--gs-text-tertiary)}
+.gs-dtp-range-option:hover:not(:disabled):not(.is-current){background:var(--gs-neutral-8);color:var(--gs-primary-2)}
+.gs-dtp-range-option.is-current:hover:not(:disabled){background:var(--gs-primary-2);color:#fff}
+.gs-dtp-range-option:disabled{color:var(--gs-text-tertiary);cursor:not-allowed}
+.gs-dtp-section-suffix{color:var(--gs-text-tertiary);font-weight:400}
+.gs-dtp-range-footer{justify-content:flex-end;margin-top:8px;padding-top:8px}
+.gs-dtp-range-footer-actions{display:flex;align-items:center;gap:8px}
+.gs-dtp-range-footer .gs-button{box-sizing:border-box;width:64px;min-width:64px;height:32px;padding:0 8px}
+.gs-dtp-calendar__head{height:40px;margin-bottom:0;padding:4px 8px 0;box-sizing:border-box}
+.gs-dtp-calendar__head strong{font-size:16px;line-height:24px}
+.gs-dtp-weekdays{margin:8px 0 6px;font-size:14px;line-height:22px}
+.gs-dtp-weekdays,.gs-dtp-calendar-grid{gap:6px 0}
+.gs-dtp-calendar-grid .gs-dtp-option{height:24px;min-height:24px;padding:1px 0;font-size:14px;line-height:22px}
+.gs-dtp-range-weekdays{margin:8px 0 6px}
+.gs-dtp-range-head{margin-bottom:0}
 @media (max-width:780px){.gs-dtp-grid{grid-template-columns:1fr}.gs-dtp-range{grid-template-columns:1fr}.gs-dtp-range__separator{display:none}}
+@media (max-width:780px){.gs-dtp-range-popover{width:calc(100vw - 32px);max-width:calc(100vw - 32px);padding:8px}.gs-dtp-range-panels{grid-template-columns:1fr;gap:12px}.gs-dtp-range-panel + .gs-dtp-range-panel{border-left:0;border-top:1px solid var(--gs-neutral-6);padding:12px 8px 0}}
 
 /* 时间选择：按 Figma 的状态行与三列滚轮面板呈现 */
 .gs-dtp-time-card{position:relative;z-index:1;overflow:visible;padding:24px 24px 32px}
@@ -100,8 +143,8 @@
 .gs-dtp-datetime__value{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gs-dtp-datetime__value.is-placeholder{color:var(--gs-text-tertiary)}
 .gs-dtp-datetime__separator{color:var(--gs-text-secondary);text-align:center}
-.gs-dtp-datetime__icon{width:16px;height:16px;display:inline-flex;color:var(--gs-text-tertiary)}
-.gs-dtp-datetime__icon .gs-icon{width:16px;height:16px}
+.gs-dtp-datetime__icon{width:16px;height:16px;display:inline-flex;color:var(--gs-neutral-4)}
+.gs-dtp-datetime__icon .gs-icon{width:16px;height:16px;color:inherit}
 .gs-dtp-datetime-popover{position:absolute;top:calc(100% + 8px);left:0;width:520px;max-width:calc(100vw - 32px);padding:8px;z-index:1100;box-sizing:border-box;border-radius:8px;box-shadow:0 0 8px rgba(20,23,26,.1)}
 .gs-dtp-datetime-panels{display:grid;grid-template-columns:280px minmax(0,1fr);align-items:stretch;gap:0}
 .gs-dtp-datetime-date-panel{min-width:0}
@@ -133,3 +176,39 @@
 .gs-dtp-datetime-time-item{display:grid;place-items:center;height:24px;color:var(--gs-text-secondary);font-size:14px;line-height:22px;scroll-snap-align:center;cursor:pointer;opacity:.72;transform:scale(.96);transition:color .18s ease,opacity .18s ease,transform .18s ease}
 .gs-dtp-datetime-time-item.is-in-slot{color:var(--gs-primary-2);opacity:1;transform:scale(1)}
 @media(max-width:780px){.gs-dtp-datetime-field{width:100%}.gs-dtp-datetime-popover{width:calc(100vw - 32px);max-width:calc(100vw - 32px);padding:16px}.gs-dtp-datetime-panels{grid-template-columns:1fr;gap:16px}.gs-dtp-datetime-time-panel{border-left:0;border-top:1px solid var(--gs-neutral-7);padding:16px 0 0}}
+
+/* 日期网格统一规范：单日期、日期时间与日期区间共用同一面板节奏。 */
+.gs-dtp-popover--calendar{box-sizing:border-box;width:296px;min-width:296px;padding:8px}
+.gs-dtp-datetime-date-panel,.gs-dtp-range-panel{box-sizing:border-box;width:280px}
+.gs-dtp-year-popover{box-sizing:border-box;width:100%;padding:8px 8px 16px}
+.gs-dtp-year-popover .gs-dtp-year-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gs-dtp-year-popover .gs-dtp-option{box-sizing:border-box;width:100%;height:40px;min-height:40px;padding:9px 8px;line-height:22px}
+.gs-dtp-year-popover .gs-dtp-option.is-current{background:var(--gs-primary-2);color:#fff}
+.gs-dtp-year-popover .gs-dtp-option:hover:not(:disabled):not(.is-current){background:var(--gs-neutral-8);color:var(--gs-primary-2)}
+.gs-dtp-year-popover .gs-dtp-option.is-current:hover:not(:disabled){background:var(--gs-primary-2);color:#fff}
+.gs-dtp-year-popover .gs-dtp-popover__footer{margin-top:8px;padding-top:8px}
+.gs-dtp-year-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gs-dtp-datetime-date-body,.gs-dtp-datetime-time-columns{height:210px}
+.gs-dtp-datetime-time-column{height:210px}
+.gs-dtp-datetime-time-wheel{padding-top:93px;padding-bottom:93px;scroll-padding-block:93px}
+.gs-dtp-range-popover{box-sizing:border-box;width:592px;padding:8px}
+.gs-dtp-range-panels{position:relative;display:grid;grid-template-columns:repeat(2,280px);align-items:stretch;column-gap:16px;row-gap:0}
+.article-body .gs-dtp-range-panels > .gs-dtp-range-panel{margin-top:0;scroll-margin-top:0}
+.gs-dtp-range-panel{position:relative;display:flex;flex-direction:column;min-height:250px;padding:0}
+.gs-dtp-range-panel + .gs-dtp-range-panel{box-sizing:border-box;border-left:0;padding-left:0}
+.gs-dtp-range-panel + .gs-dtp-range-panel::before{content:"";position:absolute;top:0;bottom:0;left:-8px;border-left:1px solid var(--gs-neutral-6)}
+.gs-dtp-calendar__head,.gs-dtp-datetime-date-head,.gs-dtp-range-head{box-sizing:border-box;height:40px;display:flex;align-items:center;justify-content:space-between;gap:4px;margin:0;padding:4px 8px;color:var(--gs-text-primary)}
+.gs-dtp-calendar__head strong,.gs-dtp-datetime-date-head strong,.gs-dtp-range-head strong{display:block;flex:1;color:var(--gs-text-secondary);text-align:center;font-size:16px;line-height:24px;font-weight:500;white-space:nowrap}
+.gs-dtp-calendar__head .gs-dtp-nav,.gs-dtp-datetime-date-head .gs-dtp-nav,.gs-dtp-range-head .gs-dtp-nav{width:32px;height:32px;min-width:32px;padding:0}
+.gs-dtp-weekdays,.gs-dtp-calendar-grid,.gs-dtp-datetime-weekdays,.gs-dtp-datetime-calendar,.gs-dtp-range-weekdays,.gs-dtp-range-calendar-grid{display:grid;grid-template-columns:repeat(7,24px);justify-content:space-between;padding:0 8px;text-align:center}
+.gs-dtp-weekdays,.gs-dtp-datetime-weekdays,.gs-dtp-range-weekdays{margin:8px 0 6px;color:var(--gs-text-secondary);font-size:14px;line-height:22px}
+.gs-dtp-calendar-grid,.gs-dtp-datetime-calendar,.gs-dtp-range-calendar-grid{gap:6px 0}
+.gs-dtp-calendar-grid .gs-dtp-option,.gs-dtp-datetime-option,.gs-dtp-range-option{box-sizing:border-box;width:24px;height:24px;min-height:24px;padding:1px;border:0;border-radius:3px;font:400 14px/22px "Alibaba PuHuiTi 3","PingFang SC","Microsoft YaHei",sans-serif}
+.gs-dtp-calendar-grid .gs-dtp-option.is-current,.gs-dtp-datetime-option.is-current,.gs-dtp-range-option.is-range-start,.gs-dtp-range-option.is-range-end{background:var(--gs-primary-2);color:#fff}
+.gs-dtp-calendar-grid .gs-dtp-option:hover:not(:disabled):not(.is-current),.gs-dtp-datetime-option:hover:not(:disabled):not(.is-current),.gs-dtp-range-option:hover:not(:disabled):not(.is-current):not(.is-range-between){background:var(--gs-neutral-8);color:var(--gs-primary-2)}
+.gs-dtp-calendar-grid .gs-dtp-option.is-current:hover:not(:disabled),.gs-dtp-datetime-option.is-current:hover:not(:disabled),.gs-dtp-range-option.is-current:hover:not(:disabled){background:var(--gs-primary-2);color:#fff}
+.gs-dtp-range-option.is-range-between:hover:not(:disabled){background:var(--gs-primary-6);color:var(--gs-text-secondary)}
+.gs-dtp-range-option.is-range-between{box-shadow:8px 0 0 var(--gs-primary-6),-8px 0 0 var(--gs-primary-6)}
+.gs-dtp-range-option.is-range-start:not(.is-range-end){box-shadow:8px 0 0 var(--gs-primary-6)}
+.gs-dtp-range-option.is-range-end:not(.is-range-start){box-shadow:-8px 0 0 var(--gs-primary-6)}
+@media (max-width:780px){.gs-dtp-popover--calendar{width:100%;min-width:0}.gs-dtp-datetime-date-panel{width:100%}.gs-dtp-range-popover{width:calc(100vw - 32px);max-width:calc(100vw - 32px)}.gs-dtp-range-panels{grid-template-columns:1fr;gap:12px}.gs-dtp-range-panel,.gs-dtp-range-panel + .gs-dtp-range-panel{width:100%;padding:0 8px}.gs-dtp-range-panel + .gs-dtp-range-panel{padding-top:12px;border-left:0;border-top:1px solid var(--gs-neutral-6)}.gs-dtp-range-panel + .gs-dtp-range-panel::before{display:none}.gs-dtp-weekdays,.gs-dtp-calendar-grid,.gs-dtp-datetime-weekdays,.gs-dtp-datetime-calendar,.gs-dtp-range-weekdays,.gs-dtp-range-calendar-grid{grid-template-columns:repeat(7,24px)}}

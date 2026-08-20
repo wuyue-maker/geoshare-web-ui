@@ -1,0 +1,481 @@
+.gs-color-picker-demo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  gap: 24px;
+  align-items: start;
+}
+
+.gs-color-picker-demo--single {
+  grid-template-columns: minmax(280px, 320px);
+}
+
+.gs-color-picker-demo--variants {
+  grid-template-columns: minmax(280px, 320px);
+}
+
+.gs-color-picker-demo--variants .gs-color-picker-card:nth-child(2) {
+  display: none;
+}
+
+.gs-color-picker-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.gs-color-picker-card__label {
+  color: var(--gs-text-tertiary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.gs-color-picker-reference {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.gs-color-picker-reference__title,
+.gs-color-picker__section-title {
+  color: var(--gs-text-secondary);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.gs-color-picker {
+  --gs-cp-hue: 210;
+  --gs-cp-saturation: 100;
+  --gs-cp-lightness: 55;
+  --gs-cp-alpha: 1;
+  box-sizing: border-box;
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  padding: 12px;
+  border-radius: var(--gs-radius-md);
+  background: var(--gs-neutral-9);
+  box-shadow: var(--gs-shadow-sm);
+  color: var(--gs-text-secondary);
+  font: 400 12px/20px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+}
+
+.gs-color-picker__commit-actions {
+  display: none;
+  gap: 8px;
+}
+
+.gs-color-picker__commit-button {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: var(--gs-radius-md);
+  background: var(--gs-neutral-9);
+  color: var(--gs-text-secondary);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gs-color-picker__commit-button--confirm {
+  border-color: var(--gs-primary-2);
+  background: var(--gs-primary-2);
+  color: var(--gs-neutral-9);
+}
+
+.gs-color-picker__commit-button:hover {
+  border-color: var(--gs-primary-2);
+}
+
+.gs-color-picker__gradient-angle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  gap: 8px;
+  align-items: center;
+}
+
+.gs-color-picker__gradient-angle[hidden] {
+  display: none;
+}
+
+.gs-color-picker__gradient-editor {
+  position: relative;
+  height: 28px;
+  cursor: crosshair;
+}
+
+.gs-color-picker__gradient-track {
+  box-sizing: border-box;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  left: 12px;
+  height: 12px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--gs-primary-2), var(--gs-purple-2));
+}
+
+.gs-color-picker__gradient-stops {
+  position: absolute;
+  inset: 0 12px;
+}
+
+.gs-color-picker__gradient-stop {
+  position: absolute;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 2px solid var(--gs-neutral-9);
+  border-radius: 999px;
+  background: var(--gs-cp-current-color, var(--gs-primary-2));
+  box-shadow: 0 1px 4px #00000026;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.gs-color-picker__gradient-stop.is-selected {
+  outline: 2px solid var(--gs-primary-2);
+  outline-offset: 1px;
+}
+
+.gs-color-picker__range--gradient {
+  background: linear-gradient(to right, #ffa36f 0%, #d5d7d9 48%, var(--gs-primary-2) 100%);
+}
+
+.gs-color-picker__angle-value {
+  box-sizing: border-box;
+  width: 48px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-9);
+  color: var(--gs-text-primary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  text-align: center;
+  outline: 0;
+  -moz-appearance: textfield;
+}
+
+.gs-color-picker__angle-value::-webkit-inner-spin-button,
+.gs-color-picker__angle-value::-webkit-outer-spin-button,
+.gs-color-picker__alpha::-webkit-inner-spin-button,
+.gs-color-picker__alpha::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.gs-color-picker__angle-value:focus,
+.gs-color-picker__alpha:focus {
+  border-color: var(--gs-primary-2);
+  outline: 0;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gs-primary-2) 20%, transparent);
+}
+
+.gs-color-picker__mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  padding: 2px;
+  border-radius: 4px;
+  background: var(--gs-neutral-7);
+  overflow: hidden;
+}
+
+.gs-color-picker__mode-button {
+  flex: 1 1 0;
+  min-width: 48px;
+  height: 28px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--gs-text-tertiary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.gs-color-picker__mode-button.is-selected {
+  background: var(--gs-neutral-9);
+  color: var(--gs-text-secondary);
+}
+
+.gs-color-picker__mode-button:hover:not(:disabled):not(.is-selected) {
+  background: transparent;
+  color: var(--gs-primary-2);
+}
+
+.gs-color-picker__mode-button:focus-visible,
+.gs-color-picker__swatch:focus-visible,
+.gs-color-picker__saturation:focus-visible {
+  outline: 2px solid var(--gs-primary-3);
+  outline-offset: 2px;
+}
+
+.gs-color-picker__saturation {
+  position: relative;
+  width: 100%;
+  height: 168px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: var(--gs-radius-sm);
+  background:
+    linear-gradient(to bottom, transparent 0%, #000 100%),
+    linear-gradient(to right, #fff 0%, transparent 100%),
+    hsl(var(--gs-cp-hue) 100% 50%);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.gs-color-picker__saturation-marker {
+  position: absolute;
+  top: var(--gs-cp-lightness-position);
+  left: var(--gs-cp-saturation-position);
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--gs-neutral-9);
+  border-radius: 999px;
+  background: var(--gs-cp-current-color, var(--gs-primary-2));
+  box-shadow: 0 1px 10px #0000000d, 0 4px 5px #00000014, 0 2px 4px -1px #0000001f;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.gs-color-picker__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px;
+  gap: 12px;
+  align-items: center;
+}
+
+.gs-color-picker__slider-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.gs-color-picker__range {
+  --gs-cp-track-color: var(--gs-primary-2);
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 16px;
+  margin: 0;
+  padding: 4px 0;
+  border-radius: 999px;
+  background: var(--gs-cp-track-color);
+  cursor: pointer;
+}
+
+.gs-color-picker__range--hue {
+  background: linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
+}
+
+.gs-color-picker__range--alpha {
+  background:
+    linear-gradient(to right, transparent, hsl(var(--gs-cp-hue) 100% 50%)),
+    repeating-conic-gradient(#d5d7d9 0 25%, #fff 0 50%) 50% / 8px 8px;
+}
+
+.gs-color-picker__range.gs-color-picker__range--gradient {
+  background: linear-gradient(to right, var(--gs-primary-2) 0%, var(--gs-purple-2) 100%);
+}
+
+.gs-color-picker__range::-webkit-slider-runnable-track {
+  box-sizing: border-box;
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.gs-color-picker__range--gradient::-webkit-slider-runnable-track {
+  border: 0;
+}
+
+.gs-color-picker__range::-moz-range-track {
+  box-sizing: border-box;
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.gs-color-picker__range--gradient::-moz-range-track {
+  border: 0;
+}
+
+.gs-color-picker__range::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -3px;
+  border: 2px solid var(--gs-neutral-9);
+  border-radius: 999px;
+  background: var(--gs-neutral-9);
+  box-shadow: 0 1px 10px #0000000d, 0 4px 5px #00000014, 0 2px 4px -1px #0000001f;
+}
+
+.gs-color-picker__range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--gs-neutral-9);
+  border-radius: 999px;
+  background: var(--gs-neutral-9);
+  box-shadow: 0 1px 10px #0000000d, 0 4px 5px #00000014, 0 2px 4px -1px #0000001f;
+}
+
+.gs-color-picker__range:focus-visible {
+  outline: 2px solid var(--gs-primary-3);
+  outline-offset: 2px;
+}
+
+.gs-color-picker__preview {
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: var(--gs-radius-sm);
+  background: hsla(var(--gs-cp-hue) var(--gs-cp-saturation)% var(--gs-cp-lightness)% / var(--gs-cp-alpha));
+}
+
+.gs-color-picker[data-mode="gradient"] .gs-color-picker__preview {
+  background: linear-gradient(var(--gs-cp-angle), hsla(calc(var(--gs-cp-hue) + 28) 70% 70% / .68), hsla(var(--gs-cp-hue) var(--gs-cp-saturation)% var(--gs-cp-lightness)% / var(--gs-cp-alpha)));
+}
+
+.gs-color-picker__format {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) 48px;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.gs-color-picker__format-select {
+  width: 70px;
+}
+
+.gs-color-picker__format-select > .gs-color-picker__select {
+  display: none;
+}
+
+.gs-color-picker__select,
+.gs-color-picker__text,
+.gs-color-picker__alpha {
+  box-sizing: border-box;
+  width: 100%;
+  height: 28px;
+  min-width: 0;
+  padding: 2px 8px;
+  border: 1px solid var(--gs-neutral-7);
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-9);
+  color: var(--gs-text-secondary);
+  font: inherit;
+}
+
+.gs-color-picker__format .gs-color-picker__format-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  min-width: 0;
+  padding: 0 8px;
+}
+
+.gs-color-picker__format .gs-color-picker__format-input > .gs-color-picker__text,
+.gs-color-picker__format .gs-color-picker__format-input > .gs-color-picker__alpha {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.gs-color-picker__alpha {
+  height: 32px;
+  border-color: var(--gs-neutral-6);
+  color: var(--gs-text-primary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  text-align: center;
+  outline: 0;
+  -moz-appearance: textfield;
+}
+
+.gs-color-picker__select:focus,
+.gs-color-picker__text:focus,
+.gs-color-picker__alpha:focus {
+  border-color: var(--gs-primary-2);
+  outline: 0;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gs-primary-2) 20%, transparent);
+}
+
+.gs-color-picker__alpha {
+  text-align: center;
+}
+
+.gs-color-picker__section {
+  display: grid;
+  gap: 4px;
+}
+
+.gs-color-picker__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.gs-color-picker__swatch {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--gs-swatch-color);
+  cursor: pointer;
+}
+
+.gs-color-picker__swatch--alpha {
+  background:
+    linear-gradient(135deg, transparent 0 50%, var(--gs-swatch-color) 50%),
+    repeating-conic-gradient(#d5d7d9 0 25%, #fff 0 50%) 50% / 8px 8px;
+}
+
+.gs-color-picker__swatch:hover { box-shadow: 0 0 0 2px var(--gs-primary-3); }
+
+.gs-color-picker__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.gs-color-picker-reference__sample {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--gs-neutral-6);
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-9);
+}
+
+.gs-color-picker-reference__sample .gs-color-picker__swatches { gap: 8px; }
+
+.gs-color-picker-reference__sample .gs-color-picker__swatch { cursor: default; }
+
+@media (max-width: 900px) {
+  .gs-color-picker-demo { grid-template-columns: minmax(280px, 320px); }
+  .gs-color-picker { max-width: none; }
+}
+
+@media (max-width: 520px) {
+  .gs-color-picker__format { grid-template-columns: 62px minmax(0, 1fr) 40px; }
+}

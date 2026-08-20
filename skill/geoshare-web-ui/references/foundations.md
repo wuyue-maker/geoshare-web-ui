@@ -38,6 +38,12 @@ Use semantic aliases in implementation. These base values are canonical.
 - Radius: 4, 8, 12, 16px. Default controls and cards: 8px.
 - Shadows: `0 0 8px #14171A1A` (large), `0 0 4px #14171A1A` (small), `0 2px 2px #14171A0D` (bottom subtle).
 
+## Icon colors
+
+- Actionable icon buttons use neutral/3 (`#626466`) by default. Filled, primary, semantic, hover, pressed, and disabled variants may override this through the button state color.
+- Decorative or accessory icons inside a component frame, such as input, search, select, date, and time field icons, use neutral/4 (`#969899`) by default.
+- Recolorable SVG paths use `currentColor`; assign color at the button or component-frame wrapper rather than hard-coding a color in the path.
+
 ## Naming
 
 Name tokens by role first, then component scope, for example `color-text-secondary`, `button-primary-bg-default`, and `table-row-hover-bg`. Avoid component code that depends directly on palette-step names except token definitions.

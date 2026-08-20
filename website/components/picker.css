@@ -76,7 +76,7 @@
 }
 
 .gs-select__prefix {
-  color: var(--gs-text-tertiary);
+  color: var(--gs-neutral-4);
 }
 
 .gs-select__chevron {
@@ -90,6 +90,7 @@
 .gs-select-option__arrow {
   width: 16px;
   height: 16px;
+  color: inherit;
 }
 
 .gs-select__chevron-icon {
