@@ -1578,7 +1578,10 @@ function tabsDemo({ id, variant = 'line', closable = false, labels = ['默认选
   const items = labels.map((label, index) => tabsItem(label, index, { selected: index === selectedIndex, closable })).join('');
   const add = closable ? button(gsIcon('plus', 'gs-tabs__add-icon'), 'gs-button--icon gs-button--text gs-tabs__add', 'data-tabs-add aria-label="新增选项"') : '';
   const isVertical = variant.startsWith('vertical');
-  return `<div class="gs-tabs gs-tabs--${variant}" data-tabs data-tabs-id="${id}" data-tabs-next="${labels.length + 1}"><div class="gs-tabs__bar" role="tablist" aria-label="${isVertical ? '垂直' : ''}选项卡">${items}${add}</div><div class="gs-tabs__panel" data-tabs-panel role="tabpanel">占位内容</div><span class="gs-tabs__live" data-tabs-live aria-live="polite"></span></div>`;
+  const tabList = closable
+    ? `<div class="gs-tabs__scroll" role="tablist" aria-label="可滚动选项卡">${items}</div>${add}`
+    : items;
+  return `<div class="gs-tabs gs-tabs--${variant}" data-tabs data-tabs-id="${id}" data-tabs-next="${labels.length + 1}"><div class="gs-tabs__bar"${closable ? '' : ` role="tablist" aria-label="${isVertical ? '垂直' : ''}选项卡"`}>${tabList}</div><div class="gs-tabs__panel" data-tabs-panel role="tabpanel">占位内容</div><span class="gs-tabs__live" data-tabs-live aria-live="polite"></span></div>`;
 }
 function tabsBody() {
   const verticalLabels = ['默认选项', '默认选项', '选中选项', '默认选项', '默认选项', '默认选项'];
@@ -1596,6 +1599,7 @@ function selectTabsItem(tabs, item) {
   const panel = tabs.querySelector('[data-tabs-panel]');
   const live = tabs.querySelector('[data-tabs-live]');
   if (panel) panel.textContent = '占位内容';
+  item.scrollIntoView?.({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   if (live) live.textContent = `已切换至${label}`;
 }
 function handleTabsClick(event) {
@@ -1619,7 +1623,8 @@ function handleTabsClick(event) {
     if (!tabs) return true;
     const index = Number(tabs.dataset.tabsNext || tabs.querySelectorAll('[data-tabs-item]').length + 1);
     const item = document.createRange().createContextualFragment(tabsItem(`新建选项${index}`, index, { closable: true })).firstElementChild;
-    add.before(item);
+    const scroll = tabs.querySelector('.gs-tabs__scroll');
+    if (scroll) scroll.append(item); else add.before(item);
     tabs.dataset.tabsNext = String(index + 1);
     selectTabsItem(tabs, item);
     tabs.querySelector('[data-tabs-live]').textContent = `已新增新建选项${index}`;
@@ -1628,6 +1633,13 @@ function handleTabsClick(event) {
   if (trigger) { selectTabsItem(trigger.closest('[data-tabs]'), trigger.closest('[data-tabs-item]')); return true; }
   return false;
 }
+function handleTabsWheel(event) {
+  const scroller = event.target.closest?.('.gs-tabs__scroll');
+  if (!scroller || !event.deltaY || event.deltaX) return;
+  event.preventDefault();
+  scroller.scrollLeft += event.deltaY;
+}
+document.addEventListener('wheel', handleTabsWheel, { passive: false });
 function switchBody() {
   const states = [['默认', ''], ['悬停', 'is-hover'], ['按下', 'is-pressed'], ['禁用', 'is-disabled']];
   const column = (title, tone, active=false) => `<div class="switch-spec-col"><span class="switch-spec-col__title">${title}</span>${states.map(([,state])=>switchTrack(tone, `${active?'is-on ':''}${state}`)).join('')}</div>`;

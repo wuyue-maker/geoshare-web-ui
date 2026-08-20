@@ -76,12 +76,17 @@
 
 .gs-tabs--editable { flex-direction: column; }
 .gs-tabs--editable .gs-tabs__bar { min-height: 48px; }
+.gs-tabs--editable .gs-tabs__scroll { display: flex; min-width: 0; flex: 1 1 auto; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: var(--gs-neutral-6) var(--gs-neutral-8); }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar { height: 4px; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-track { background: var(--gs-neutral-8); border-radius: 2px; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb { background-color: var(--gs-neutral-6) !important; border-radius: 2px; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb:hover { background-color: var(--gs-neutral-5) !important; }
 .gs-tabs--editable .gs-tabs__tab { gap: 4px; }
 .gs-tabs--editable .gs-tabs__trigger { padding-right: 4px; }
 .gs-tabs__close.gs-button { width: 16px; min-width: 16px; height: 16px; padding: 0; border-radius: 2px; }
 .gs-tabs__close-icon,
 .gs-tabs__add-icon { display: block; width: 16px; height: 16px; }
-.gs-tabs__add.gs-button { align-self: stretch; width: 40px; min-width: 40px; height: 48px; margin-left: auto; border-left: 1px solid var(--gs-neutral-7); border-radius: 0; box-shadow: -10px 0 10px #0000000d; }
+.gs-tabs__add.gs-button { position: relative; z-index: 2; flex: 0 0 40px; align-self: stretch; width: 40px; min-width: 40px; height: 48px; border-left: 1px solid var(--gs-neutral-7); border-radius: 0; background: var(--gs-neutral-9); box-shadow: -10px 0 10px #0000000d; }
 
 .gs-tabs--vertical-line,
 .gs-tabs--vertical-card { min-height: 320px; border: 0; }
