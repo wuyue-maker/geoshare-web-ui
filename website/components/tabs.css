@@ -1,0 +1,107 @@
+.gs-tabs {
+  --gs-tabs-item-bg: var(--gs-neutral-9);
+  --gs-tabs-content-bg: var(--gs-neutral-9);
+  display: flex;
+  min-height: 120px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--gs-neutral-7);
+  background: var(--gs-tabs-content-bg);
+}
+
+.gs-tabs__bar {
+  display: flex;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.gs-tabs__tab {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px;
+  background: var(--gs-tabs-item-bg);
+}
+
+.gs-tabs__trigger {
+  min-width: 0;
+  height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--gs-text-secondary);
+  font: 500 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.gs-tabs__trigger:hover,
+.gs-tabs__tab.is-selected .gs-tabs__trigger { color: var(--gs-primary-2); }
+
+.gs-tabs__trigger:focus-visible,
+.gs-tabs__close:focus-visible,
+.gs-tabs__add:focus-visible { outline: 2px solid var(--gs-primary-3); outline-offset: -2px; }
+
+.gs-tabs--line { flex-direction: column; }
+.gs-tabs--line .gs-tabs__bar,
+.gs-tabs--editable .gs-tabs__bar { border-bottom: 1px solid var(--gs-neutral-7); }
+.gs-tabs--line .gs-tabs__tab.is-selected::after,
+.gs-tabs--editable .gs-tabs__tab.is-selected::after {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  left: 8px;
+  height: 3px;
+  background: var(--gs-primary-2);
+  content: "";
+}
+
+.gs-tabs__panel {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 16px;
+  color: var(--gs-text-secondary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.gs-tabs--card { flex-direction: column; background: var(--gs-neutral-8); }
+.gs-tabs--card .gs-tabs__bar { border-bottom: 1px solid var(--gs-neutral-7); }
+.gs-tabs--card .gs-tabs__tab { padding: 0 16px; border-right: 1px solid var(--gs-neutral-7); background: var(--gs-neutral-8); }
+.gs-tabs--card .gs-tabs__tab.is-selected { background: var(--gs-neutral-9); }
+.gs-tabs--card .gs-tabs__trigger { padding: 0; }
+.gs-tabs--card .gs-tabs__panel { background: var(--gs-neutral-9); }
+
+.gs-tabs--editable { flex-direction: column; }
+.gs-tabs--editable .gs-tabs__bar { min-height: 48px; }
+.gs-tabs--editable .gs-tabs__tab { gap: 4px; }
+.gs-tabs--editable .gs-tabs__trigger { padding-right: 4px; }
+.gs-tabs__close.gs-button { width: 16px; min-width: 16px; height: 16px; padding: 0; border-radius: 2px; }
+.gs-tabs__close-icon,
+.gs-tabs__add-icon { display: block; width: 16px; height: 16px; }
+.gs-tabs__add.gs-button { align-self: stretch; width: 40px; min-width: 40px; height: 48px; margin-left: auto; border-left: 1px solid var(--gs-neutral-7); border-radius: 0; box-shadow: -10px 0 10px #0000000d; }
+
+.gs-tabs--vertical-line,
+.gs-tabs--vertical-card { min-height: 320px; border: 0; }
+.gs-tabs--vertical-line .gs-tabs__bar,
+.gs-tabs--vertical-card .gs-tabs__bar { flex: 0 0 160px; flex-direction: column; border-right: 1px solid var(--gs-neutral-7); }
+.gs-tabs--vertical-line .gs-tabs__tab,
+.gs-tabs--vertical-card .gs-tabs__tab { width: 100%; padding: 0 16px; border-bottom: 1px solid var(--gs-neutral-7); }
+.gs-tabs--vertical-line .gs-tabs__trigger,
+.gs-tabs--vertical-card .gs-tabs__trigger { width: 100%; padding: 0; text-align: left; }
+.gs-tabs--vertical-line .gs-tabs__tab { background: var(--gs-neutral-9); }
+.gs-tabs--vertical-line .gs-tabs__tab.is-selected { color: var(--gs-primary-2); }
+.gs-tabs--vertical-line .gs-tabs__tab.is-selected::after { position: absolute; top: 0; right: 0; bottom: 0; width: 4px; background: var(--gs-primary-2); content: ""; }
+.gs-tabs--vertical-card .gs-tabs__bar,
+.gs-tabs--vertical-card .gs-tabs__tab { background: var(--gs-neutral-8); }
+.gs-tabs--vertical-card .gs-tabs__tab.is-selected { background: var(--gs-neutral-9); color: var(--gs-primary-2); }
+
+.gs-tabs__live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@media (max-width: 640px) {
+  .gs-tabs__bar { overflow-x: auto; }
+  .gs-tabs--vertical-line .gs-tabs__bar,
+  .gs-tabs--vertical-card .gs-tabs__bar { flex-basis: 128px; }
+}

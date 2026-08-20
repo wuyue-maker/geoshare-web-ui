@@ -1,0 +1,33 @@
+/* Pagination — aligned with Figma node 2049:2485. */
+.gs-pagination-demo { display: grid; gap: 20px; }
+.gs-pagination-example { display: grid; gap: 12px; }
+.gs-pagination-example__label { color: var(--gs-text-tertiary); font-size: 13px; line-height: 20px; }
+.gs-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-width: 0; }
+.gs-pagination__total, .gs-pagination__jump-label, .gs-pagination__jump-suffix { color: var(--gs-text-tertiary); font-size: 14px; line-height: 22px; white-space: nowrap; }
+.gs-pagination__total { margin-right: 0; }
+.gs-pagination__size-wrap { position: relative; display: inline-flex; align-items: center; width: max-content; min-width: 0; }
+/* 只适配内容宽度；边框、激活、悬停与禁用状态完全继承 Select 组件。 */
+.gs-pagination__size { width: max-content; min-width: 0; }
+.gs-pagination__size .gs-select__value { flex: 0 0 auto; min-width: 0; overflow: visible; text-overflow: clip; }
+.gs-pagination__pages { display: inline-flex; align-items: center; gap: 8px; }
+.gs-pagination__button { width: 32px; min-width: 32px; height: 32px; margin: 0; padding: 0; }
+/* 当前页是固定选中态，不参与 Button 的悬停反馈。 */
+.gs-pagination__button.is-current:not(:disabled):not(.is-disabled):hover {
+  --button-bg: var(--gs-primary-2);
+  --button-border: var(--gs-primary-2);
+}
+.gs-pagination__nav .gs-icon { width: 16px; height: 16px; }
+.gs-pagination__ellipsis { display: inline-grid; place-items: center; width: 32px; height: 32px; color: var(--gs-text-secondary); font: 500 14px/22px "Alibaba PuHuiTi 3", sans-serif; }
+.gs-pagination__jump { display: inline-flex; align-items: center; gap: 8px; }
+.gs-pagination__input-wrap { width: 48px; min-width: 48px; }
+/* 仅将页码居中，聚焦与禁用反馈继承 Input 组件。 */
+.gs-pagination__input { text-align: center; }
+.gs-pagination--small { gap: 12px; }
+.gs-pagination--small .gs-pagination__pages { gap: 4px; }
+.gs-pagination--small .gs-pagination__button, .gs-pagination--small .gs-pagination__ellipsis { width: 24px; min-width: 24px; height: 24px; font-size: 12px; line-height: 20px; }
+.gs-pagination--small .gs-pagination__nav .gs-icon { width: 16px; height: 16px; }
+.pagination-type-list { display: grid; gap: 24px; }
+.pagination-type { display: grid; gap: 12px; padding-top: 24px; border-top: 1px solid var(--gs-neutral-7); }
+.pagination-type:first-child { padding-top: 0; border-top: 0; }
+.pagination-type__name { color: var(--gs-text-secondary); font-size: 14px; line-height: 22px; }
+@media (max-width: 720px) { .gs-pagination { gap: 12px; } .gs-pagination__pages { gap: 4px; } .gs-pagination__total { flex-basis: 100%; } .gs-pagination__jump { flex-basis: 100%; } }

@@ -19,6 +19,7 @@ const palettes = [
   ['主色', [['primary-1', '#064580'], ['primary-2', '#1890FF'], ['primary-3', '#99CEFF'], ['primary-4', '#CCE6FF'], ['primary-5', '#EBF5FF'], ['primary-6', '#F2F9FF']]],
   ['辅助色', [['orange', '#FF6F26'], ['red', '#F13F2F'], ['purple', '#AE24F2'], ['indigo', '#3939E5'], ['cyan', '#21D9D9'], ['green', '#32CC65'], ['yellow', '#F2CE18']]],
 ];
+const breadcrumbItems = ['上级页面', '上级页面', '当前页面'];
 const pageData = {
   '#/guide/intro': { crumb: '开发指南 / 介绍', title: 'GeoShare Web UI', lead: '面向公司互联网产品的 B 端组件文档。以统一的设计语言帮助团队快速构建清晰、一致、高效的产品体验。', toc: ['开始使用', '设计原则', '组件规划'], body: `<section id="开始使用"><h2>开始使用</h2><p>本组件库由设计令牌、组件规范、可运行预览和实现代码组成。开发新功能前，先在此找到对应组件与用法；没有现成组件时，按规范新增并补充预览。</p><div class="callout"><b>当前版本</b><span>基础设计令牌已经发布。通用组件、表单和数据展示组件将按产品需求持续补充。</span></div></section><section id="设计原则"><h2>设计原则</h2><div class="principles"><div><b>清晰</b><span>信息层级明确，降低复杂业务的理解成本。</span></div><div><b>一致</b><span>相同场景使用相同组件与交互模式。</span></div><div><b>高效</b><span>优先支持高频操作与密集数据处理。</span></div></div></section><section id="组件规划"><h2>组件规划</h2><p>侧栏按基础、通用、数据录入、数据展示和反馈分类组织。每个组件页面将提供使用说明、示例、API、状态与可访问性规则。</p></section>` },
   '#/guide/design': { crumb: '开发指南 / 设计规范', title: '设计规范', lead: '所有组件与产品页面均以此处令牌为基础。变量已同时提供在 tokens.css，供开发实现直接复用。', toc: ['颜色', '文字', '布局与外观'], body: designBody() },
@@ -30,6 +31,7 @@ const pageData = {
   '#/components/tag': { crumb: '通用组件 / Tag 标签', title: 'Tag 标签', lead: '用于标记对象的属性、分类或业务状态；按信息语义选择色调，只有可关闭标签提供移除操作。', toc: ['实色标签', '浅色标签', '边线标签', '可关闭标签', '使用规则', '无障碍', 'API'], body: tagBody() },
   '#/components/progress': { crumb: '数据展示 / Progress 进度条', title: 'Progress 进度条', lead: '用于展示任务的连续完成比例或未知时长的等待状态，不承担流程阶段导航。', toc: ['基础进度条', '尺寸与标签', '语义状态', '不确定进度', '使用规则', 'API'], body: progressBody() },
   '#/components/slider': { crumb: '数据录入 / Slider 滑块', title: 'Slider 滑块', lead: '用于在连续数值范围内快速选择一个值，并通过提示文本和结果反馈保持当前选择可见。', toc: ['提示文本', '使用规则', '无障碍', 'API'], body: sliderBody() },
+  '#/components/tabs': { crumb: '导航 / Tabs 选项卡', title: 'Tabs 选项卡', lead: '用于在同一内容区域内切换关联视图，支持默认、卡片、可增减和垂直布局。', toc: ['默认选项卡', '卡片主题选项卡', '增减选项卡', '垂直选项卡', '使用规则', '无障碍', 'API'], body: tabsBody() },
   '#/components/timeline': { crumb: '数据展示 / Timeline 时间轴', title: 'Timeline 时间轴', lead: '按时间顺序展示事件、操作记录与状态变更，适合审计记录、任务进展和业务历程。', toc: ['基础时间轴', '状态时间轴', '交替布局', '使用规则', '无障碍', 'API'], body: timelineBody() },
   '#/components/tree': { crumb: '数据展示 / Tree 树形结构', title: 'Tree 树形结构', lead: '用于展示具有父子层级的数据，并支持展开、选择与复选。', toc: ['基础树', '复选树', '交互与无障碍', '使用规则', 'API'], body: treeBody() },
   '#/components/switch': { crumb: '数据录入 / Switch 开关', title: 'Switch 开关', lead: '用于立即生效的二元开关设置；开启或关闭都应有清晰的文字说明。', toc: ['基础开关', '使用规则', 'API'], body: switchBody() },
@@ -40,6 +42,8 @@ const pageData = {
   '#/components/input': { crumb: '数据录入 / Input 输入框', title: 'Input 输入框', lead: '用于接收单行文本、密码、数字和结构化输入；通过统一尺寸、状态与辅助信息保持表单一致性。', toc: ['带标题输入框', '密码输入框', '装饰输入框', '数字输入框', '标签输入框', '范围输入框', '使用规则', '无障碍', 'API'], body: inputBodySimplified() },
   '#/components/search': { crumb: '数据录入 / Search 搜索框', title: 'Search 搜索框', lead: '用于从列表、资源或页面内容中快速定位目标。', toc: ['小搜索框', '大搜索框', '使用规则', '无障碍', 'API'], body: searchBody() },
   '#/components/picker': { crumb: '数据录入 / Select 选择器', title: 'Select 选择器', lead: '用于从预设选项中选择一个值，并支持单选、多选、级联选择与禁用状态。', toc: ['单选框', '多选框', '级联选框', '使用规则', '无障碍', 'API'], body: pickerBody() },
+  '#/components/pagination': { crumb: '导航 / Pagination 分页', title: 'Pagination 分页', lead: '用于在大量数据中切换当前页，并可按需组合总数据数、每页数量与快速跳转。', toc: ['基础分页', '分页类型', '使用规则', '无障碍', 'API'], body: paginationBody() },
+  '#/components/breadcrumb': { crumb: '导航 / Breadcrumb 面包屑', title: 'Breadcrumb 面包屑', lead: '用于展示当前页面在信息架构中的位置，并提供返回上级页面的路径入口。', toc: ['带图标', '不带图标', '使用规则', '无障碍', 'API'], body: breadcrumbBody() },
   '#/components/date-time-picker': { crumb: '数据录入 / Laydate 时间和日期选择器', title: '时间和日期选择器', lead: '用于选择时间、日期与日期时间范围，支持独立或联动面板。', toc: ['时间选择', '日期选择', '日期加时间选择', '日期区间联动选择', '年份选择', '使用规则', 'API'], body: dateTimePickerBodySingle() },
 };
 function paletteHtml() { return `<div class="color-groups">${palettes.map(([name, colors]) => `<div class="palette"><h3>${name}</h3><div class="swatches">${colors.map(([label, color]) => `<div class="swatch"><i style="background:${color}"></i><b>${label}</b><code>${color}</code></div>`).join('')}</div></div>`).join('')}</div>`; }
@@ -55,6 +59,91 @@ function button(label, cls='', attrs='') {
     content = `<span class="gs-button__label">${text}</span><span class="gs-button__split-box" aria-hidden="true"><i class="gs-button__divider"></i><i class="gs-button__chevron"></i></span>`;
   }
   return `<button type="button" class="gs-button ${cls}" ${attrs}>${content}</button>`;
+}
+function paginationPageList(current, totalPages) {
+  if (totalPages <= 7) return Array.from({ length: totalPages }, (_, index) => index + 1);
+  if (current <= 4) return [1, 2, 3, 4, 5, 'ellipsis', totalPages];
+  if (current >= totalPages - 3) return [1, 'ellipsis', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  return [1, 'ellipsis', current - 1, current, current + 1, 'ellipsis', totalPages];
+}
+function paginationButtons(current, totalPages, disabled=false) {
+  const previous = button(gsIcon('chevronLeft'), 'gs-button--icon gs-button--text gs-icon-radius-4 gs-pagination__button gs-pagination__nav', `data-pagination-page="${current - 1}" aria-label="上一页"${disabled || current === 1 ? ' disabled' : ''}`);
+  const pages = paginationPageList(current, totalPages).map(item => item === 'ellipsis'
+    ? '<span class="gs-pagination__ellipsis" aria-hidden="true">•••</span>'
+    : button(item, `gs-pagination__button${item === current ? ' is-current' : ' gs-button--secondary'}`, `data-pagination-page="${item}" aria-label="第 ${item} 页"${item === current ? ' aria-current="page"' : ''}${disabled ? ' disabled' : ''}`)).join('');
+  const next = button(gsIcon('chevronRight'), 'gs-button--icon gs-button--text gs-icon-radius-4 gs-pagination__button gs-pagination__nav', `data-pagination-page="${current + 1}" aria-label="下一页"${disabled || current === totalPages ? ' disabled' : ''}`);
+  return `${previous}${pages}${next}`;
+}
+function paginationSizeSelect(pageSize, disabled = false) {
+  const options = [10,20,50].map(value => pickerOption(`${value} 条/页`, { value: String(value), selected: value === pageSize })).join('');
+  return `<div class="gs-select-wrap gs-pagination__size-wrap" data-picker="pagination-size"><button type="button" class="gs-select gs-pagination__size" data-picker-trigger aria-haspopup="listbox" aria-expanded="false"${disabled ? ' disabled aria-disabled="true"' : ''}><span class="gs-select__value is-selected">${pageSize} 条/页</span>${selectChevron()}</button><div class="gs-select-popup" data-picker-popup role="listbox" hidden>${options}</div></div>`;
+}
+function paginationJumpField(page, disabled = false) {
+  return inputField({ value: String(page), placeholder: '', disabled, className: `gs-pagination__input-wrap${disabled ? ' is-disabled' : ''}` })
+    .replace('<input ', '<input class="gs-pagination__input" data-pagination-jump ')
+    .replace('aria-label="输入内容"', 'aria-label="跳至页码"');
+}
+function paginationMarkup({ variant='full', size='large', disabled=false, total=101, pageSize=10, current=1 }={}) {
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const page = Math.min(Math.max(1, current), totalPages);
+  const hasTotal = ['full', 'size', 'total'].includes(variant);
+  const hasSize = ['full', 'size'].includes(variant);
+  const hasJump = variant === 'full';
+  const sizeControl = hasSize ? paginationSizeSelect(pageSize, disabled) : '';
+  const jump = hasJump ? `<label class="gs-pagination__jump"><span class="gs-pagination__jump-label">跳至</span>${paginationJumpField(page, disabled)}<span class="gs-pagination__jump-suffix">/ ${totalPages} 页</span></label>` : '';
+  return `${hasTotal ? `<span class="gs-pagination__total">共 ${total} 项数据</span>` : ''}${sizeControl}<span class="gs-pagination__pages" data-pagination-pages>${paginationButtons(page,totalPages,disabled)}</span>${jump}`;
+}
+function paginationExample({ label, variant='full', size='large', disabled=false, current=1 }={}) {
+  if (label === '禁用示例') return '';
+  return `<div class="gs-pagination-example"><div class="gs-pagination${size === 'small' ? ' gs-pagination--small' : ''}" data-pagination data-pagination-variant="${variant}" data-pagination-size-value="10" data-pagination-total="101" data-pagination-current="${current}"${disabled ? ' data-pagination-disabled="true" aria-disabled="true"' : ''}>${paginationMarkup({ variant, size, disabled, current })}</div></div>`;
+}
+function paginationBody() {
+  const types = [
+    ['大 / 总数据数 + 每页数量 + 翻页', 'full', 'large'],
+    ['大 / 总数据数 + 每页数量', 'size', 'large'],
+    ['大 / 总数据数', 'total', 'large'],
+    ['大', 'pages', 'large'],
+    ['小', 'pages', 'small'],
+  ].map(([name, variant, size]) => `<div class="pagination-type"><span class="pagination-type__name">${name}</span>${paginationExample({ label: '交互示例', variant, size })}</div>`).join('');
+  return `<section id="基础分页"><h2>基础分页</h2><p>默认使用 32px 大尺寸分页；当前页使用主色 2 作为背景色，页码切换、每页数量与跳页均可操作。</p><div class="demo-card gs-pagination-demo">${paginationExample({ label: '交互示例', variant: 'full' })}${paginationExample({ label: '禁用示例', variant: 'full', disabled: true, current: 1 })}</div></section><section id="分页类型"><h2>分页类型</h2><p>根据页面信息密度组合总数据数、每页数量、翻页和跳页能力；小尺寸仅用于空间有限的紧凑场景。</p><div class="demo-card pagination-type-list">${types}</div></section><section id="使用规则"><h2>使用规则</h2><ul><li>数据量超过单页承载时使用分页；少量连续内容优先使用加载更多或列表。</li><li>当前页必须清晰可见，首页和末页分别禁用不可继续前进的方向按钮。</li><li>每页数量变更后重置到第一页；跳页输入应限制在有效页码范围内。</li><li>小尺寸分页不搭配总数、每页数量或跳页，避免压缩操作区域。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>上一页、下一页和页码使用真实 button，并提供可理解的辅助名称。</li><li>当前页使用 <code>aria-current="page"</code>，禁用按钮不响应键盘与鼠标操作。</li><li>跳页输入框提供页码范围说明，按 Enter 或离焦后提交。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>current</code><span>number</span><span>当前页码，从 1 开始</span></div><div><code>pageSize</code><span>number</span><span>每页数据条数，默认 10</span></div><div><code>total</code><span>number</span><span>总数据量</span></div><div><code>showSizeChanger</code><span>boolean</span><span>是否展示每页数量选择</span></div><div><code>showQuickJumper</code><span>boolean</span><span>是否展示跳页输入</span></div><div><code>size</code><span>large | small</span><span>32px 或 24px 尺寸</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用所有分页操作</span></div><div><code>onChange</code><span>(page, pageSize) =&gt; void</span><span>页码或每页数量变化时触发</span></div></div></section>`;
+}
+function renderPagination(root) {
+  if (!root) return;
+  const variant = root.dataset.paginationVariant || 'full';
+  const size = root.classList.contains('gs-pagination--small') ? 'small' : 'large';
+  const total = Number(root.dataset.paginationTotal) || 101;
+  const pageSize = Number(root.dataset.paginationSizeValue) || 10;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const current = Math.min(Math.max(1, Number(root.dataset.paginationCurrent) || 1), totalPages);
+  const disabled = root.dataset.paginationDisabled === 'true';
+  root.dataset.paginationCurrent = String(current);
+  root.innerHTML = paginationMarkup({ variant, size, disabled, total, pageSize, current });
+}
+function breadcrumbLink(label, { withIcon = false, level = 1, itemIndex = 0 } = {}) {
+  const safeLabel = escapeHtml(label);
+  const icon = withIcon ? gsIcon('link', 'gs-breadcrumb__icon') : '';
+  return `<button type="button" class="gs-breadcrumb__item gs-breadcrumb__link" data-breadcrumb-link data-breadcrumb-index="${itemIndex}" data-breadcrumb-label="${safeLabel}" aria-label="返回第 ${level} 级路径：${safeLabel}">${icon}<span>${safeLabel}</span></button>`;
+}
+function breadcrumbSeparator(type) {
+  if (type === 'slash') return '<span class="gs-breadcrumb__separator gs-breadcrumb__separator--slash" aria-hidden="true">/</span>';
+  return `<span class="gs-breadcrumb__separator" aria-hidden="true">${gsIcon('chevronRight', 'gs-breadcrumb__separator-icon')}</span>`;
+}
+function breadcrumbTrailMarkup({ withIcon = false, currentIndex = breadcrumbItems.length - 1 } = {}) {
+  const separator = withIcon ? 'arrow' : 'slash';
+  return `<div class="gs-breadcrumb" aria-label="面包屑导航">${breadcrumbItems.slice(0, currentIndex + 1).map((label, index) => {
+    const current = index === currentIndex;
+    const item = current
+      ? `<span class="gs-breadcrumb__item gs-breadcrumb__current" aria-current="page">${withIcon ? gsIcon('link', 'gs-breadcrumb__icon') : ''}<span>${label}</span></span>`
+      : breadcrumbLink(label, { withIcon, level: index + 1, itemIndex: index });
+    return `${index ? breadcrumbSeparator(separator) : ''}${item}`;
+  }).join('')}</div>`;
+}
+function breadcrumbExample({ withIcon = false } = {}) {
+  return `<div data-breadcrumb-trail data-breadcrumb-icon="${withIcon}" data-breadcrumb-current="${breadcrumbItems.length - 1}">${breadcrumbTrailMarkup({ withIcon })}</div>`;
+}
+function breadcrumbBody() {
+  const demo = withIcon => `<div class="demo-card gs-breadcrumb-demo" data-breadcrumb-demo>${breadcrumbExample({ withIcon })}<p class="gs-breadcrumb__live" data-breadcrumb-live aria-live="polite"></p></div>`;
+  return `<section id="带图标"><h2>带图标</h2><p>适用于路径节点具有明确对象语义的场景。图标、文字与分隔符均使用 16px 图标和 4px 间距。</p>${demo(true)}</section><section id="不带图标"><h2>不带图标</h2><p>适用于简洁的层级路径展示。当前页面仅用于标识位置，不提供点击操作。</p>${demo(false)}</section><section id="使用规则"><h2>使用规则</h2><ul><li>面包屑最多展示当前页面及必要的上级路径；层级过深时应折叠中间节点。</li><li>除当前页外的路径节点可点击返回对应层级，当前页不应作为链接。</li><li>同一页面中保持分隔符、图标和文字样式一致，不混用不同类型。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>使用 <code>nav</code> 或带有明确 <code>aria-label</code> 的导航容器标识路径用途。</li><li>当前页使用 <code>aria-current=&quot;page&quot;</code>，上级路径使用可聚焦的真实按钮或链接。</li><li>键盘焦点与悬停均应提供可见反馈，不以颜色作为唯一的路径识别方式。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>items</code><span>BreadcrumbItem[]</span><span>路径节点数据，最后一个节点作为当前页</span></div><div><code>withIcon</code><span>boolean</span><span>是否在每个节点前展示图标</span></div><div><code>separator</code><span>arrow | slash</span><span>节点之间的分隔符类型</span></div><div><code>onNavigate</code><span>(item) =&gt; void</span><span>点击上级路径节点时触发</span></div></div></section>`;
 }
 // 输入框中的清空操作复用基础按钮的图形按钮结构；输入框只负责边缘布局，视觉状态统一由 button.css 管理。
 function inputClearButton({ label = '清空输入', dataAttr = 'data-input-clear', disabled = false, hidden = false, search = false } = {}) {
@@ -293,6 +382,16 @@ function syncCheckboxDemo(group) { const master=group.querySelector('[data-check
 function handleControlChange(event) {
   const input=event.target;
   if(!(input instanceof HTMLInputElement)) return;
+  if (input.hasAttribute('data-pagination-jump')) {
+    const pagination=input.closest('[data-pagination]');
+    if (pagination && pagination.dataset.paginationDisabled!=='true') {
+      const pageSize=Number(pagination.dataset.paginationSizeValue) || 10;
+      const totalPages=Math.max(1,Math.ceil((Number(pagination.dataset.paginationTotal) || 101) / pageSize));
+      pagination.dataset.paginationCurrent=String(Math.min(totalPages,Math.max(1,Number(input.value.replace(/\D/g,'')) || 1)));
+      renderPagination(pagination);
+    }
+    return;
+  }
   const group=input.closest('[data-checkbox-demo]');
   if(!group) return;
   if(input.hasAttribute('data-checkbox-master')) group.querySelectorAll('[data-checkbox-item]:not(:disabled)').forEach(item=>{ item.checked=input.checked; });
@@ -317,6 +416,17 @@ function handleNumericInput(event) {
     const position = Math.min(cursor, next.length);
     input.setSelectionRange(position, position);
   }
+}
+function handlePaginationKeydown(event) {
+  const input=event.target.closest?.('[data-pagination-jump]');
+  if (!input || event.key !== 'Enter') return;
+  const pagination=input.closest('[data-pagination]');
+  if (!pagination || pagination.dataset.paginationDisabled === 'true') return;
+  const pageSize=Number(pagination.dataset.paginationSizeValue) || 10;
+  const totalPages=Math.max(1,Math.ceil((Number(pagination.dataset.paginationTotal) || 101) / pageSize));
+  pagination.dataset.paginationCurrent=String(Math.min(totalPages,Math.max(1,Number(input.value.replace(/\D/g,'')) || 1)));
+  renderPagination(pagination);
+  event.preventDefault();
 }
 function handleInputAffordances(event) {
   const input = event.target;
@@ -579,6 +689,14 @@ function selectPickerOption(picker, option) {
     if (format && colorPicker) {
       format.value = value;
       updateColorPicker(colorPicker, true);
+    }
+  }
+  if (picker.dataset.picker === 'pagination-size') {
+    const pagination = picker.closest('[data-pagination]');
+    if (pagination && pagination.dataset.paginationDisabled !== 'true') {
+      pagination.dataset.paginationSizeValue = String(Number(value) || 10);
+      pagination.dataset.paginationCurrent = '1';
+      renderPagination(pagination);
     }
   }
 }
@@ -1027,6 +1145,25 @@ function handleColorPickerKeydown(event) {
 function handleComponentClick(event) {
   const app=document.querySelector('#app');
   if (handleDateTimeClick(event)) return;
+  const breadcrumbLinkTarget=event.target.closest('[data-breadcrumb-link]');
+  if (breadcrumbLinkTarget && app.contains(breadcrumbLinkTarget)) {
+    const demo=breadcrumbLinkTarget.closest('[data-breadcrumb-demo]');
+    const trail=breadcrumbLinkTarget.closest('[data-breadcrumb-trail]');
+    const live=demo?.querySelector('[data-breadcrumb-live]');
+    const nextIndex=Math.max(0, Math.min(breadcrumbItems.length - 1, Number(breadcrumbLinkTarget.dataset.breadcrumbIndex) || 0));
+    if (trail) {
+      trail.dataset.breadcrumbCurrent=String(nextIndex);
+      trail.innerHTML=breadcrumbTrailMarkup({ withIcon: trail.dataset.breadcrumbIcon === 'true', currentIndex: nextIndex });
+    }
+    if (live) live.textContent=`已返回${breadcrumbLinkTarget.dataset.breadcrumbLabel}，后续路径已收起`;
+    return;
+  }
+  const paginationButton=event.target.closest('[data-pagination-page]');
+  if (paginationButton && app.contains(paginationButton) && !paginationButton.disabled) {
+    const pagination=paginationButton.closest('[data-pagination]');
+    if (pagination) { pagination.dataset.paginationCurrent=String(Number(paginationButton.dataset.paginationPage) || 1); renderPagination(pagination); }
+    return;
+  }
   const combinationOption=event.target.closest('[data-combination-option]');
   if (combinationOption && app.contains(combinationOption)) {
     const group=combinationOption.closest('[data-combination-group]');
@@ -1039,6 +1176,7 @@ function handleComponentClick(event) {
     return;
   }
   if (handleUploadClick(event)) return;
+  if (handleTabsClick(event)) return;
   if (handleColorPickerClick(event)) return;
   // Picker dismissal also needs to run for clicks outside a picker. Keep the
   // single delegated listener on #app so every open popup closes consistently.
@@ -1086,6 +1224,7 @@ function syncUploadListPanel(panel) {
   const body = panel.querySelector('[data-upload-list-body]');
   if (!body) return;
   const hasFiles = [...body.querySelectorAll('tr')].some(row => !row.querySelector('.upload-dropzone'));
+  panel.classList.toggle('has-upload-files', hasFiles);
   if (!hasFiles && !body.querySelector('.upload-dropzone')) body.innerHTML = '<tr><td colspan="4"><div class="upload-dropzone"><span>点击上方“选择文件”或将文件拖拽到此区域</span></div></td></tr>';
   const submit = panel.querySelector('[data-upload-submit]');
   if (!submit) return;
@@ -1430,6 +1569,65 @@ function uploadBodyCompact({ maxCount = 5 } = {}) {
   return `<section id="图片上传"><h2>图片上传</h2><p>适合头像、封面和地图缩略图等图片场景。这里仅展示一个完整交互示例，状态会在操作过程中反馈。</p><div class="demo-card upload-interactive-card" data-upload-demo><div class="upload-reference-grid"><div class="upload-reference-card"><h3>示例</h3>${picture}</div><div class="upload-reference-card"><h3>禁用示例</h3>${pictureDisabled}</div></div><span class="upload-a11y-status" data-upload-live role="status" aria-live="polite"></span></div></section><section id="按钮上传"><h2>按钮上传</h2><p>适合单个文件或轻量上传操作；状态信息和操作入口保持垂直排列。</p><div class="upload-button-state-reference">${buttonStates}</div></section><section id="输入上传"><h2>输入上传</h2><p>适合表单上下文，将当前文件名作为输入框内容展示；状态由真实业务反馈驱动。</p><div class="demo-card upload-single-example"><div class="upload-reference-card"><h3>示例</h3>${inputExample}</div></div></section><section id="上传列表"><h2>上传列表</h2><p>适合批量文件上传；默认展示空拖拽区，使用一张表格表达文件名、大小、状态和操作。</p><div class="demo-card upload-list-panel upload-single-example" data-upload-max-count="${safeMaxCount}"><div class="upload-list-toolbar"><button type="button" class="gs-button gs-button--secondary">选择文件</button><span class="upload-helper">支持批量上传文件，文件格式不限，最多只能上传 ${safeMaxCount} 份文件</span></div><table class="upload-table" aria-label="上传文件列表"><thead><tr><th>文件名</th><th>大小</th><th>状态</th><th>操作</th></tr></thead><tbody>${emptyList}</tbody></table><div class="upload-list-actions"><button type="button" class="gs-button gs-button--secondary">取消上传</button><button type="button" class="gs-button" disabled>点击上传</button></div></div></section><section id="使用规则"><h2>使用规则</h2><ul><li>按业务场景选择图片、按钮、输入框或列表式上传，每种类型只提供一个主要示例。</li><li>上传中阻止重复提交；失败时保留文件名并提供“重新上传”，成功时提供预览或删除。</li><li>提示语说明文件类型、大小和数量限制；限制校验应在选择后立即反馈。</li><li>批量上传使用表格保持列对齐，状态同时使用文字和语义色表达。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>图片选择区域提供按钮语义、可见焦点和键盘触发能力。</li><li>查看、删除、重新上传和取消上传均使用真实按钮或链接并提供可理解名称。</li><li>状态变化写入 <code>aria-live="polite"</code>，不只依赖颜色或动画。</li></ul></section><section id="API"><h2>API</h2><div class="api-table upload-api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>type</code><span>picture | button | input | list</span><span>上传外观，默认 button</span></div><div><code>fileList</code><span>UploadFile[]</span><span>受控文件列表</span></div><div><code>accept</code><span>string</span><span>原生文件类型筛选</span></div><div><code>multiple</code><span>boolean</span><span>是否允许多个文件</span></div><div><code>disabled</code><span>boolean</span><span>是否禁用</span></div><div><code>maxCount</code><span>number</span><span>最大文件数量</span></div><div><code>onChange</code><span>(info) =&gt; void</span><span>选择、进度或状态变化时触发</span></div><div><code>onPreview</code><span>(file) =&gt; void</span><span>点击图片预览时触发</span></div><div><code>onRemove</code><span>(file) =&gt; boolean | Promise&lt;boolean&gt;</span><span>删除前回调</span></div></div></section>`;
 }
 
+function tabsItem(label, index, { selected = false, closable = false } = {}) {
+  const close = closable ? button(gsIcon('close', 'gs-tabs__close-icon'), 'gs-button--icon gs-button--text gs-tabs__close', `data-tabs-close aria-label="关闭${escapeHtml(label)}"`) : '';
+  return `<div class="gs-tabs__tab${selected ? ' is-selected' : ''}" data-tabs-item data-tabs-index="${index}"><button type="button" class="gs-tabs__trigger" data-tabs-trigger role="tab" aria-selected="${selected}" tabindex="${selected ? '0' : '-1'}"><span>${escapeHtml(label)}</span></button>${close}</div>`;
+}
+function tabsDemo({ id, variant = 'line', closable = false, labels = ['默认选项', '悬停选项', '选中选项', '默认选项', '默认选项'] } = {}) {
+  const selectedIndex = 2;
+  const items = labels.map((label, index) => tabsItem(label, index, { selected: index === selectedIndex, closable })).join('');
+  const add = closable ? button(gsIcon('plus', 'gs-tabs__add-icon'), 'gs-button--icon gs-button--text gs-tabs__add', 'data-tabs-add aria-label="新增选项"') : '';
+  const isVertical = variant.startsWith('vertical');
+  return `<div class="gs-tabs gs-tabs--${variant}" data-tabs data-tabs-id="${id}" data-tabs-next="${labels.length + 1}"><div class="gs-tabs__bar" role="tablist" aria-label="${isVertical ? '垂直' : ''}选项卡">${items}${add}</div><div class="gs-tabs__panel" data-tabs-panel role="tabpanel">占位内容</div><span class="gs-tabs__live" data-tabs-live aria-live="polite"></span></div>`;
+}
+function tabsBody() {
+  const verticalLabels = ['默认选项', '默认选项', '选中选项', '默认选项', '默认选项', '默认选项'];
+  return `<section id="默认选项卡"><h2>默认选项卡</h2><p>默认主题以主色底部 3px 指示当前项，选项高度 48px。</p><div class="demo-card gs-tabs-demo">${tabsDemo({ id: 'tabs-line' })}</div></section><section id="卡片主题选项卡"><h2>卡片主题选项卡</h2><p>卡片主题使用中性色8背景和中性色7分隔线，当前项切换为白色背景与主色文字。</p><div class="demo-card gs-tabs-demo">${tabsDemo({ id: 'tabs-card', variant: 'card' })}</div></section><section id="增减选项卡"><h2>增减选项卡</h2><p>支持关闭已有选项和新增选项；关闭后自动选中相邻项。</p><div class="demo-card gs-tabs-demo">${tabsDemo({ id: 'tabs-editable', variant: 'editable', closable: true, labels: ['默认选项', '悬停选项', '选中选项', '默认选项'] })}</div></section><section id="垂直选项卡"><h2>垂直选项卡</h2><p>用于左侧导航与右侧内容区域联动的场景，宽度固定为 160px，提供默认线型和卡片型两种样式。</p><h3>默认线型</h3><div class="demo-card gs-tabs-demo">${tabsDemo({ id: 'tabs-vertical-line', variant: 'vertical-line', labels: verticalLabels })}</div><h3>卡片型</h3><div class="demo-card gs-tabs-demo">${tabsDemo({ id: 'tabs-vertical-card', variant: 'vertical-card', labels: verticalLabels })}</div></section><section id="使用规则"><h2>使用规则</h2><ul><li>仅用于同层级、关联内容的切换；选项过多时使用下拉、分页或侧边栏。</li><li>同一组选项默认保留一个选中项，切换后更新对应内容区域。</li><li>可关闭选项必须保留至少一个；新增入口固定在选项列末尾。</li><li>垂直选项卡适合稳定的模块导航，不用于高频临时筛选。</li></ul></section><section id="无障碍"><h2>无障碍</h2><ul><li>选项使用 <code>role="tab"</code> 和 <code>aria-selected</code> 表达当前状态。</li><li>关闭和新增入口使用独立按钮与可理解的辅助名称。</li><li>Tab 键进入当前选项，Enter 或 Space 可完成选择。</li></ul></section><section id="API"><h2>API</h2><div class="api-table"><div><b>属性</b><b>类型</b><b>说明</b></div><div><code>variant</code><span>line | card | editable | vertical-line | vertical-card</span><span>选项卡视觉类型</span></div><div><code>items</code><span>TabItem[]</span><span>选项数据</span></div><div><code>activeKey</code><span>string</span><span>当前选中项</span></div><div><code>closable</code><span>boolean</span><span>是否显示关闭入口</span></div><div><code>addable</code><span>boolean</span><span>是否显示新增入口</span></div><div><code>onChange</code><span>(key) =&gt; void</span><span>切换选项回调</span></div><div><code>onEdit</code><span>(key, action) =&gt; void</span><span>新增或关闭选项回调</span></div></div></section>`;
+}
+function selectTabsItem(tabs, item) {
+  if (!tabs || !item) return;
+  tabs.querySelectorAll('[data-tabs-item]').forEach(node => {
+    const selected = node === item;
+    node.classList.toggle('is-selected', selected);
+    const trigger = node.querySelector('[data-tabs-trigger]');
+    if (trigger) { trigger.setAttribute('aria-selected', String(selected)); trigger.tabIndex = selected ? 0 : -1; }
+  });
+  const label = item.querySelector('[data-tabs-trigger] span')?.textContent?.trim() || '选项';
+  const panel = tabs.querySelector('[data-tabs-panel]');
+  const live = tabs.querySelector('[data-tabs-live]');
+  if (panel) panel.textContent = '占位内容';
+  if (live) live.textContent = `已切换至${label}`;
+}
+function handleTabsClick(event) {
+  const close = event.target.closest?.('[data-tabs-close]');
+  const add = event.target.closest?.('[data-tabs-add]');
+  const trigger = event.target.closest?.('[data-tabs-trigger]');
+  if (close) {
+    const tabs = close.closest('[data-tabs]');
+    const item = close.closest('[data-tabs-item]');
+    const items = [...tabs.querySelectorAll('[data-tabs-item]')];
+    if (!tabs || !item || items.length <= 1) return true;
+    const wasSelected = item.classList.contains('is-selected');
+    const next = items[items.indexOf(item) + 1] || items[items.indexOf(item) - 1];
+    item.remove();
+    if (wasSelected && next?.isConnected) selectTabsItem(tabs, next);
+    tabs.querySelector('[data-tabs-live]').textContent = '已关闭选项';
+    return true;
+  }
+  if (add) {
+    const tabs = add.closest('[data-tabs]');
+    if (!tabs) return true;
+    const index = Number(tabs.dataset.tabsNext || tabs.querySelectorAll('[data-tabs-item]').length + 1);
+    const item = document.createRange().createContextualFragment(tabsItem(`新建选项${index}`, index, { closable: true })).firstElementChild;
+    add.before(item);
+    tabs.dataset.tabsNext = String(index + 1);
+    selectTabsItem(tabs, item);
+    tabs.querySelector('[data-tabs-live]').textContent = `已新增新建选项${index}`;
+    return true;
+  }
+  if (trigger) { selectTabsItem(trigger.closest('[data-tabs]'), trigger.closest('[data-tabs-item]')); return true; }
+  return false;
+}
 function switchBody() {
   const states = [['默认', ''], ['悬停', 'is-hover'], ['按下', 'is-pressed'], ['禁用', 'is-disabled']];
   const column = (title, tone, active=false) => `<div class="switch-spec-col"><span class="switch-spec-col__title">${title}</span>${states.map(([,state])=>switchTrack(tone, `${active?'is-on ':''}${state}`)).join('')}</div>`;
@@ -2231,4 +2429,5 @@ function getPage() { const hash=location.hash || '#/guide/intro'; if(pageData[ha
 function renderNav() { document.querySelector('#side-nav').innerHTML=navigation.map(([group,items])=>`<section><p>${group}</p>${items.map(([label,href])=>`<a href="${href}" data-href="${href}">${label}</a>`).join('')}</section>`).join(''); }
 function render() { const page=getPage(); const shell=document.querySelector('#article-shell').content.cloneNode(true); shell.querySelector('.breadcrumb').innerHTML=page.crumb; shell.querySelector('h1').textContent=page.title; shell.querySelector('.lead').textContent=page.lead; const articleBody=shell.querySelector('.article-body'); articleBody.innerHTML=location.hash === '#/components/date-time-picker' ? dateTimePickerBodySingle() : page.body; if (location.hash === '#/components/date-time-picker') { const dateSection=articleBody.querySelector('#日期选择'); const datetimeSection=articleBody.querySelector('#日期加时间选择'); if (dateSection && datetimeSection) datetimeSection.before(dateSection); const yearSection=articleBody.querySelector('#年份选择'); if (yearSection) yearSection.before(document.createRange().createContextualFragment(dateRangePickerSection()).firstElementChild); } const app=document.querySelector('#app'); app.replaceChildren(shell); document.querySelectorAll('[data-href]').forEach(a=>a.classList.toggle('active',a.dataset.href===(location.hash||'#/guide/intro'))); document.querySelector('#page-toc').innerHTML=`<p>本页目录</p>${page.toc.map(x=>`<a href="${location.hash || '#/guide/intro'}" data-section="${x}">${x}</a>`).join('')}`; initComponentDemos(app); app.focus({preventScroll:true}); }
 function search(query) { const q=query.trim().toLowerCase(); document.querySelectorAll('#side-nav a').forEach(a=>{ a.hidden=Boolean(q && !a.textContent.toLowerCase().includes(q)); }); document.querySelectorAll('#side-nav section').forEach(section=>{ section.hidden=Boolean(q && !section.querySelector('a:not([hidden])')); }); }
-renderNav(); render(); const appRoot=document.querySelector('#app'); appRoot.addEventListener('click',handleComponentClick); appRoot.addEventListener('click',handleInputClick); appRoot.addEventListener('click',handleSearchClick); appRoot.addEventListener('change',handleControlChange); appRoot.addEventListener('change',handleUploadChange); appRoot.addEventListener('change',handleColorPickerChange); appRoot.addEventListener('input',handleSliderInput); appRoot.addEventListener('input',handleNumericInput); appRoot.addEventListener('input',handleInputAffordances); appRoot.addEventListener('input',handleSearchInput); appRoot.addEventListener('input',handleColorPickerInput); appRoot.addEventListener('pointerdown',handleSearchPointerDown); appRoot.addEventListener('pointerdown',handleColorPickerPointerDown); appRoot.addEventListener('pointermove',handleColorPickerPointerMove); appRoot.addEventListener('pointerup',handleSearchPointerEnd); appRoot.addEventListener('pointerup',handleColorPickerPointerUp); appRoot.addEventListener('pointercancel',handleSearchPointerEnd); appRoot.addEventListener('pointercancel',handleColorPickerPointerUp); appRoot.addEventListener('focusin',handleSearchFocus); appRoot.addEventListener('focusout',handleSearchFocus); appRoot.addEventListener('focusout',handleColorPickerFocusOut); appRoot.addEventListener('focusin',handleSliderFocus); appRoot.addEventListener('focusout',handleSliderFocus); appRoot.addEventListener('keydown',handleSearchKeydown); appRoot.addEventListener('keydown',handleInputKeydown); appRoot.addEventListener('keydown',handleTagKeydown); appRoot.addEventListener('keydown',handleTreeKeydown); appRoot.addEventListener('keydown',handlePickerKeydown); appRoot.addEventListener('keydown',handleColorPickerKeydown); appRoot.addEventListener('keydown',handleDateTimeKeydown); appRoot.addEventListener('keydown',handleUploadKeydown); appRoot.addEventListener('scroll',handleTimeWheelScroll,true); document.addEventListener('pointerdown',handleSliderPointerDown); document.addEventListener('pointermove',handleSliderPointerMove); document.addEventListener('pointerup',handleSliderPointerUp); document.addEventListener('pointercancel',handleSliderPointerUp); document.addEventListener('click',handlePickerOutsideClick); document.addEventListener('click',handleDateTimeOutsideClick); document.querySelector('#page-toc').addEventListener('click',handleTocClick); addEventListener('hashchange',render); document.querySelector('#search-input').addEventListener('input',e=>search(e.target.value)); addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();document.querySelector('#search-input').focus();}});
+function initHeaderSearch() { const field=document.querySelector('[data-header-search-field]'); const input=document.querySelector('#search-input'); const clear=document.querySelector('[data-header-search-clear]'); if (!field || !(input instanceof HTMLInputElement) || !(clear instanceof HTMLButtonElement)) return; if (!field.querySelector('.gs-search-icon--leading')) input.insertAdjacentHTML('beforebegin',gsIcon('search','gs-search-icon gs-search-icon--leading')); clear.innerHTML=gsIcon('close','gs-input-clear__icon'); const sync=()=>{ const active=document.activeElement===input || Boolean(input.value); field.classList.toggle('is-active',active); clear.hidden=!input.value; }; input.addEventListener('input',event=>{ search(event.target.value); sync(); }); input.addEventListener('focus',sync); input.addEventListener('blur',()=>setTimeout(sync)); clear.addEventListener('click',()=>{ input.value=''; search(''); input.focus(); sync(); }); sync(); }
+renderNav(); render(); initHeaderSearch(); const appRoot=document.querySelector('#app'); appRoot.addEventListener('click',handleComponentClick); appRoot.addEventListener('click',handleInputClick); appRoot.addEventListener('click',handleSearchClick); appRoot.addEventListener('change',handleControlChange); appRoot.addEventListener('change',handleUploadChange); appRoot.addEventListener('change',handleColorPickerChange); appRoot.addEventListener('input',handleSliderInput); appRoot.addEventListener('input',handleNumericInput); appRoot.addEventListener('input',handleInputAffordances); appRoot.addEventListener('input',handleSearchInput); appRoot.addEventListener('input',handleColorPickerInput); appRoot.addEventListener('pointerdown',handleSearchPointerDown); appRoot.addEventListener('pointerdown',handleColorPickerPointerDown); appRoot.addEventListener('pointermove',handleColorPickerPointerMove); appRoot.addEventListener('pointerup',handleSearchPointerEnd); appRoot.addEventListener('pointerup',handleColorPickerPointerUp); appRoot.addEventListener('pointercancel',handleSearchPointerEnd); appRoot.addEventListener('pointercancel',handleColorPickerPointerUp); appRoot.addEventListener('focusin',handleSearchFocus); appRoot.addEventListener('focusout',handleSearchFocus); appRoot.addEventListener('focusout',handleColorPickerFocusOut); appRoot.addEventListener('focusin',handleSliderFocus); appRoot.addEventListener('focusout',handleSliderFocus); appRoot.addEventListener('keydown',handleSearchKeydown); appRoot.addEventListener('keydown',handleInputKeydown); appRoot.addEventListener('keydown',handlePaginationKeydown); appRoot.addEventListener('keydown',handleTagKeydown); appRoot.addEventListener('keydown',handleTreeKeydown); appRoot.addEventListener('keydown',handlePickerKeydown); appRoot.addEventListener('keydown',handleColorPickerKeydown); appRoot.addEventListener('keydown',handleDateTimeKeydown); appRoot.addEventListener('keydown',handleUploadKeydown); appRoot.addEventListener('scroll',handleTimeWheelScroll,true); document.addEventListener('pointerdown',handleSliderPointerDown); document.addEventListener('pointermove',handleSliderPointerMove); document.addEventListener('pointerup',handleSliderPointerUp); document.addEventListener('pointercancel',handleSliderPointerUp); document.addEventListener('click',handlePickerOutsideClick); document.addEventListener('click',handleDateTimeOutsideClick); document.querySelector('#page-toc').addEventListener('click',handleTocClick); addEventListener('hashchange',render); addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();document.querySelector('#search-input').focus();}});
