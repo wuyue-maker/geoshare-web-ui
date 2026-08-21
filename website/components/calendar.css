@@ -1,0 +1,243 @@
+.gs-calendar-demo {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.gs-calendar {
+  box-sizing: border-box;
+  display: flex;
+  height: 780px;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid var(--gs-neutral-7);
+  border-radius: var(--gs-radius-md);
+  background: var(--gs-neutral-9);
+  color: var(--gs-text-secondary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.gs-calendar__toolbar,
+.gs-calendar__toolbar-selects,
+.gs-calendar__view-switch {
+  display: flex;
+  align-items: center;
+}
+
+.gs-calendar__toolbar {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 0 32px;
+}
+
+.gs-calendar__toolbar-selects { gap: 8px; }
+.gs-calendar__select-wrap--year { width: 156px; }
+.gs-calendar__select-wrap--month { width: 114px; }
+
+.gs-calendar__view-switch {
+  box-sizing: border-box;
+  width: 120px;
+  height: 32px;
+}
+
+.gs-calendar__view-switch .gs-combination__item { min-width: 0; }
+
+.gs-calendar__today { min-width: 64px; }
+
+.gs-calendar__panel {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.gs-calendar__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.gs-calendar__weekdays,
+.gs-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  column-gap: 10px;
+}
+
+.gs-calendar__weekdays {
+  padding-bottom: 8px;
+  color: var(--gs-text-secondary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.gs-calendar__weekdays span {
+  padding-right: 8px;
+  text-align: right;
+}
+
+.gs-calendar__grid {
+  min-height: 0;
+  flex: 1 1 auto;
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  row-gap: 0;
+}
+
+.gs-calendar__day {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 8px;
+  border: 0;
+  border-top: 1px solid var(--gs-neutral-7);
+  border-radius: 0;
+  background: transparent;
+  color: var(--gs-text-secondary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color .16s, color .16s, box-shadow .16s;
+}
+
+.gs-calendar__day-number {
+  display: block;
+  width: 100%;
+  text-align: right;
+}
+
+.gs-calendar__day:not(:disabled):not(.is-selected):hover,
+.gs-calendar__day:not(:disabled):not(.is-selected):focus-visible {
+  background: var(--gs-neutral-8);
+  color: var(--gs-primary-2);
+}
+
+.gs-calendar__day:focus-visible,
+.gs-calendar__month-option:focus-visible {
+  outline: 2px solid var(--gs-primary-3);
+  outline-offset: -2px;
+}
+
+.gs-calendar__day.is-selected,
+.gs-calendar__day.is-selected:hover,
+.gs-calendar__day.is-selected:focus-visible {
+  background: var(--gs-primary-5);
+  color: var(--gs-text-secondary);
+  box-shadow: inset 0 2px 0 var(--gs-primary-2);
+  outline: 0;
+}
+
+.gs-calendar__day.is-outside,
+.gs-calendar__day:disabled {
+  color: var(--gs-text-tertiary);
+  cursor: not-allowed;
+}
+
+.gs-calendar__events {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  display: grid;
+  gap: 2px;
+  color: var(--gs-text-tertiary);
+  font: 400 12px/18px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-align: left;
+}
+
+.gs-calendar__event {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gs-calendar__event i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-radius: 50%;
+}
+
+.gs-calendar__event--error i { background: var(--gs-red-2); }
+.gs-calendar__event--warning i { background: var(--gs-orange-2); }
+.gs-calendar__event--success i { background: var(--gs-green-2); }
+
+.gs-calendar__year-grid {
+  display: grid;
+  min-height: 0;
+  flex: 1 1 auto;
+  align-content: start;
+  gap: 24px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-color: var(--gs-neutral-6) var(--gs-neutral-8);
+  scrollbar-width: thin;
+}
+
+.gs-calendar__year-section {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.gs-calendar__year-months {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.gs-calendar__year-heading {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  color: var(--gs-text-primary);
+  font: 400 16px/24px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.gs-calendar__month-option {
+  height: 40px;
+  border: 0;
+  border-radius: var(--gs-radius-sm);
+  background: transparent;
+  color: var(--gs-text-secondary);
+  font: 400 14px/22px "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+  cursor: pointer;
+}
+
+.gs-calendar__month-option:hover:not(.is-selected) {
+  background: var(--gs-neutral-8);
+  color: var(--gs-primary-2);
+}
+
+.gs-calendar__month-option.is-selected,
+.gs-calendar__month-option.is-selected:hover {
+  background: var(--gs-primary-5);
+  color: var(--gs-primary-2);
+  box-shadow: inset 0 2px 0 var(--gs-primary-2);
+}
+
+@media (max-width: 720px) {
+  .gs-calendar { height: 600px; min-height: 0; padding: 12px; }
+  .gs-calendar__toolbar { justify-content: flex-start; padding-bottom: 20px; }
+  .gs-calendar__select-wrap--year { width: 132px; }
+  .gs-calendar__select-wrap--month { width: 92px; }
+  .gs-calendar__weekdays,
+  .gs-calendar__grid { column-gap: 4px; }
+  .gs-calendar__day { padding: 5px; }
+  .gs-calendar__weekdays span { padding-right: 5px; }
+  .gs-calendar__events { right: 5px; bottom: 5px; left: 5px; font-size: 10px; line-height: 14px; }
+  .gs-calendar__event i { width: 6px; height: 6px; margin-right: 2px; }
+  .gs-calendar__year-section,
+  .gs-calendar__year-months { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

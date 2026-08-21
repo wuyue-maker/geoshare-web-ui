@@ -1,0 +1,103 @@
+/* Side navigation — Figma node 571:455. Uses the shared Button component for every action. */
+.gs-side-nav-demo { padding: 24px; }
+.gs-side-nav-demo__canvas {
+  min-height: 400px;
+  padding: 24px;
+  background: transparent;
+}
+.gs-side-nav-demo__group { display: flex; align-items: flex-start; gap: 96px; }
+.gs-side-nav-demo__variant { display: grid; gap: 16px; }
+.gs-side-nav-demo__variant h3 { margin: 0; color: var(--gs-text-secondary); font-size: 14px; font-weight: 400; line-height: 22px; }
+.gs-side-nav-demo__variants { display: flex; align-items: flex-start; gap: 32px; }
+.gs-side-nav {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-9);
+  box-shadow: var(--gs-shadow-lg);
+}
+.gs-side-nav--rounded { border-radius: 32px; }
+.gs-side-nav__action.gs-button {
+  position: relative;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--gs-radius-sm);
+  color: var(--gs-text-secondary);
+}
+.gs-side-nav--rounded .gs-side-nav__action.gs-button { border-radius: 50%; }
+.gs-side-nav__action.gs-button:not(:disabled):not(.is-disabled):hover {
+  --button-bg: var(--gs-neutral-8);
+  --button-color: var(--gs-primary-2);
+  --button-border: transparent;
+}
+.gs-side-nav__action.gs-button:not(:disabled):not(.is-disabled):active {
+  --button-bg: var(--gs-primary-5);
+  --button-color: var(--gs-primary-1);
+  --button-border: transparent;
+}
+.gs-side-nav__action.gs-button.is-active {
+  --button-bg: var(--gs-primary-5);
+  --button-color: var(--gs-primary-2);
+  --button-border: transparent;
+  color: var(--gs-primary-2);
+}
+.gs-side-nav__action.gs-button.is-active:hover {
+  --button-bg: var(--gs-primary-5) !important;
+  --button-color: var(--gs-primary-2) !important;
+  --button-border: transparent !important;
+  color: var(--gs-primary-2) !important;
+}
+.gs-side-nav__action.gs-button.is-active .gs-side-nav__icon,
+.gs-side-nav__action.gs-button.is-active .gs-side-nav__label { color: var(--gs-primary-2); }
+.gs-side-nav__icon { display: block; width: 20px; height: 20px; }
+.gs-side-nav__label {
+  display: block;
+  overflow: hidden;
+  max-width: 52px;
+  color: inherit;
+  font: 400 12px/20px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gs-side-nav--labelled { gap: 12px; padding: 16px 8px; }
+.gs-side-nav--labelled .gs-side-nav__action.gs-button {
+  display: inline-flex;
+  flex-direction: column;
+  width: 52px;
+  height: 48px;
+  min-width: 52px;
+  gap: 0;
+}
+.gs-side-nav--labelled.gs-side-nav--rounded { padding-right: 10px; padding-left: 10px; }
+.gs-side-nav:not(.gs-side-nav--labelled) .gs-side-nav__action::after {
+  position: absolute;
+  z-index: 2;
+  left: calc(100% + 8px);
+  top: 50%;
+  display: block;
+  padding: 2px 8px;
+  border-radius: var(--gs-radius-sm);
+  background: var(--gs-neutral-2);
+  color: var(--gs-neutral-9);
+  content: attr(data-side-nav-label);
+  font: 400 12px/20px "Alibaba PuHuiTi 3", "PingFang SC", sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: opacity .16s ease;
+  white-space: nowrap;
+}
+.gs-side-nav:not(.gs-side-nav--labelled) .gs-side-nav__action:not(:disabled):hover::after { opacity: 1; }
+.gs-side-nav__action:disabled::after { display: none; }
+.gs-side-nav__live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.gs-side-nav-demo__hint { margin: 24px 0 0; color: var(--gs-text-tertiary); font-size: 14px; line-height: 22px; }
+@media (max-width: 640px) {
+  .gs-side-nav-demo__canvas { min-height: 0; }
+  .gs-side-nav-demo__group { flex-wrap: wrap; gap: 32px; }
+}

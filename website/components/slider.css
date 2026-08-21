@@ -5,7 +5,7 @@
 .gs-slider-demo-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
+  gap: 24px;
 }
 
 .gs-slider-example {
@@ -56,6 +56,105 @@
 
 .gs-slider[data-slider-tips="false"] .gs-slider__result {
   top: 0;
+}
+
+.gs-slider--editable {
+  padding-top: 0;
+}
+
+.gs-slider__editable-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  gap: 12px;
+  align-items: center;
+}
+
+.gs-slider__edit-field {
+  padding: 0 8px;
+}
+
+.gs-slider__edit-field > input {
+  text-align: center;
+}
+
+.gs-slider--range {
+  --gs-slider-range-start: 20%;
+  --gs-slider-range-end: 60%;
+  position: relative;
+  height: 44px;
+  padding-top: 20px;
+}
+
+.gs-slider--range::before {
+  position: absolute;
+  top: 28px;
+  right: 0;
+  left: 0;
+  height: 8px;
+  content: "";
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--gs-neutral-6) 0 var(--gs-slider-range-start), var(--gs-primary-2) var(--gs-slider-range-start) var(--gs-slider-range-end), var(--gs-neutral-6) var(--gs-slider-range-end) 100%);
+  pointer-events: none;
+}
+
+.gs-slider--range .gs-slider__input {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  left: 0;
+  height: 24px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gs-slider--range .gs-slider__input::-webkit-slider-runnable-track {
+  background: transparent !important;
+}
+
+.gs-slider--range .gs-slider__input::-moz-range-track {
+  background: transparent !important;
+}
+
+.gs-slider--range .gs-slider__input::-moz-range-progress {
+  background: transparent !important;
+}
+
+.gs-slider--range .gs-slider__input::-webkit-slider-thumb,
+.gs-slider--range .gs-slider__input::-moz-range-thumb {
+  pointer-events: auto;
+}
+
+.gs-slider--range .gs-slider__input.is-range-hover::-webkit-slider-thumb {
+  background: var(--gs-primary-3);
+}
+
+.gs-slider--range .gs-slider__input.is-range-hover::-moz-range-thumb {
+  background: var(--gs-primary-3);
+}
+
+.gs-slider--range .gs-slider__output {
+  top: -8px;
+  z-index: 2;
+}
+
+.gs-slider--range .gs-slider__output[data-slider-range-output="start"] {
+  left: var(--gs-slider-range-start-tip-left);
+}
+
+.gs-slider--range .gs-slider__output[data-slider-range-output="end"] {
+  left: var(--gs-slider-range-end-tip-left);
+}
+
+.gs-slider--range.is-range-thumb-hover {
+  cursor: pointer;
+}
+
+.gs-slider-range-result {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--gs-text-tertiary);
+  font: 400 12px/20px "DINPro", "Alibaba PuHuiTi 3", sans-serif;
 }
 
 .gs-slider__input {

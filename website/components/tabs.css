@@ -77,10 +77,13 @@
 .gs-tabs--editable { flex-direction: column; }
 .gs-tabs--editable .gs-tabs__bar { min-height: 48px; }
 .gs-tabs--editable .gs-tabs__scroll { display: flex; min-width: 0; flex: 1 1 auto; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: var(--gs-neutral-6) var(--gs-neutral-8); }
-.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar { height: 4px; }
-.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-track { background: var(--gs-neutral-8); border-radius: 2px; }
-.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb { background-color: var(--gs-neutral-6) !important; border-radius: 2px; }
-.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb:hover { background-color: var(--gs-neutral-5) !important; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar { width: 4px; height: 4px; -webkit-appearance: none; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-track,
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-track-piece:horizontal { background: var(--gs-neutral-8) !important; border: 0; border-radius: 2px; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb,
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb:horizontal { min-width: 24px; -webkit-appearance: none; background: var(--gs-neutral-6) !important; border: 0 !important; border-radius: 2px; box-shadow: none !important; }
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb:hover,
+.gs-tabs--editable .gs-tabs__scroll::-webkit-scrollbar-thumb:horizontal:hover { background: var(--gs-neutral-5) !important; }
 .gs-tabs--editable .gs-tabs__tab { gap: 4px; }
 .gs-tabs--editable .gs-tabs__trigger { padding-right: 4px; }
 .gs-tabs__close.gs-button { width: 16px; min-width: 16px; height: 16px; padding: 0; border-radius: 2px; }

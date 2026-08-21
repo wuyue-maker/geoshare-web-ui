@@ -1,8 +1,9 @@
 .progress-demo-stack { display: grid; gap: 24px; }
 .progress-sample { display: grid; gap: 10px; }
-.progress-sample__name { color: var(--gs-text-secondary); font-size: 13px; line-height: 22px; }
+.progress-sample__name { color: var(--gs-text-secondary); font-size: 14px; line-height: 22px; }
 .progress-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; }
-.progress-controls .gs-button { min-width: 64px; }
+.progress-controls .progress-controls__delta { min-width: 64px; }
+.progress-controls .progress-controls__status { min-width: 64px; margin-left: auto; }
 .gs-progress {
   --gs-progress-value: 0%;
   --gs-progress-color: var(--gs-primary-2);
@@ -24,4 +25,4 @@
 .gs-progress--indeterminate .gs-progress__bar { width: 36%; animation: gs-progress-indeterminate 1.25s ease-in-out infinite; }
 @keyframes gs-progress-indeterminate { from { transform: translateX(-110%); } to { transform: translateX(310%); } }
 @media (prefers-reduced-motion: reduce) { .gs-progress__bar { transition: none; }.gs-progress--indeterminate .gs-progress__bar { animation: none; transform: translateX(90%); } }
-@media (max-width: 720px) { .progress-controls { gap: 6px; }.progress-controls .gs-button { min-width: 56px; } }
+@media (max-width: 720px) { .progress-controls { gap: 6px; } }
